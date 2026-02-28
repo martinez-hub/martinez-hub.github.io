@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research - Dr. [Your Name]</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">Dr. [Your Name]</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">About</a></li>
+                <li><a href="research.html" class="active">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="#cv">CV</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="research">
+            <h2>Research Projects</h2>
+
+            <div class="project-item">
+                <h3>Audio JEPA for Deepfake Detection</h3>
+                <p class="project-meta">2024-2025 | Self-Supervised Learning, Synthetic Media Detection</p>
+                <p>
+                    Developed a novel self-supervised learning approach for audio deepfake detection using
+                    Joint-Embedding Predictive Architecture (JEPA). The system employs a two-stage training
+                    paradigm: first learning representations from real audio only, then fine-tuning a classifier
+                    on both real and fake samples.
+                </p>
+                <p><strong>Key Contributions:</strong></p>
+                <ul>
+                    <li>Implemented AudioJEPAEncoder and Predictor architectures for temporal audio modeling</li>
+                    <li>Achieved 5-10% improvement in out-of-distribution generalization over supervised baselines</li>
+                    <li>Integrated SNGP (Spectral Normalized Gaussian Process) for uncertainty quantification</li>
+                    <li>Released open-source codebase with 12,000+ lines of production-ready code</li>
+                </ul>
+                <p><strong>Technologies:</strong> PyTorch, VICReg Loss, Mel-Spectrograms, Uncertainty Quantification</p>
+                <p>
+                    <a href="https://github.com/yourusername/audio-jepa" class="work-link">View on GitHub →</a>
+                </p>
+            </div>
+
+            <div class="project-item">
+                <h3>[Project 2 Title]</h3>
+                <p class="project-meta">2023-2024 | [Research Area]</p>
+                <p>
+                    Description of your second major research project. Explain the problem you tackled,
+                    your approach, and the impact of your work.
+                </p>
+                <p><strong>Key Contributions:</strong></p>
+                <ul>
+                    <li>First major contribution or finding</li>
+                    <li>Second contribution</li>
+                    <li>Impact metrics or achievements</li>
+                </ul>
+            </div>
+
+            <div class="project-item">
+                <h3>[Project 3 Title]</h3>
+                <p class="project-meta">2022-2023 | [Research Area]</p>
+                <p>
+                    Earlier work or collaborative projects. Highlight your specific role and contributions.
+                </p>
+                <p><strong>Key Contributions:</strong></p>
+                <ul>
+                    <li>Your specific contributions</li>
+                    <li>Collaborative achievements</li>
+                    <li>Results or publications</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="research">
+            <h2>Research Interests</h2>
+            <p>
+                My research interests span several interconnected areas:
+            </p>
+            <ul>
+                <li><strong>Self-Supervised Learning:</strong> Learning robust representations without labels</li>
+                <li><strong>Synthetic Media Detection:</strong> Detecting AI-generated content (deepfakes, text, images)</li>
+                <li><strong>Uncertainty Quantification:</strong> Building reliable AI systems that know when they don't know</li>
+                <li><strong>Multimodal Learning:</strong> Integrating audio, visual, and textual information</li>
+                <li><strong>OOD Generalization:</strong> Building models that work on unseen data distributions</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Dr. [Your Name]. All rights reserved.</p>
+            <p>Built with care. Hosted on GitHub Pages.</p>
+        </div>
+    </footer>
+</body>
+</html>
