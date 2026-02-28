@@ -377,6 +377,43 @@ footer p {
 }
 
 /* ==================== */
+/* Awards               */
+/* ==================== */
+
+.awards {
+    margin-top: 3rem;
+}
+
+.award-item {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.award-item:last-child {
+    border-bottom: none;
+}
+
+.award-year {
+    flex-shrink: 0;
+    width: 60px;
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 0.95rem;
+}
+
+.award-details {
+    flex: 1;
+    line-height: 1.8;
+}
+
+.award-details strong {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+/* ==================== */
 /* Responsive           */
 /* ==================== */
 
