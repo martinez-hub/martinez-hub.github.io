@@ -96,9 +96,28 @@ section {
 /* ==================== */
 
 .hero {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
     padding: 3rem 0 4rem;
     border-bottom: 1px solid var(--border-color);
+}
+
+.hero-profile {
+    flex-shrink: 0;
+}
+
+.profile-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--border-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hero-content {
+    flex: 1;
 }
 
 .hero h1 {
@@ -123,7 +142,6 @@ section {
 .social-links {
     display: flex;
     gap: 1.5rem;
-    justify-content: center;
     flex-wrap: wrap;
 }
 
@@ -427,12 +445,32 @@ footer p {
         gap: 1rem;
     }
 
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .profile-photo {
+        width: 150px;
+        height: 150px;
+    }
+
     .hero h1 {
         font-size: 2rem;
     }
 
+    .social-links {
+        justify-content: center;
+    }
+
     .work-grid {
         grid-template-columns: 1fr;
+    }
+
+    .award-item {
+        flex-direction: column;
+        gap: 0.5rem;
     }
 
     .container {
