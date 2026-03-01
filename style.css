@@ -432,6 +432,70 @@ footer p {
 }
 
 /* ==================== */
+/* Professional Service */
+/* ==================== */
+
+.professional-service {
+    margin-top: 3rem;
+}
+
+.service-item {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.service-item:last-child {
+    border-bottom: none;
+}
+
+.service-year {
+    flex-shrink: 0;
+    width: 100px;
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 0.95rem;
+}
+
+.service-details {
+    flex: 1;
+    line-height: 1.8;
+}
+
+.service-details strong {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+/* ==================== */
+/* Skills               */
+/* ==================== */
+
+.skills {
+    margin-top: 3rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.skill-category h3 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.skill-category p {
+    color: var(--text-color);
+    line-height: 1.8;
+}
+
+/* ==================== */
 /* Responsive           */
 /* ==================== */
 
@@ -471,6 +535,16 @@ footer p {
     .award-item {
         flex-direction: column;
         gap: 0.5rem;
+    }
+
+    .service-item {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .container {
