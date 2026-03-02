@@ -28,58 +28,84 @@
             <h2>Research Projects</h2>
 
             <div class="project-item">
-                <h3>Audio JEPA for Deepfake Detection</h3>
-                <p class="project-meta">2024-2025 | Self-Supervised Learning, Synthetic Media Detection</p>
+                <h3>Underconfidence Adversarial Training</h3>
+                <p class="project-meta">2024-2026 | Adversarial Machine Learning, Uncertainty Quantification</p>
                 <p>
-                    Developed a novel self-supervised learning approach for audio deepfake detection using
-                    Joint-Embedding Predictive Architecture (JEPA). The system employs a two-stage training
-                    paradigm: first learning representations from real audio only, then fine-tuning a classifier
-                    on both real and fake samples.
+                    Addressed a critical but overlooked vulnerability in adversarially trained models: attacks that reduce
+                    model confidence without changing predictions. Decreased confidence can result in unnecessary interventions,
+                    delayed diagnoses, and erosion of trust in automated systems—particularly problematic in high-stakes domains
+                    like medical imaging and autonomous systems.
                 </p>
                 <p><strong>Key Contributions:</strong></p>
                 <ul>
-                    <li>Implemented AudioJEPAEncoder and Predictor architectures for temporal audio modeling</li>
-                    <li>Achieved 5-10% improvement in out-of-distribution generalization over supervised baselines</li>
-                    <li>Integrated SNGP (Spectral Normalized Gaussian Process) for uncertainty quantification</li>
-                    <li>Released open-source codebase with 12,000+ lines of production-ready code</li>
+                    <li>Introduced two novel underconfidence attack methods: class-pair ambiguity attacks and ConfSmooth,
+                        which spreads uncertainty across all classes</li>
+                    <li>Developed Underconfidence Adversarial Training (UAT), a defense framework that integrates these
+                        attacks into standard adversarial training</li>
+                    <li>Demonstrated UAT achieves comparable or better robustness than traditional adversarial training
+                        while requiring only half the gradient steps</li>
+                    <li>Comprehensive evaluation across 6 architectures (CNNs and Vision Transformers) and 7 datasets
+                        including MNIST, CIFAR, ImageNet, MSTAR, and medical imaging</li>
                 </ul>
-                <p><strong>Technologies:</strong> PyTorch, VICReg Loss, Mel-Spectrograms, Uncertainty Quantification</p>
+                <p><strong>Impact:</strong> Expanded adversarial robustness considerations beyond misclassification to
+                    encompass uncertainty-aware threats, addressing a critical gap in current defense mechanisms.</p>
                 <p>
-                    <a href="https://github.com/martinez-hub/Synthetic_jepa" class="work-link">View on GitHub →</a>
+                    <a href="https://proceedings.mlr.press/v307/marti-nez-marti-nez26a.html" target="_blank" class="work-link">View paper →</a>
                 </p>
             </div>
 
             <div class="project-item">
-                <h3>Robustness Under Distribution Shift and Adversarial Attacks</h3>
-                <p class="project-meta">2023-2024 | AI Assurance, Adversarial Machine Learning</p>
+                <h3>Model-Based Robust Training: From Snow to Rain</h3>
+                <p class="project-meta">2024-2025 | Distribution Shift, Model Calibration</p>
                 <p>
-                    Developed methods for achieving simultaneous robustness under both distribution shifts
-                    and adversarial attacks, addressing a critical gap in trustworthy AI systems. Published at AAAI.
+                    Investigated how deep learning models handle natural image corruptions like snow and rain in
+                    safety-critical applications. Developed and evaluated training methods using learned corruption
+                    models to generate realistic distortions, with a focus on balancing robustness, calibration,
+                    and computational efficiency.
                 </p>
                 <p><strong>Key Contributions:</strong></p>
                 <ul>
-                    <li>Novel training methodology combining robustness to natural and adversarial perturbations</li>
-                    <li>Theoretical analysis of trade-offs between different robustness objectives</li>
-                    <li>Empirical validation on multiple benchmark datasets and shift scenarios</li>
-                    <li>Published findings at the AAAI Conference on Artificial Intelligence</li>
+                    <li>Comparative framework evaluating model-based training approaches against baselines (Vanilla,
+                        Adversarial Training, AugMix) across varying corruption severity levels</li>
+                    <li>Introduced hybrid strategies combining random coverage with adversarial refinement in
+                        nuisance space to balance performance and efficiency</li>
+                    <li>Multi-dimensional analysis assessing accuracy, calibration quality, and computational
+                        requirements—moving beyond accuracy-only metrics</li>
+                    <li>Demonstrated that model-based data augmentation delivers comparable robustness to adversarial
+                        approaches with significantly lower computational demands</li>
                 </ul>
+                <p><strong>Key Findings:</strong> Learned corruption models effectively capture natural variability,
+                    offering a promising direction toward more resilient and well-calibrated systems under adverse conditions.</p>
+                <p>
+                    <a href="https://arxiv.org/abs/2601.09153" target="_blank" class="work-link">View paper →</a>
+                </p>
             </div>
 
             <div class="project-item">
-                <h3>Underconfidence Attack Detection and Mitigation</h3>
-                <p class="project-meta">2022-2023 | Adversarial Machine Learning, Model Security</p>
+                <h3>Robust Training for Medical Imaging Classification</h3>
+                <p class="project-meta">2023-2025 | Medical AI, Healthcare Security</p>
                 <p>
-                    Investigated underconfidence vulnerabilities in machine learning models where adversarial
-                    examples cause models to be overly uncertain about correct predictions. Developed detection
-                    and mitigation strategies to address this emerging threat.
+                    Developed robust training strategies to strengthen deep neural networks used in medical image
+                    diagnosis against adversarial attacks and distribution shifts while maintaining diagnostic accuracy.
+                    Critical for ensuring model reliability and maintaining clinician trust when facing adversarial
+                    examples or real-world data variations.
                 </p>
                 <p><strong>Key Contributions:</strong></p>
                 <ul>
-                    <li>Characterized underconfidence attack mechanisms and their impact on model reliability</li>
-                    <li>Developed detection methods to identify when models are under attack</li>
-                    <li>Proposed defense strategies to maintain model confidence under adversarial conditions</li>
-                    <li>Published research findings in peer-reviewed venue</li>
+                    <li>Proposed Robust Training with Data Augmentation (RTDA), combining robust training strategies
+                        with data augmentation techniques specifically designed for medical imaging</li>
+                    <li>Comprehensive benchmarking across 6 competing baseline approaches, including isolated and
+                        combined adversarial training and augmentation methods</li>
+                    <li>Multi-modal validation across three distinct imaging technologies: mammograms, X-rays,
+                        and ultrasound, demonstrating broad applicability</li>
+                    <li>Evaluated robustness against both adversarial perturbations and natural distribution variations
+                        while maintaining clean accuracy</li>
                 </ul>
+                <p><strong>Impact:</strong> Addresses critical healthcare concerns around maintaining model reliability
+                    in clinical settings where adversarial attacks or data distribution shifts could compromise patient safety.</p>
+                <p>
+                    <a href="https://arxiv.org/abs/2506.17133" target="_blank" class="work-link">View paper →</a>
+                </p>
             </div>
         </section>
 
