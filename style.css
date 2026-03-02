@@ -175,6 +175,59 @@ section {
 }
 
 /* ==================== */
+/* News Section         */
+/* ==================== */
+
+.news h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+}
+
+.news-item {
+    display: flex;
+    gap: 2rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-date {
+    flex-shrink: 0;
+    width: 120px;
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 0.95rem;
+}
+
+.news-content {
+    flex: 1;
+    line-height: 1.8;
+}
+
+.news-content strong {
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.news-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+.news-link:hover {
+    text-decoration: underline;
+}
+
+/* ==================== */
 /* Work Grid            */
 /* ==================== */
 
@@ -590,6 +643,15 @@ footer p {
 
     .work-grid {
         grid-template-columns: 1fr;
+    }
+
+    .news-item {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .news-date {
+        width: auto;
     }
 
     .award-item {
