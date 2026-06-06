@@ -1,160 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CW59PVY98J"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research — Josué Martínez-Martínez</title>
+<meta name="description" content="Research on agentic AI, world models, and AI assurance, including adversarial robustness and trustworthy machine learning, by Josué Martínez-Martínez.">
+<meta name="author" content="Josué Martínez-Martínez">
+<meta property="og:title" content="Research — Josué Martínez-Martínez">
+<meta property="og:description" content="Research on agentic AI, world models, and AI assurance.">
+<meta property="og:image" content="https://martinez-hub.github.io/assets/profile.jpg">
+<meta property="og:url" content="https://martinez-hub.github.io/research.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
 
-      gtag('config', 'G-CW59PVY98J');
-    </script>
+<script>
+  (function(){
+    try{
+      var s=localStorage.getItem('theme');
+      var m=s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+      document.documentElement.setAttribute('data-theme',m);
+    }catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+  })();
+</script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research & Projects - Josué Martínez-Martínez</title>
+<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Research projects on AI assurance, adversarial machine learning, and robust deep learning by Josué Martínez-Martínez. Underconfidence adversarial training, model robustness, and medical imaging AI.">
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Research & Projects - Josué Martínez-Martínez">
-    <meta property="og:description" content="Research on AI assurance, adversarial machine learning, and trustworthy AI systems.">
-    <meta property="og:image" content="https://martinez-hub.github.io/assets/profile.jpg">
-    <meta property="og:url" content="https://martinez-hub.github.io/research.html">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./assets/favicon.png">
-
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CW59PVY98J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CW59PVY98J');
+</script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <a href="index.html">Josué Martínez-Martínez</a>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">About</a></li>
-                <li><a href="research.html" class="active">Research / Projects</a></li>
-                <li><a href="publications.html">Publications</a></li>
-                <li><a href="./cv/Josue_Martinez_Martinez_CV.pdf" target="_blank">CV</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <main class="container">
-        <section class="research">
-            <h2>Research Projects</h2>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Josué Martínez-Martínez</a>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">About</a></li>
+      <li><a href="research.html" class="active">Research</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="./cv/Josue_Martinez_Martinez_CV.pdf" target="_blank">CV</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><button class="toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">◐</span> <span id="themeText">Dark</span></button></li>
+    </ul>
+  </div>
+</nav>
 
-            <div class="project-item">
-                <h3>Underconfidence Adversarial Training</h3>
-                <p>
-                    Addressed a critical but overlooked vulnerability in adversarially trained models: attacks that reduce
-                    model confidence without changing predictions. Decreased confidence can result in unnecessary interventions,
-                    delayed diagnoses, and erosion of trust in automated systems—particularly problematic in high-stakes domains
-                    like medical imaging and autonomous systems.
-                </p>
-                <p><strong>Key Contributions:</strong></p>
-                <ul>
-                    <li>Introduced two novel underconfidence attack methods: class-pair ambiguity attacks and ConfSmooth,
-                        which spreads uncertainty across all classes</li>
-                    <li>Developed Underconfidence Adversarial Training (UAT), a defense framework that integrates these
-                        attacks into standard adversarial training</li>
-                    <li>Demonstrated UAT achieves comparable or better robustness than traditional adversarial training
-                        while requiring only half the gradient steps</li>
-                    <li>Comprehensive evaluation across 6 architectures (CNNs and Vision Transformers) and 7 datasets
-                        including MNIST, CIFAR, ImageNet, MSTAR, and medical imaging</li>
-                </ul>
-                <p><strong>Impact:</strong> Expanded adversarial robustness considerations beyond misclassification to
-                    encompass uncertainty-aware threats, addressing a critical gap in current defense mechanisms.</p>
-                <p>
-                    <a href="https://proceedings.mlr.press/v307/marti-nez-marti-nez26a.html" target="_blank" class="work-link">View paper →</a>
-                </p>
-            </div>
+<main class="wrap">
+  <h1 class="page-title">Research &amp; Projects</h1>
 
-            <div class="project-item">
-                <h3>Model-Based Robust Training</h3>
-                <p>
-                    Investigated how deep learning models handle natural image corruptions like snow and rain in
-                    safety-critical applications. Developed and evaluated training methods using learned corruption
-                    models to generate realistic distortions, with a focus on balancing robustness, calibration,
-                    and computational efficiency.
-                </p>
-                <p><strong>Key Contributions:</strong></p>
-                <ul>
-                    <li>Comparative framework evaluating model-based training approaches against baselines (Vanilla,
-                        Adversarial Training, AugMix) across varying corruption severity levels</li>
-                    <li>Introduced hybrid strategies combining random coverage with adversarial refinement in
-                        nuisance space to balance performance and efficiency</li>
-                    <li>Multi-dimensional analysis assessing accuracy, calibration quality, and computational
-                        requirements—moving beyond accuracy-only metrics</li>
-                    <li>Demonstrated that model-based data augmentation delivers comparable robustness to adversarial
-                        approaches with significantly lower computational demands</li>
-                </ul>
-                <p><strong>Key Findings:</strong> Learned corruption models effectively capture natural variability,
-                    offering a promising direction toward more resilient and well-calibrated systems under adverse conditions.</p>
-                <p><strong>Related Publications:</strong></p>
-                <div class="publication-links">
-                    <a href="https://arxiv.org/abs/2601.09153" target="_blank">From Snow to Rain: Evaluating Robustness, Calibration, and Complexity (NeurIPS 2025)</a>
-                    <a href="https://ojs.aaai.org/index.php/AAAI/article/view/30481" target="_blank">Towards Robustness to Natural Variations and Distribution Shift (AAAI 2024)</a>
-                </div>
-            </div>
+  <section class="project">
+    <h3>Underconfidence Adversarial Training</h3>
+    <p>Addressed an overlooked vulnerability in adversarially trained models: attacks that reduce model confidence without changing predictions. Decreased confidence can cause unnecessary interventions, delayed diagnoses, and erosion of trust — especially in high-stakes domains like medical imaging and autonomous systems.</p>
+    <p><b>Key contributions:</b></p>
+    <ul>
+      <li>Introduced two underconfidence attacks: class-pair ambiguity attacks and ConfSmooth, which spreads uncertainty across all classes.</li>
+      <li>Developed Underconfidence Adversarial Training (UAT), integrating these attacks into standard adversarial training.</li>
+      <li>UAT matches or beats traditional adversarial training while using half the gradient steps.</li>
+      <li>Evaluated across 6 architectures (CNNs and Vision Transformers) and 7 datasets including MNIST, CIFAR, ImageNet, MSTAR, and medical imaging.</li>
+    </ul>
+    <div class="linkrow"><a class="ulink" href="https://proceedings.mlr.press/v307/marti-nez-marti-nez26a.html" target="_blank">View paper →</a></div>
+  </section>
 
-            <div class="project-item">
-                <h3>Robust Training for Medical Imaging Classification</h3>
-                <p>
-                    Developed robust training strategies to strengthen deep neural networks used in medical image
-                    diagnosis against adversarial attacks and distribution shifts while maintaining diagnostic accuracy.
-                    Critical for ensuring model reliability and maintaining clinician trust when facing adversarial
-                    examples or real-world data variations.
-                </p>
-                <p><strong>Key Contributions:</strong></p>
-                <ul>
-                    <li>Proposed Robust Training with Data Augmentation (RTDA), combining robust training strategies
-                        with data augmentation techniques specifically designed for medical imaging</li>
-                    <li>Comprehensive benchmarking across 6 competing baseline approaches, including isolated and
-                        combined adversarial training and augmentation methods</li>
-                    <li>Multi-modal validation across three distinct imaging technologies: mammograms, X-rays,
-                        and ultrasound, demonstrating broad applicability</li>
-                    <li>Evaluated robustness against both adversarial perturbations and natural distribution variations
-                        while maintaining clean accuracy</li>
-                </ul>
-                <p><strong>Impact:</strong> Addresses critical healthcare concerns around maintaining model reliability
-                    in clinical settings where adversarial attacks or data distribution shifts could compromise patient safety.</p>
-                <p><strong>Related Publications:</strong></p>
-                <div class="publication-links">
-                    <a href="https://arxiv.org/abs/2506.17133" target="_blank">Robust Training with Data Augmentation (AAAI 2025)</a>
-                    <a href="https://ieeexplore.ieee.org/document/10980787" target="_blank">Robust Training for Mammogram Classification (ISBI 2025)</a>
-                    <a href="https://ieeexplore.ieee.org/document/10195019/" target="_blank">Addressing Vulnerability in Medical Deep Learning (IEEE CAI 2023)</a>
-                </div>
-            </div>
-        </section>
+  <section class="project">
+    <h3>Model-Based Robust Training</h3>
+    <p>Investigated how deep models handle natural image corruptions like snow and rain in safety-critical settings, using learned corruption models to generate realistic distortions while balancing robustness, calibration, and compute.</p>
+    <p><b>Key contributions:</b></p>
+    <ul>
+      <li>Comparative framework evaluating model-based training against Vanilla, Adversarial Training, and AugMix across corruption severities.</li>
+      <li>Hybrid strategies combining random coverage with adversarial refinement in nuisance space.</li>
+      <li>Multi-dimensional analysis of accuracy, calibration, and computational cost — beyond accuracy-only metrics.</li>
+      <li>Showed model-based augmentation matches adversarial robustness at significantly lower cost.</li>
+    </ul>
+    <div class="linkrow">
+      <a class="ulink" href="https://arxiv.org/abs/2601.09153" target="_blank">From Snow to Rain (NeurIPS 2025 workshop) →</a>
+      <a class="ulink" href="https://ojs.aaai.org/index.php/AAAI/article/view/30481" target="_blank">Towards Robustness to Natural Variations (AAAI 2024) →</a>
+    </div>
+  </section>
 
-        <section class="research">
-            <h2>Research Interests</h2>
-            <p>
-                My research interests span several interconnected areas in trustworthy and robust AI:
-            </p>
-            <ul>
-                <li><strong>AI Assurance:</strong> Building reliable and trustworthy AI systems with formal guarantees</li>
-                <li><strong>Adversarial Machine Learning:</strong> Understanding and defending against adversarial attacks</li>
-                <li><strong>Self-Supervised Learning:</strong> Learning robust representations without manual labels</li>
-                <li><strong>Deepfake Detection:</strong> Detecting AI-generated synthetic media (audio, video, images)</li>
-                <li><strong>Uncertainty Quantification:</strong> Building AI systems that know when they don't know</li>
-                <li><strong>OOD Generalization:</strong> Ensuring models work reliably on unseen data distributions</li>
-            </ul>
-        </section>
-    </main>
+  <section class="project">
+    <h3>Robust Training for Medical Imaging Classification</h3>
+    <p>Developed robust training strategies to strengthen diagnostic neural networks against adversarial attacks and distribution shift while preserving diagnostic accuracy and clinician trust.</p>
+    <p><b>Key contributions:</b></p>
+    <ul>
+      <li>Proposed Robust Training with Data Augmentation (RTDA) tailored to medical imaging.</li>
+      <li>Benchmarked across 6 baselines spanning isolated and combined adversarial training and augmentation.</li>
+      <li>Validated across mammograms, X-rays, and ultrasound.</li>
+      <li>Evaluated against both adversarial perturbations and natural distribution variations while preserving clean accuracy.</li>
+    </ul>
+    <div class="linkrow">
+      <a class="ulink" href="https://arxiv.org/abs/2506.17133" target="_blank">RTDA (AAAI 2025 workshop) →</a>
+      <a class="ulink" href="https://ieeexplore.ieee.org/document/10980787" target="_blank">Mammogram Classification (ISBI 2025) →</a>
+      <a class="ulink" href="https://ieeexplore.ieee.org/document/10195019/" target="_blank">Medical Deep Learning (IEEE CAI 2023) →</a>
+    </div>
+  </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Josué Martínez-Martínez. All rights reserved.</p>
-            <p>Built with care. Hosted on GitHub Pages. Last updated: March 2026.</p>
-        </div>
-    </footer>
+  <h2 class="section-title">Research Interests</h2>
+  <ul class="interests">
+    <li><b>Agentic AI</b> — autonomous, tool-using AI systems and their reliability.</li>
+    <li><b>World Models</b> — learned models of environment dynamics for perception and planning.</li>
+    <li><b>AI Assurance</b> — trustworthy, reliable AI under adversarial and distribution stress, including adversarial machine learning, robustness to natural variation, uncertainty quantification, out-of-distribution generalization, and self-supervised representation learning.</li>
+  </ul>
+</main>
+
+<footer>
+  <div class="footer-inner"><span>© 2026 Josué Martínez-Martínez</span><span>Hosted on GitHub Pages · Updated June 2026</span></div>
+</footer>
+<script src="main.js"></script>
 </body>
 </html>

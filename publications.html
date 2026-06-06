@@ -1,259 +1,146 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CW59PVY98J"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publications — Josué Martínez-Martínez</title>
+<meta name="description" content="Publications by Josué Martínez-Martínez on AI assurance, adversarial robustness, and trustworthy AI (AAAI, NeurIPS, NLDL, IEEE ISBI, and more).">
+<meta name="author" content="Josué Martínez-Martínez">
+<meta property="og:title" content="Publications — Josué Martínez-Martínez">
+<meta property="og:description" content="Research publications on AI assurance, adversarial machine learning, and robust deep learning.">
+<meta property="og:image" content="https://martinez-hub.github.io/assets/profile.jpg">
+<meta property="og:url" content="https://martinez-hub.github.io/publications.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
 
-      gtag('config', 'G-CW59PVY98J');
-    </script>
+<script>
+  (function(){
+    try{
+      var s=localStorage.getItem('theme');
+      var m=s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+      document.documentElement.setAttribute('data-theme',m);
+    }catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+  })();
+</script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publications - Josué Martínez-Martínez</title>
+<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Publications by Josué Martínez-Martínez on AI assurance, adversarial robustness, and trustworthy AI. Papers published at AAAI, NeurIPS, NLDL, IEEE ISBI, and more.">
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Publications - Josué Martínez-Martínez">
-    <meta property="og:description" content="Research publications on AI assurance, adversarial machine learning, and robust deep learning.">
-    <meta property="og:image" content="https://martinez-hub.github.io/assets/profile.jpg">
-    <meta property="og:url" content="https://martinez-hub.github.io/publications.html">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./assets/favicon.png">
-
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CW59PVY98J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CW59PVY98J');
+</script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <a href="index.html">Josué Martínez-Martínez</a>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">About</a></li>
-                <li><a href="research.html">Research / Projects</a></li>
-                <li><a href="publications.html" class="active">Publications</a></li>
-                <li><a href="./cv/Josue_Martinez_Martinez_CV.pdf" target="_blank">CV</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <main class="container">
-        <section class="publications">
-            <h2>Publications</h2>
-            <p style="margin-bottom: 2rem;">
-                For a complete list with citations, please visit my
-                <a href="https://scholar.google.com/citations?user=oqFkyvcAAAAJ&hl=en" target="_blank" style="font-weight: 600;">Google Scholar profile</a> or
-                <a href="https://orcid.org/0000-0002-2903-9297" target="_blank" style="font-weight: 600;">ORCID</a>.
-            </p>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Josué Martínez-Martínez</a>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">About</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="publications.html" class="active">Publications</a></li>
+      <li><a href="./cv/Josue_Martinez_Martinez_CV.pdf" target="_blank">CV</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><button class="toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">◐</span> <span id="themeText">Dark</span></button></li>
+    </ul>
+  </div>
+</nav>
 
-            <!-- Conference Papers -->
-            <h3 style="font-size: 1.4rem; margin: 2.5rem 0 1.5rem; color: var(--secondary-color);">
-                Conference Papers
-            </h3>
+<main class="wrap">
+  <h1 class="page-title">Publications</h1>
+  <p class="lead">For a complete list with citations, see my
+    <a class="ulink" href="https://scholar.google.com/citations?user=oqFkyvcAAAAJ&hl=en" target="_blank">Google Scholar</a> or
+    <a class="ulink" href="https://orcid.org/0000-0002-2903-9297" target="_blank">ORCID</a>.</p>
 
-            <div class="publication-item">
-                <div class="publication-title">
-                    Improving Vision Model Robustness against Misclassification and Uncertainty Attacks via Underconfidence Adversarial Training
-                </div>
-                <div class="publication-authors">
-                    <strong>Josué Martínez-Martínez</strong>, John T Holodnak, Olivia Brown, Sheida Nabavi, Derek Aguiar, Allan Wollaber
-                </div>
-                <div class="publication-venue">
-                    Northern Lights Deep Learning (NLDL) Conference, 2026
-                </div>
-                <div class="publication-links">
-                    <a href="https://proceedings.mlr.press/v307/marti-nez-marti-nez26a.html" target="_blank">Paper</a>
-                    <a href="https://github.com/martinez-hub/underconfidence-adversarial-training" target="_blank">Code</a>
-                </div>
-            </div>
+  <div class="pub-group">Conference Papers</div>
+  <div class="pub">
+    <div class="title">Improving Vision Model Robustness against Misclassification and Uncertainty Attacks via Underconfidence Adversarial Training</div>
+    <div class="authors"><b>Josué Martínez-Martínez</b>, John T Holodnak, Olivia Brown, Sheida Nabavi, Derek Aguiar, Allan Wollaber</div>
+    <div class="venue">Northern Lights Deep Learning (NLDL) Conference, 2026</div>
+    <div class="links"><a class="ulink" href="https://proceedings.mlr.press/v307/marti-nez-marti-nez26a.html" target="_blank">Paper</a><a class="ulink" href="https://github.com/martinez-hub/underconfidence-adversarial-training" target="_blank">Code</a></div>
+  </div>
+  <div class="pub">
+    <div class="title">Robust Training of Deep Learning Models for Mammogram Classification</div>
+    <div class="authors"><b>Josué Martínez-Martínez</b>, Olivia Brown, Jun Bai, Sheida Nabavi</div>
+    <div class="venue">IEEE International Symposium on Biomedical Imaging (ISBI), 2025</div>
+    <div class="links"><a class="ulink" href="https://ieeexplore.ieee.org/document/10980787" target="_blank">Paper</a></div>
+  </div>
+  <div class="pub">
+    <div class="title">Unmanned Autonomous Aerial Navigation in GPS-Denied Environments</div>
+    <div class="authors">Noshin Habib, Angel Flores-Abad, <b>Josué Martínez-Martínez</b>, Diego Aponte-Roa, Albert Espinoza</div>
+    <div class="venue">18th LACCEI International Multi-Conference for Engineering, Education, and Technology, 2020</div>
+    <div class="links"><a class="ulink" href="https://laccei.org/LACCEI2020-VirtualEdition/full_papers/FP349.pdf" target="_blank">Paper</a></div>
+  </div>
+  <div class="pub">
+    <div class="title">A Secured IoT Scheme for Microgrids Monitoring</div>
+    <div class="authors"><b>Josué Martínez-Martínez</b>, Carmen Carvajal-Jiménez, Diego A. Aponte-Roa</div>
+    <div class="venue">10th Annual Computing and Communication Workshop and Conference (CCWC), pp. 986-990, 2020</div>
+    <div class="links"><a class="ulink" href="https://ieeexplore.ieee.org/document/9031280" target="_blank">Paper</a></div>
+  </div>
 
-            <div class="publication-item">
-                <div class="publication-title">
-                    Robust Training of Deep Learning Models for Mammogram Classification
-                </div>
-                <div class="publication-authors">
-                    <strong>Josué Martínez-Martínez</strong>, Olivia Brown, Jun Bai, Sheida Nabavi
-                </div>
-                <div class="publication-venue">
-                    IEEE International Symposium on Biomedical Imaging (ISBI), 2025
-                </div>
-                <div class="publication-links">
-                    <a href="https://ieeexplore.ieee.org/document/10980787" target="_blank">Paper</a>
-                </div>
-            </div>
+  <div class="pub-group">Workshop Papers</div>
+  <div class="pub">
+    <div class="title">From Snow to Rain: Evaluating Robustness, Calibration, and Complexity of Model-Based Robust Training</div>
+    <div class="authors"><b>Josué Martínez-Martínez</b>, Olivia Brown, Giselle Zeno, Pooya Khorrami, Rajmonda Caceres</div>
+    <div class="venue">LatinX in AI Research Workshop @ NeurIPS 2025</div>
+    <div class="links"><a class="ulink" href="https://arxiv.org/abs/2601.09153" target="_blank">Paper</a><a class="ulink" href="https://github.com/martinez-hub/mbrdl-hybrid" target="_blank">Code</a></div>
+  </div>
+  <div class="pub">
+    <div class="title">Robust Training with Data Augmentation for Medical Imaging Classification</div>
+    <div class="authors"><b>Josué Martínez-Martínez</b>, Olivia Brown, Mostafa Karami, Sheida Nabavi</div>
+    <div class="venue">9th International Workshop on Health Intelligence (W3PHIAI-25) @ AAAI 2025</div>
+    <div class="links"><a class="ulink" href="https://arxiv.org/abs/2506.17133" target="_blank">Paper</a><a class="ulink" href="https://github.com/martinez-hub/rtda" target="_blank">Code</a></div>
+  </div>
+  <div class="pub">
+    <div class="title">RobustAugMix: Joint Optimization of Natural and Adversarial Robustness</div>
+    <div class="authors"><b>Josué Martínez-Martínez</b>, Olivia Brown</div>
+    <div class="venue">ML Safety Workshop @ NeurIPS 2022</div>
+    <div class="links"><a class="ulink" href="https://openreview.net/pdf?id=8MfPfECiFET" target="_blank">Paper</a><a class="ulink" href="https://github.com/martinez-hub/robustaugmix" target="_blank">Code</a></div>
+  </div>
 
-            <div class="publication-item">
-                <div class="publication-title">
-                    Unmanned Autonomous Aerial Navigation in GPS-Denied Environments
-                </div>
-                <div class="publication-authors">
-                    Noshin Habib, Angel Flores-Abad, <strong>Josué Martínez-Martínez</strong>, Diego Aponte-Roa, Albert Espinoza
-                </div>
-                <div class="publication-venue">
-                    18th LACCEI International Multi-Conference for Engineering, Education, and Technology, 2020
-                </div>
-                <div class="publication-links">
-                    <a href="https://laccei.org/LACCEI2020-VirtualEdition/full_papers/FP349.pdf" target="_blank">Paper</a>
-                </div>
-            </div>
+  <div class="pub-group">Conference Abstracts</div>
+  <div class="pub">
+    <div class="title">Towards Robustness to Natural Variations and Distribution Shift (Student Abstract)</div>
+    <div class="authors"><b>Josué Martínez-Martínez</b>, Olivia Brown, Rajmonda Caceres</div>
+    <div class="venue">Proceedings of the AAAI Conference on Artificial Intelligence, Vol. 38, No. 21, pp. 23579-23581, 2024</div>
+    <div class="links"><a class="ulink" href="https://ojs.aaai.org/index.php/AAAI/article/view/30481" target="_blank">Paper</a></div>
+  </div>
+  <div class="pub">
+    <div class="title">Addressing Vulnerability in Medical Deep Learning through Robust Training</div>
+    <div class="authors"><b>Josué Martínez-Martínez</b>, Sheida Nabavi</div>
+    <div class="venue">IEEE Conference on Computational Intelligence (CAI), 2023</div>
+    <div class="links"><a class="ulink" href="https://ieeexplore.ieee.org/document/10195019/" target="_blank">Paper</a><a class="ulink" href="https://github.com/martinez-hub/robustaugmix" target="_blank">Code</a></div>
+  </div>
 
-            <div class="publication-item">
-                <div class="publication-title">
-                    A Secured IoT Scheme for Microgrids Monitoring
-                </div>
-                <div class="publication-authors">
-                    <strong>Josué Martínez-Martínez</strong>, Carmen Carvajal-Jiménez, Diego A. Aponte-Roa
-                </div>
-                <div class="publication-venue">
-                    10th Annual Computing and Communication Workshop and Conference (CCWC), pp. 986-990, 2020
-                </div>
-                <div class="publication-links">
-                    <a href="https://ieeexplore.ieee.org/document/9031280" target="_blank">Paper</a>
-                </div>
-            </div>
+  <div class="pub-group">Journal Articles</div>
+  <div class="pub">
+    <div class="title">A Low-Cost Secure IoT Mechanism for Monitoring and Controlling Polygeneration Microgrids</div>
+    <div class="authors"><b>Josué Martínez-Martínez</b>, Diego Aponte-Roa, Idalides Vergara-Laurens, Wayne W. Weaver</div>
+    <div class="venue">Applied Sciences, Vol. 10, No. 23, Article 8354, 2020</div>
+    <div class="links"><a class="ulink" href="https://www.mdpi.com/2076-3417/10/23/8354" target="_blank">Paper</a></div>
+  </div>
 
-            <!-- Workshop Papers -->
-            <h3 style="font-size: 1.4rem; margin: 2.5rem 0 1.5rem; color: var(--secondary-color);">
-                Workshop Papers
-            </h3>
+  <div class="pub-group">Thesis</div>
+  <div class="pub">
+    <div class="title">Achieving Robustness to Natural and Adversarial Perturbations</div>
+    <div class="authors"><b>Josué Martínez-Martínez</b></div>
+    <div class="venue">PhD Dissertation, University of Connecticut, 2025</div>
+  </div>
+</main>
 
-            <div class="publication-item">
-                <div class="publication-title">
-                    From Snow to Rain: Evaluating Robustness, Calibration, and Complexity of Model-Based Robust Training
-                </div>
-                <div class="publication-authors">
-                    <strong>Josué Martínez-Martínez</strong>, Olivia Brown, Giselle Zeno, Pooya Khorrami, Rajmonda Caceres
-                </div>
-                <div class="publication-venue">
-                    LatinX in AI Research Workshop @ NeurIPS 2025
-                </div>
-                <div class="publication-links">
-                    <a href="https://arxiv.org/abs/2601.09153" target="_blank">Paper</a>
-                    <a href="https://github.com/martinez-hub/mbrdl-hybrid" target="_blank">Code</a>
-                </div>
-            </div>
-
-            <div class="publication-item">
-                <div class="publication-title">
-                    Robust Training with Data Augmentation for Medical Imaging Classification
-                </div>
-                <div class="publication-authors">
-                    <strong>Josué Martínez-Martínez</strong>, Olivia Brown, Mostafa Karami, Sheida Nabavi
-                </div>
-                <div class="publication-venue">
-                    9th International Workshop on Health Intelligence (W3PHIAI-25) @ AAAI 2025
-                </div>
-                <div class="publication-links">
-                    <a href="https://arxiv.org/abs/2506.17133" target="_blank">Paper</a>
-                    <a href="https://github.com/martinez-hub/rtda" target="_blank">Code</a>
-                </div>
-            </div>
-
-            <div class="publication-item">
-                <div class="publication-title">
-                    RobustAugMix: Joint Optimization of Natural and Adversarial Robustness
-                </div>
-                <div class="publication-authors">
-                    <strong>Josué Martínez-Martínez</strong>, Olivia Brown
-                </div>
-                <div class="publication-venue">
-                    ML Safety Workshop @ NeurIPS 2022
-                </div>
-                <div class="publication-links">
-                    <a href="https://openreview.net/pdf?id=8MfPfECiFET" target="_blank">Paper</a>
-                    <a href="https://github.com/martinez-hub/robustaugmix" target="_blank">Code</a>
-                </div>
-            </div>
-
-            <!-- Conference Abstracts -->
-            <h3 style="font-size: 1.4rem; margin: 2.5rem 0 1.5rem; color: var(--secondary-color);">
-                Conference Abstracts
-            </h3>
-
-            <div class="publication-item">
-                <div class="publication-title">
-                    Towards Robustness to Natural Variations and Distribution Shift (Student Abstract)
-                </div>
-                <div class="publication-authors">
-                    <strong>Josué Martínez-Martínez</strong>, Olivia Brown, Rajmonda Caceres
-                </div>
-                <div class="publication-venue">
-                    Proceedings of the AAAI Conference on Artificial Intelligence, Vol. 38, No. 21, pp. 23579-23581, 2024
-                </div>
-                <div class="publication-links">
-                    <a href="https://ojs.aaai.org/index.php/AAAI/article/view/30481" target="_blank">Paper</a>
-                </div>
-            </div>
-
-            <div class="publication-item">
-                <div class="publication-title">
-                    Addressing Vulnerability in Medical Deep Learning through Robust Training
-                </div>
-                <div class="publication-authors">
-                    <strong>Josué Martínez-Martínez</strong>, Sheida Nabavi
-                </div>
-                <div class="publication-venue">
-                    IEEE Conference on Computational Intelligence (CAI), 2023
-                </div>
-                <div class="publication-links">
-                    <a href="https://ieeexplore.ieee.org/document/10195019/" target="_blank">Paper</a>
-                    <a href="https://github.com/martinez-hub/robustaugmix" target="_blank">Code</a>
-                </div>
-            </div>
-
-            <!-- Journal Articles -->
-            <h3 style="font-size: 1.4rem; margin: 2.5rem 0 1.5rem; color: var(--secondary-color);">
-                Journal Articles
-            </h3>
-
-            <div class="publication-item">
-                <div class="publication-title">
-                    A Low-Cost Secure IoT Mechanism for Monitoring and Controlling Polygeneration Microgrids
-                </div>
-                <div class="publication-authors">
-                    <strong>Josué Martínez-Martínez</strong>, Diego Aponte-Roa, Idalides Vergara-Laurens, Wayne W. Weaver
-                </div>
-                <div class="publication-venue">
-                    Applied Sciences, Vol. 10, No. 23, Article 8354, 2020
-                </div>
-                <div class="publication-links">
-                    <a href="https://www.mdpi.com/2076-3417/10/23/8354" target="_blank">Paper</a>
-                </div>
-            </div>
-
-            <!-- Thesis -->
-            <h3 style="font-size: 1.4rem; margin: 2.5rem 0 1.5rem; color: var(--secondary-color);">
-                Thesis
-            </h3>
-
-            <div class="publication-item">
-                <div class="publication-title">
-                    Achieving Robustness to Natural and Adversarial Perturbations
-                </div>
-                <div class="publication-authors">
-                    <strong>Josué Martínez-Martínez</strong>
-                </div>
-                <div class="publication-venue">
-                    PhD Dissertation, University of Connecticut, 2025
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Josué Martínez-Martínez. All rights reserved.</p>
-            <p>Built with care. Hosted on GitHub Pages. Last updated: March 2026.</p>
-        </div>
-    </footer>
+<footer>
+  <div class="footer-inner"><span>© 2026 Josué Martínez-Martínez</span><span>Hosted on GitHub Pages · Updated June 2026</span></div>
+</footer>
+<script src="main.js"></script>
 </body>
 </html>
