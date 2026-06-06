@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Research — Josué Martínez-Martínez</title>
-<meta name="description" content="Research on agentic AI, world models, and AI assurance, including adversarial robustness and trustworthy machine learning, by Josué Martínez-Martínez.">
-<meta name="author" content="Josué Martínez-Martínez">
-<meta property="og:title" content="Research — Josué Martínez-Martínez">
+<title>Research — Josué Martínez</title>
+<meta name="description" content="Research on agentic AI, world models, and AI assurance, including adversarial robustness and trustworthy machine learning, by Josué Martínez.">
+<meta name="author" content="Josué Martínez">
+<meta property="og:title" content="Research — Josué Martínez">
 <meta property="og:description" content="Research on agentic AI, world models, and AI assurance.">
 <meta property="og:image" content="https://martinez-hub.github.io/assets/profile.jpg">
 <meta property="og:url" content="https://martinez-hub.github.io/research.html">
@@ -43,7 +43,7 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <a class="brand" href="index.html">Josué Martínez-Martínez</a>
+    <a class="brand" href="index.html">Josué Martínez</a>
     <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <ul class="nav-menu" id="navMenu">
       <li><a href="index.html">About</a></li>
@@ -60,48 +60,57 @@
   <h1 class="page-title">Research &amp; Projects</h1>
 
   <section class="project">
-    <h3>Underconfidence Adversarial Training</h3>
-    <p>Addressed an overlooked vulnerability in adversarially trained models: attacks that reduce model confidence without changing predictions. Decreased confidence can cause unnecessary interventions, delayed diagnoses, and erosion of trust — especially in high-stakes domains like medical imaging and autonomous systems.</p>
-    <p><b>Key contributions:</b></p>
-    <ul>
-      <li>Introduced two underconfidence attacks: class-pair ambiguity attacks and ConfSmooth, which spreads uncertainty across all classes.</li>
-      <li>Developed Underconfidence Adversarial Training (UAT), integrating these attacks into standard adversarial training.</li>
-      <li>UAT matches or beats traditional adversarial training while using half the gradient steps.</li>
-      <li>Evaluated across 6 architectures (CNNs and Vision Transformers) and 7 datasets including MNIST, CIFAR, ImageNet, MSTAR, and medical imaging.</li>
-    </ul>
-    <div class="linkrow"><a class="ulink" href="https://proceedings.mlr.press/v307/marti-nez-marti-nez26a.html" target="_blank">View paper →</a></div>
-  </section>
-
-  <section class="project">
-    <h3>Model-Based Robust Training</h3>
-    <p>Investigated how deep models handle natural image corruptions like snow and rain in safety-critical settings, using learned corruption models to generate realistic distortions while balancing robustness, calibration, and compute.</p>
-    <p><b>Key contributions:</b></p>
-    <ul>
-      <li>Comparative framework evaluating model-based training against Vanilla, Adversarial Training, and AugMix across corruption severities.</li>
-      <li>Hybrid strategies combining random coverage with adversarial refinement in nuisance space.</li>
-      <li>Multi-dimensional analysis of accuracy, calibration, and computational cost — beyond accuracy-only metrics.</li>
-      <li>Showed model-based augmentation matches adversarial robustness at significantly lower cost.</li>
-    </ul>
-    <div class="linkrow">
-      <a class="ulink" href="https://arxiv.org/abs/2601.09153" target="_blank">From Snow to Rain (NeurIPS 2025 workshop) →</a>
-      <a class="ulink" href="https://ojs.aaai.org/index.php/AAAI/article/view/30481" target="_blank">Towards Robustness to Natural Variations (AAAI 2024) →</a>
+    <div class="idx">01</div>
+    <div class="body">
+      <h3>Underconfidence Adversarial Training</h3>
+      <p>Addressed an overlooked vulnerability in adversarially trained models: attacks that reduce model confidence without changing predictions. Decreased confidence can cause unnecessary interventions, delayed diagnoses, and erosion of trust — especially in high-stakes domains like medical imaging and autonomous systems.</p>
+      <p><b>Key contributions:</b></p>
+      <ul>
+        <li>Introduced two underconfidence attacks: class-pair ambiguity attacks and ConfSmooth, which spreads uncertainty across all classes.</li>
+        <li>Developed Underconfidence Adversarial Training (UAT), integrating these attacks into standard adversarial training.</li>
+        <li>UAT matches or beats traditional adversarial training while using half the gradient steps.</li>
+        <li>Evaluated across 6 architectures (CNNs and Vision Transformers) and 7 datasets including MNIST, CIFAR, ImageNet, MSTAR, and medical imaging.</li>
+      </ul>
+      <div class="linkrow"><a class="ulink" href="https://proceedings.mlr.press/v307/marti-nez-marti-nez26a.html" target="_blank">View paper →</a></div>
     </div>
   </section>
 
   <section class="project">
-    <h3>Robust Training for Medical Imaging Classification</h3>
-    <p>Developed robust training strategies to strengthen diagnostic neural networks against adversarial attacks and distribution shift while preserving diagnostic accuracy and clinician trust.</p>
-    <p><b>Key contributions:</b></p>
-    <ul>
-      <li>Proposed Robust Training with Data Augmentation (RTDA) tailored to medical imaging.</li>
-      <li>Benchmarked across 6 baselines spanning isolated and combined adversarial training and augmentation.</li>
-      <li>Validated across mammograms, X-rays, and ultrasound.</li>
-      <li>Evaluated against both adversarial perturbations and natural distribution variations while preserving clean accuracy.</li>
-    </ul>
-    <div class="linkrow">
-      <a class="ulink" href="https://arxiv.org/abs/2506.17133" target="_blank">RTDA (AAAI 2025 workshop) →</a>
-      <a class="ulink" href="https://ieeexplore.ieee.org/document/10980787" target="_blank">Mammogram Classification (ISBI 2025) →</a>
-      <a class="ulink" href="https://ieeexplore.ieee.org/document/10195019/" target="_blank">Medical Deep Learning (IEEE CAI 2023) →</a>
+    <div class="idx">02</div>
+    <div class="body">
+      <h3>Model-Based Robust Training</h3>
+      <p>Investigated how deep models handle natural image corruptions like snow and rain in safety-critical settings, using learned corruption models to generate realistic distortions while balancing robustness, calibration, and compute.</p>
+      <p><b>Key contributions:</b></p>
+      <ul>
+        <li>Comparative framework evaluating model-based training against Vanilla, Adversarial Training, and AugMix across corruption severities.</li>
+        <li>Hybrid strategies combining random coverage with adversarial refinement in nuisance space.</li>
+        <li>Multi-dimensional analysis of accuracy, calibration, and computational cost — beyond accuracy-only metrics.</li>
+        <li>Showed model-based augmentation matches adversarial robustness at significantly lower cost.</li>
+      </ul>
+      <div class="linkrow">
+        <a class="ulink" href="https://arxiv.org/abs/2601.09153" target="_blank">From Snow to Rain (NeurIPS 2025 workshop) →</a>
+        <a class="ulink" href="https://ojs.aaai.org/index.php/AAAI/article/view/30481" target="_blank">Towards Robustness to Natural Variations (AAAI 2024) →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="project">
+    <div class="idx">03</div>
+    <div class="body">
+      <h3>Robust Training for Medical Imaging Classification</h3>
+      <p>Developed robust training strategies to strengthen diagnostic neural networks against adversarial attacks and distribution shift while preserving diagnostic accuracy and clinician trust.</p>
+      <p><b>Key contributions:</b></p>
+      <ul>
+        <li>Proposed Robust Training with Data Augmentation (RTDA) tailored to medical imaging.</li>
+        <li>Benchmarked across 6 baselines spanning isolated and combined adversarial training and augmentation.</li>
+        <li>Validated across mammograms, X-rays, and ultrasound.</li>
+        <li>Evaluated against both adversarial perturbations and natural distribution variations while preserving clean accuracy.</li>
+      </ul>
+      <div class="linkrow">
+        <a class="ulink" href="https://arxiv.org/abs/2506.17133" target="_blank">RTDA (AAAI 2025 workshop) →</a>
+        <a class="ulink" href="https://ieeexplore.ieee.org/document/10980787" target="_blank">Mammogram Classification (ISBI 2025) →</a>
+        <a class="ulink" href="https://ieeexplore.ieee.org/document/10195019/" target="_blank">Medical Deep Learning (IEEE CAI 2023) →</a>
+      </div>
     </div>
   </section>
 
@@ -114,7 +123,7 @@
 </main>
 
 <footer>
-  <div class="footer-inner"><span>© 2026 Josué Martínez-Martínez</span><span>Hosted on GitHub Pages · Updated June 2026</span></div>
+  <div class="footer-inner"><span>© 2026 Josué Martínez</span><span>Hosted on GitHub Pages · Updated June 2026</span></div>
 </footer>
 <script src="main.js"></script>
 </body>
