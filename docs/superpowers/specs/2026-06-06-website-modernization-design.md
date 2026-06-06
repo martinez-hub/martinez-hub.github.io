@@ -86,7 +86,7 @@ Restyle to new tokens; keep the big "404" + Return Home CTA.
 
 ## 6. Asset & performance fixes
 
-- **Favicon:** the current `assets/favicon.png` is **2.2 MB** — far too large. Regenerate a small favicon (e.g., 32×32 / 180×180) from the source image; target < 50 KB total. Add an `apple-touch-icon`.
+- **Favicon:** the current `assets/favicon.png` is **2.2 MB** — far too large. Generate a new **monogram favicon matching the Paper theme** (not the face): initials "JM" (or "J") in oxblood `#7a2e2e` on a warm paper `#f6f2ea` ground, set in the Newsreader/serif style. Produce an SVG favicon plus a 180×180 `apple-touch-icon` PNG; target < 20 KB total. Replace `assets/favicon.png` references accordingly.
 - Keep `profile.jpg` (67 KB, fine).
 - Remove the stray `2022-...MITLincolnLaboratory....JPG` (1.5 MB) from `assets/` if unused, or leave untouched if referenced elsewhere (verify first).
 - Fonts: load only the weights actually used.
@@ -97,10 +97,10 @@ Restyle to new tokens; keep the big "404" + Return Home CTA.
 - Verify `https://martinez-hub.github.io/` returns HTTP 200 after the Pages rebuild.
 - The `og:url` / `og:image` absolute URLs already point at the correct domain; keep them.
 
-## 8. Open decisions for user review
+## 8. Resolved decisions
 
-1. **Research/Collaboration interest lists** (§5.2, §5.4): collapse the legacy granular bullets under the three new areas (recommended), OR keep the full legacy list visible in addition to the new framing?
-2. **Favicon source:** regenerate from the existing `assets/favicon.png` source, or from `profile.jpg`, or provide a new image?
+1. **Research/Collaboration interest lists** (§5.2, §5.4): **Resolved — Option A.** Collapse the legacy granular bullets under the three new areas (Agentic AI · World Models · AI Assurance), with prior work as supporting detail under AI Assurance.
+2. **Favicon:** **Resolved.** Generate a new monogram favicon matching the Paper theme (oxblood-on-paper), not the face. See §6.
 
 ## 9. Testing / verification
 
