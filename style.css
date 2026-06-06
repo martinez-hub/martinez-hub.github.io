@@ -8,13 +8,13 @@ html{ scroll-behavior:smooth; }
 
 :root[data-theme="light"]{
   --bg:#f6f2ea; --surface:#efe8da; --surface-2:#ece4d5;
-  --text:#211e18; --muted:#5e564a; --faint:#9a8f7c;
+  --text:#211e18; --muted:#5e564a; --faint:#6b6253;
   --line:#ddd3c2; --accent:#7a2e2e; --accent-ink:#5e2424;
   --grain:.045; --grain-blend:multiply;
 }
 :root[data-theme="dark"]{
   --bg:#16140f; --surface:#1e1b15; --surface-2:#221e17;
-  --text:#ece7dd; --muted:#a99f8e; --faint:#7d7464;
+  --text:#ece7dd; --muted:#a99f8e; --faint:#9a9080;
   --line:#332e25; --accent:#d2796a; --accent-ink:#e6a394;
   --grain:.07; --grain-blend:screen;
 }
@@ -29,6 +29,13 @@ body::before{
   content:""; position:fixed; inset:0; z-index:1; pointer-events:none; opacity:var(--grain);
   mix-blend-mode:var(--grain-blend);
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* warm halo + bottom vignette for depth */
+body::after{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(90% 55% at 50% -10%, color-mix(in srgb,var(--accent) 8%, transparent), transparent 60%),
+    radial-gradient(130% 80% at 50% 112%, transparent 72%, color-mix(in srgb,#000 6%, transparent));
 }
 
 a{ color:inherit; }
@@ -63,7 +70,7 @@ a{ color:inherit; }
 .eyebrow{ font-family:'JetBrains Mono',monospace; font-size:.74rem; letter-spacing:.22em; text-transform:uppercase;
   color:var(--accent); margin-bottom:1.1rem; display:flex; align-items:center; gap:.6rem; }
 .eyebrow::before{ content:""; width:26px; height:1px; background:var(--accent); display:inline-block; }
-h1{ font-family:'Newsreader',serif; font-weight:500; font-size:clamp(2.7rem,5.8vw,4.8rem); line-height:1.06; letter-spacing:-.02em; }
+h1{ font-family:'Newsreader',serif; font-weight:500; font-size:clamp(2.8rem,6.2vw,5.4rem); line-height:1.04; letter-spacing:-.025em; overflow-wrap:break-word; }
 .role{ font-family:'Newsreader',serif; font-style:italic; font-size:1.4rem; color:var(--muted); margin-top:1rem; }
 .role b{ font-style:normal; font-weight:600; color:var(--accent); }
 .sub{ font-family:'JetBrains Mono',monospace; font-size:.8rem; color:var(--muted); margin-top:.7rem; letter-spacing:.02em; }
@@ -108,7 +115,10 @@ main{ padding:2rem 0 1rem; }
 .news .l{ font-family:'JetBrains Mono',monospace; font-size:.74rem; color:var(--accent); display:inline-block; margin-top:.3rem; }
 
 /* projects (research) */
-.project{ padding-bottom:2.75rem; margin-bottom:2.75rem; border-bottom:1px solid var(--line); }
+.project{ position:relative; padding-bottom:2.75rem; margin-bottom:2.75rem; border-bottom:1px solid var(--line); }
+.project::before{ content:""; position:absolute; left:-1.25rem; top:.45rem; bottom:2.75rem; width:2px;
+  background:var(--accent); transform:scaleY(0); transform-origin:top; transition:transform .4s cubic-bezier(.2,.7,.2,1); }
+.project:hover::before{ transform:scaleY(1); }
 .project:last-child{ border-bottom:none; }
 .project h3{ font-family:'Newsreader',serif; font-size:1.6rem; font-weight:500; margin-bottom:.8rem; letter-spacing:-.01em; }
 .project p{ font-size:1.1rem; line-height:1.7; margin-bottom:.9rem; max-width:72ch; }
@@ -127,7 +137,9 @@ main{ padding:2rem 0 1rem; }
 /* publications */
 .pub-group{ font-family:'JetBrains Mono',monospace; font-size:.74rem; letter-spacing:.16em; text-transform:uppercase;
   color:var(--accent); margin:3rem 0 1.25rem; padding-bottom:.5rem; border-bottom:1px solid var(--line); }
-.pub{ padding:1.15rem 0; border-bottom:1px solid var(--line); }
+.pub{ padding:1.15rem 1rem; margin:0 -1rem; border-bottom:1px solid var(--line); border-radius:8px;
+  transition:background .2s ease, box-shadow .2s ease; }
+.pub:hover{ background:var(--surface); box-shadow:inset 2px 0 0 var(--accent); }
 .pub:last-child{ border-bottom:none; }
 .pub .title{ font-family:'Newsreader',serif; font-size:1.18rem; font-weight:600; margin-bottom:.3rem; line-height:1.3; }
 .pub .authors{ font-size:1.02rem; margin-bottom:.2rem; }
@@ -170,6 +182,7 @@ footer{ border-top:1px solid var(--line); background:var(--surface); padding:2.5
   .nav-menu.open{ display:flex; }
   .hero{ grid-template-columns:1fr; text-align:center; gap:2rem; padding-top:3rem; }
   .avatar{ margin:0 auto; width:150px; height:150px; }
+  h1{ font-size:2.1rem; line-height:1.12; }
   .social,.tags,.eyebrow{ justify-content:center; }
   .grid{ grid-template-columns:1fr; gap:2.5rem; }
   .about .first::first-letter{ float:none; font-size:inherit; padding:0; color:inherit; }
