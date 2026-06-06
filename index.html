@@ -1,149 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CW59PVY98J"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Josué Martínez-Martínez — AI Research Engineer</title>
+<meta name="description" content="Josué Martínez-Martínez — AI Research Engineer at Orbis Operations and CS PhD (UConn). Research in agentic AI, world models, and AI assurance.">
+<meta name="keywords" content="AI Research Engineer, Agentic AI, World Models, AI Assurance, Trustworthy AI, Adversarial Machine Learning">
+<meta name="author" content="Josué Martínez-Martínez">
+<meta property="og:title" content="Josué Martínez-Martínez — AI Research Engineer">
+<meta property="og:description" content="AI Research Engineer at Orbis Operations. Research in agentic AI, world models, and AI assurance.">
+<meta property="og:image" content="https://martinez-hub.github.io/assets/profile.jpg">
+<meta property="og:url" content="https://martinez-hub.github.io/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Josué Martínez-Martínez — AI Research Engineer">
+<meta name="twitter:description" content="AI Research Engineer at Orbis Operations. Research in agentic AI, world models, and AI assurance.">
+<meta name="twitter:image" content="https://martinez-hub.github.io/assets/profile.jpg">
 
-      gtag('config', 'G-CW59PVY98J');
-    </script>
+<script>
+  (function(){
+    try{
+      var s=localStorage.getItem('theme');
+      var m=s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+      document.documentElement.setAttribute('data-theme',m);
+    }catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+  })();
+</script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josué Martínez-Martínez - AI Assurance Researcher</title>
+<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Josué Martínez-Martínez - AI Assurance Researcher specializing in adversarial machine learning, synthetic media detection, and trustworthy AI systems. PhD in Computer Science & Engineering from UConn.">
-    <meta name="keywords" content="AI Assurance, Adversarial Machine Learning, Deepfake Detection, Robust AI, Trustworthy AI, Computer Vision, Machine Learning Security">
-    <meta name="author" content="Josué Martínez-Martínez">
-
-    <!-- Open Graph Meta Tags (for LinkedIn, Facebook, etc.) -->
-    <meta property="og:title" content="Josué Martínez-Martínez - AI Assurance Researcher">
-    <meta property="og:description" content="AI Assurance Researcher specializing in adversarial machine learning, synthetic media detection, and trustworthy AI systems.">
-    <meta property="og:image" content="https://martinez-hub.github.io/assets/profile.jpg">
-    <meta property="og:url" content="https://martinez-hub.github.io/">
-    <meta property="og:type" content="website">
-
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Josué Martínez-Martínez - AI Assurance Researcher">
-    <meta name="twitter:description" content="AI Assurance Researcher specializing in adversarial machine learning, synthetic media detection, and trustworthy AI systems.">
-    <meta name="twitter:image" content="https://martinez-hub.github.io/assets/profile.jpg">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./assets/favicon.png">
-
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CW59PVY98J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CW59PVY98J');
+</script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <a href="index.html">Josué Martínez-Martínez</a>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="active">About</a></li>
-                <li><a href="research.html">Research / Projects</a></li>
-                <li><a href="publications.html">Publications</a></li>
-                <li><a href="./cv/Josue_Martinez_Martinez_CV.pdf" target="_blank">CV</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Josué Martínez-Martínez</a>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html" class="active">About</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="./cv/Josue_Martinez_Martinez_CV.pdf" target="_blank">CV</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><button class="toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">◐</span> <span id="themeText">Dark</span></button></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header class="hero">
+    <img class="avatar reveal d1" src="./assets/profile.jpg" alt="Josué Martínez-Martínez">
+    <div>
+      <div class="eyebrow reveal d2">AI Research Engineer · Orbis Operations</div>
+      <h1 class="reveal d3">Josué<br>Martínez-Martínez</h1>
+      <p class="role reveal d4"><b>AI Research Engineer</b>, Orbis Operations</p>
+      <p class="sub reveal d4">PhD, Computer Science &amp; Engineering · University of Connecticut</p>
+      <div class="tags reveal d5"><span>Agentic AI</span><span>World Models</span><span>AI Assurance</span></div>
+      <div class="social reveal d6">
+        <a class="ulink" href="https://scholar.google.com/citations?user=oqFkyvcAAAAJ&hl=en" target="_blank">Google Scholar</a>
+        <a class="ulink" href="https://orcid.org/0000-0002-2903-9297" target="_blank">ORCID</a>
+        <a class="ulink" href="https://github.com/martinez-hub" target="_blank">GitHub</a>
+        <a class="ulink" href="https://www.linkedin.com/in/josuemartinezmartinez/" target="_blank">LinkedIn</a>
+        <a class="ulink" href="contact.html">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="rule"></div>
+
+  <section class="grid">
+    <div>
+      <div class="sec-h"><span class="num">01</span> About</div>
+      <div class="about">
+        <p class="first">I'm an <b>AI Research Engineer at Orbis Operations</b> and a recent PhD graduate in Computer Science &amp; Engineering from the University of Connecticut. My work centers on AI systems that remain reliable under distribution shift and adversarial stress — spanning <b>agentic AI, world models, and AI assurance</b>.</p>
+        <p class="muted">My doctoral research was conducted in collaboration with MIT Lincoln Laboratory and supported by competitive fellowships and grants from NSF, NASA, GEM, General Electric, and the University of Connecticut.</p>
+      </div>
+    </div>
+    <div>
+      <div class="sec-h"><span class="num">02</span> News</div>
+      <div class="news">
+        <div class="item">
+          <div class="date">January 2026</div>
+          <div class="t">Paper presented at NLDL 2026</div>
+          <a class="l ulink" href="https://proceedings.mlr.press/v307/marti-nez-marti-nez26a.html" target="_blank">View paper →</a>
         </div>
-    </nav>
-
-    <main class="container">
-        <section class="hero">
-            <div class="hero-profile">
-                <img src="./assets/profile.jpg" alt="Josué Martínez-Martínez" class="profile-photo">
-            </div>
-            <div class="hero-content">
-                <h1>Josué Martínez-Martínez</h1>
-                <p class="subtitle">PhD in Computer Science & Engineering</p>
-                <p class="tagline">AI Assurance Researcher</p>
-
-                <div class="social-links">
-                    <a href="https://scholar.google.com/citations?user=oqFkyvcAAAAJ&hl=en" target="_blank">Google Scholar</a>
-                    <a href="https://orcid.org/0000-0002-2903-9297" target="_blank">ORCID</a>
-                    <a href="https://github.com/martinez-hub" target="_blank">GitHub</a>
-                    <a href="https://www.linkedin.com/in/josuemartinezmartinez/" target="_blank">LinkedIn</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="about">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <p>
-                    I'm Josue Martinez-Martinez, an engineer, AI researcher, and recent PhD graduate in Computer Science & Engineering from
-                    the University of Connecticut. I was supervised by
-                    <a href="https://sheida-nabavi.uconn.edu/" target="_blank">Dr. Sheida Nabavi</a> and
-                    <a href="https://www.derekaguiar.com" target="_blank">Dr. Derek Aguiar</a> and conducted my doctoral research
-                    in collaboration with MIT Lincoln Laboratory, where I was mentored by
-                    <a href="https://www.linkedin.com/in/olivia-brown-9028b33b" target="_blank">Olivia Brown</a>. My research
-                    focuses on building machine learning systems that remain reliable under distribution shift and adversarial
-                    stress, with interests spanning synthetic media detection, model reliability, and self-supervised learning.
-                    My work has been supported by competitive fellowships and grants from NSF, NASA, GEM, General Electric,
-                    and the University of Connecticut.
-                </p>
-                <p>
-                    I'm currently seeking research positions and collaboration opportunities in AI assurance and trustworthy AI systems.
-                </p>
-            </div>
-        </section>
-
-        <section class="news">
-            <h2>News</h2>
-
-            <div class="news-item">
-                <span class="news-date">January 2026</span>
-                <div class="news-content">
-                    <strong>Paper Presentation at NLDL 2026</strong><br>
-                    Presented "Improving Vision Model Robustness against Misclassification and Uncertainty Attacks via Underconfidence Adversarial Training" at the Northern Lights Deep Learning Conference.
-                    <a href="https://proceedings.mlr.press/v307/marti-nez-marti-nez26a.html" target="_blank" class="news-link">View paper →</a>
-                </div>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">March 6, 2026</span>
-                <div class="news-content">
-                    <strong>WACV SAFE Workshop</strong><br>
-                    Organizing the Synthetic & Adversarial Forensics (SAFE) Workshop at WACV 2026. Join us for cutting-edge research on deepfake detection and synthetic media authentication.
-                    <a href="https://www.safeworkshop.org/wacv-2026/" target="_blank" class="news-link">Workshop website →</a>
-                </div>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">Deadline: March 13</span>
-                <div class="news-content">
-                    <strong>CVPR SAFE Workshop - Call for Papers</strong><br>
-                    Submissions are open for the SAFE Workshop at CVPR 2026. We welcome papers on synthetic media detection, adversarial forensics, and AI security. Submission deadline: March 13, 2026.
-                    <a href="https://www.safeworkshop.org/cvpr-2026/" target="_blank" class="news-link">Submit your work →</a>
-                </div>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">Deadline: March 14</span>
-                <div class="news-content">
-                    <strong>CVPR SPAR3D Workshop - Call for Papers</strong><br>
-                    Co-organizing the SPAR in 3D Generative Vision Models Workshop at CVPR 2026. Submit your research on 3D generative models and spatial reasoning. Submission deadline: March 14, 2026.
-                    <a href="https://www.spar3d.org" target="_blank" class="news-link">Learn more →</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Josué Martínez-Martínez. All rights reserved.</p>
-            <p>Built with care. Hosted on GitHub Pages. Last updated: March 2026.</p>
+        <div class="item">
+          <div class="date">March 2026</div>
+          <div class="t">Organizing the SAFE Workshop @ WACV 2026</div>
+          <a class="l ulink" href="https://www.safeworkshop.org/wacv-2026/" target="_blank">Workshop website →</a>
         </div>
-    </footer>
+        <div class="item">
+          <div class="date">Deadline · March 13</div>
+          <div class="t">SAFE @ CVPR 2026 — Call for Papers</div>
+          <a class="l ulink" href="https://www.safeworkshop.org/cvpr-2026/" target="_blank">Submit your work →</a>
+        </div>
+        <div class="item">
+          <div class="date">Deadline · March 14</div>
+          <div class="t">SPAR3D @ CVPR 2026 — Call for Papers</div>
+          <a class="l ulink" href="https://www.spar3d.org" target="_blank">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner"><span>© 2026 Josué Martínez-Martínez</span><span>Hosted on GitHub Pages · Updated June 2026</span></div>
+</footer>
+<script src="main.js"></script>
 </body>
 </html>
