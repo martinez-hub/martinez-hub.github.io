@@ -1,118 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CW59PVY98J"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Josué Martínez-Martínez</title>
+<meta name="description" content="Contact Josué Martínez-Martínez for research collaborations in agentic AI, world models, and AI assurance.">
+<meta name="author" content="Josué Martínez-Martínez">
+<meta property="og:title" content="Contact — Josué Martínez-Martínez">
+<meta property="og:description" content="Get in touch for research collaborations in agentic AI, world models, and AI assurance.">
+<meta property="og:image" content="https://martinez-hub.github.io/assets/profile.jpg">
+<meta property="og:url" content="https://martinez-hub.github.io/contact.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
 
-      gtag('config', 'G-CW59PVY98J');
-    </script>
+<script>
+  (function(){
+    try{
+      var s=localStorage.getItem('theme');
+      var m=s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+      document.documentElement.setAttribute('data-theme',m);
+    }catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+  })();
+</script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Josué Martínez-Martínez</title>
+<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Contact Josué Martínez-Martínez for research collaborations and opportunities in AI assurance, adversarial machine learning, and trustworthy AI systems.">
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Contact - Josué Martínez-Martínez">
-    <meta property="og:description" content="Get in touch for research collaborations in AI assurance and trustworthy AI.">
-    <meta property="og:image" content="https://martinez-hub.github.io/assets/profile.jpg">
-    <meta property="og:url" content="https://martinez-hub.github.io/contact.html">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./assets/favicon.png">
-
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CW59PVY98J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CW59PVY98J');
+</script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <a href="index.html">Josué Martínez-Martínez</a>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">About</a></li>
-                <li><a href="research.html">Research / Projects</a></li>
-                <li><a href="publications.html">Publications</a></li>
-                <li><a href="./cv/Josue_Martinez_Martinez_CV.pdf" target="_blank">CV</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <main class="container">
-        <section class="contact">
-            <h2>Get In Touch</h2>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Josué Martínez-Martínez</a>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">About</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="./cv/Josue_Martinez_Martinez_CV.pdf" target="_blank">CV</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><button class="toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">◐</span> <span id="themeText">Dark</span></button></li>
+    </ul>
+  </div>
+</nav>
 
-            <div class="contact-info">
-                <p>
-                    I'm always interested in hearing about new research collaborations, speaking opportunities,
-                    and industry positions related to my research areas.
-                </p>
-                <p>
-                    <strong>Location:</strong> Massachusetts, USA
-                </p>
-            </div>
+<main class="wrap">
+  <h1 class="page-title">Get in Touch</h1>
 
-            <h3 style="font-size: 1.4rem; margin: 2rem 0 1rem;">Send Me a Message</h3>
-            <form class="contact-form" action="https://formspree.io/f/mgoljkdg" method="POST">
-                <div class="form-group">
-                    <label for="name">Your Name *</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
+  <div class="card">
+    <p>I'm always interested in research collaborations, speaking opportunities, and roles related to my research areas.</p>
+    <p><b>Location:</b> Massachusetts, USA</p>
+    <p><b>LinkedIn:</b> <a class="ulink" href="https://www.linkedin.com/in/josuemartinezmartinez/" target="_blank">josuemartinezmartinez</a></p>
+  </div>
 
-                <div class="form-group">
-                    <label for="email">Your Email *</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
+  <div class="sec-h"><span class="num">01</span> Send a message</div>
+  <form class="form" action="https://formspree.io/f/mgoljkdg" method="POST">
+    <div class="field"><label for="name">Your name *</label><input type="text" id="name" name="name" required></div>
+    <div class="field"><label for="email">Your email *</label><input type="email" id="email" name="email" required></div>
+    <div class="field"><label for="subject">Subject *</label><input type="text" id="subject" name="subject" required></div>
+    <div class="field"><label for="message">Message *</label><textarea id="message" name="message" required></textarea></div>
+    <button type="submit" class="btn">Send Message</button>
+  </form>
+  <p class="sub" style="margin-top:1.5rem">I typically respond within 2–3 business days.</p>
 
-                <div class="form-group">
-                    <label for="subject">Subject *</label>
-                    <input type="text" id="subject" name="subject" required>
-                </div>
+  <div class="sec-h" style="margin-top:3.5rem"><span class="num">02</span> Collaboration interests</div>
+  <ul class="interests">
+    <li><b>Agentic AI</b> — autonomous, tool-using systems and their reliability.</li>
+    <li><b>World Models</b> — learned environment dynamics for perception and planning.</li>
+    <li><b>AI Assurance</b> — trustworthy, robust AI under adversarial and distribution stress (adversarial ML, robustness to natural variation, uncertainty quantification, out-of-distribution generalization, and self-supervised learning).</li>
+  </ul>
+</main>
 
-                <div class="form-group">
-                    <label for="message">Message *</label>
-                    <textarea id="message" name="message" rows="6" required></textarea>
-                </div>
-
-                <button type="submit" class="submit-button">Send Message</button>
-            </form>
-
-            <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-light);">
-                I typically respond within 2-3 business days.
-            </p>
-
-            <h3 style="font-size: 1.4rem; margin: 2rem 0 1rem;">Connect With Me</h3>
-            <div class="social-links" style="justify-content: flex-start; margin-bottom: 2rem;">
-                <a href="https://www.linkedin.com/in/josuemartinezmartinez/" target="_blank">LinkedIn</a>
-            </div>
-
-            <h3 style="font-size: 1.4rem; margin: 2rem 0 1rem;">Collaboration Interests</h3>
-            <p>I'm particularly interested in collaborations involving:</p>
-            <ul style="margin: 1rem 0 1rem 1.5rem; line-height: 1.8;">
-                <li>AI Assurance and trustworthy AI systems</li>
-                <li>Adversarial machine learning</li>
-                <li>Robustness to natural data variations</li>
-                <li>Self-supervised learning for vision, audio and multimodal data</li>
-                <li>Deepfake detection and synthetic media authentication</li>
-                <li>Uncertainty quantification in deep learning</li>
-                <li>Out-of-distribution generalization</li>
-            </ul>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Josué Martínez-Martínez. All rights reserved.</p>
-            <p>Built with care. Hosted on GitHub Pages. Last updated: March 2026.</p>
-        </div>
-    </footer>
+<footer>
+  <div class="footer-inner"><span>© 2026 Josué Martínez-Martínez</span><span>Hosted on GitHub Pages · Updated June 2026</span></div>
+</footer>
+<script src="main.js"></script>
 </body>
 </html>
