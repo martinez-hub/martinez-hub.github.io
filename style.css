@@ -121,6 +121,22 @@ main{ padding:2rem 0 1rem; }
 .news .date{ font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.04em; text-transform:uppercase; color:var(--faint); margin-bottom:.2rem; }
 .news .t{ font-family:'Newsreader',serif; font-size:1.15rem; font-weight:500; }
 .news .l{ font-family:'JetBrains Mono',monospace; font-size:.74rem; color:var(--accent); display:inline-block; margin-top:.3rem; }
+.news-more{ margin-top:1.5rem; }
+.news-more a{ font-family:'JetBrains Mono',monospace; font-size:.76rem; letter-spacing:.04em; color:var(--accent); }
+
+/* news archive page — date-rail feed */
+.news-feed{ margin-top:.5rem; }
+.nf-item{ display:grid; grid-template-columns:minmax(0,170px) 1fr; gap:2.5rem;
+  padding:1.6rem 1rem; margin:0 -1rem; border-top:1px solid var(--line); border-radius:8px;
+  transition:background .2s ease; }
+.news-feed .nf-item:last-child{ border-bottom:1px solid var(--line); }
+.nf-item:hover{ background:var(--surface); }
+.nf-date{ font-family:'JetBrains Mono',monospace; font-size:.74rem; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--accent); padding-top:.3rem; }
+.nf-body{ min-width:0; }
+.nf-body h3{ font-family:'Newsreader',serif; font-weight:500; font-size:1.25rem; letter-spacing:-.01em; }
+.nf-body p{ color:var(--muted); margin-top:.4rem; max-width:64ch; line-height:1.6; }
+.nf-body .l{ font-family:'JetBrains Mono',monospace; font-size:.76rem; color:var(--accent); display:inline-block; margin-top:.5rem; }
 
 /* projects (research) — editorial numbered grid */
 .project{ display:grid; grid-template-columns:minmax(0,96px) 1fr; gap:2.5rem;
@@ -205,6 +221,7 @@ footer{ border-top:1px solid var(--line); background:var(--surface); padding:2.5
   .project .idx{ font-size:2.4rem; }
   .pubsec{ grid-template-columns:1fr; gap:.6rem; }
   .pubsec-h{ position:static; }
+  .nf-item{ grid-template-columns:1fr; gap:.4rem; }
   .about .first::first-letter{ float:none; font-size:inherit; padding:0; color:inherit; }
   .wrap,.nav-inner,.footer-inner{ padding-left:1.5rem; padding-right:1.5rem; }
 }
