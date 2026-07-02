@@ -160,23 +160,35 @@ acc = xr.DataArray(
 acc.mean("seed")     <span class="c"># average across seeds, per learning rate</span></code></pre>
     </div>
 
-    <p class="guide-note"><b>mushin</b> — define a task, sweep it, and get a labeled dataset back:</p>
+    <p class="guide-note"><b>mushin end-to-end</b> — sweep a Lightning model across learning rates and seeds, collect the results as an xarray dataset, and plot straight from it:</p>
     <div class="codeblock">
       <div class="cb-bar"><span class="cb-label">python</span><button class="cb-copy" type="button">Copy</button></div>
-      <pre class="cb-pre"><code>from mushin import multirun
+      <pre class="cb-pre"><code>import lightning as L
+import matplotlib.pyplot as plt
+from mushin import multirun
 from mushin.workflows import MultiRunMetricsWorkflow
 
 class LRSweep(MultiRunMetricsWorkflow):
     @staticmethod
     def task(lr: float, seed: int) -> dict:
-        <span class="c"># ... train + evaluate a model with these hyperparameters ...</span>
-        return dict(accuracy=acc)
+        L.seed_everything(seed)
+        model = MyLitModule(lr=lr)               <span class="c"># your LightningModule</span>
+        trainer = L.Trainer(max_epochs=5, accelerator="auto",
+                            logger=False, enable_checkpointing=False)
+        trainer.fit(model, datamodule=dm)        <span class="c"># dm: your LightningDataModule</span>
+        return {"accuracy": trainer.callback_metrics["val_acc"].item()}
 
 wf = LRSweep()
-wf.run(lr=multirun([0.01, 0.1, 1.0]), seed=multirun([0, 1, 2]))
+wf.run(lr=multirun([1e-3, 1e-2, 1e-1]), seed=multirun([0, 1, 2]))
 
-ds = wf.to_xarray()             <span class="c"># results as a labeled xarray dataset</span>
-ds["accuracy"].mean("seed")     <span class="c"># average over seeds, per learning rate</span></code></pre>
+ds = wf.to_xarray()                              <span class="c"># labeled dataset, dims (lr, seed)</span>
+mean = ds["accuracy"].mean("seed")              <span class="c"># average over seeds</span>
+std  = ds["accuracy"].std("seed")               <span class="c"># spread across seeds</span>
+
+<span class="c"># plot straight from the xarray: val accuracy vs. learning rate, mean ± spread</span>
+plt.errorbar(mean["lr"], mean, yerr=std, marker="o", capsize=4)
+plt.xscale("log"); plt.xlabel("learning rate"); plt.ylabel("val accuracy")
+plt.tight_layout(); plt.savefig("acc_vs_lr.png")</code></pre>
     </div>
   </section>
 
