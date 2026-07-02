@@ -65,27 +65,49 @@
   <!-- Set up your environment -->
   <section class="guide-sec">
     <div class="sec-h">Set up your environment</div>
-    <p class="guide-note">Work through these once and you're set for everything below. Commands are for macOS (Terminal); on Linux or Windows, install the same tools from their sites. If a command fails, paste the exact error into a search or an AI assistant — don't spin on it.</p>
+    <p class="guide-note">Work through these once and you're set for everything below. Each step lists commands for macOS, Linux, and Windows — run the block for your system. If a command fails, paste the exact error into a search or an AI assistant — don't spin on it.</p>
 
     <div class="setup-step">
-      <h3>1 · Homebrew — the macOS package manager</h3>
-      <p>Makes installing everything else a one-liner. Paste the install command from <a class="ulink" href="https://brew.sh" target="_blank">brew.sh</a>, then confirm it worked.</p>
-      <pre class="cmd">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew --version   <span class="c"># confirm it installed</span></pre>
+      <h3>1 · A package manager</h3>
+      <p>A package manager installs everything else with one command. macOS uses <a class="ulink" href="https://brew.sh" target="_blank">Homebrew</a>; most Linux distros ship one already; Windows 10/11 include <a class="ulink" href="https://learn.microsoft.com/windows/package-manager/winget/" target="_blank">winget</a>.</p>
+      <pre class="cmd"><span class="c"># macOS — Homebrew (from https://brew.sh)</span>
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew --version
+
+<span class="c"># Linux — use your distro's manager, e.g. Debian/Ubuntu:</span>
+sudo apt update
+
+<span class="c"># Windows — winget is built in (run in PowerShell):</span>
+winget --version</pre>
     </div>
 
     <div class="setup-step">
       <h3>2 · Core tools — Git, uv, Node, VS Code</h3>
       <p><a class="ulink" href="https://git-scm.com" target="_blank">Git</a> for version control (make a <a class="ulink" href="https://github.com" target="_blank">GitHub</a> account too), <a class="ulink" href="https://docs.astral.sh/uv/" target="_blank">uv</a> for Python + dependencies, <a class="ulink" href="https://nodejs.org" target="_blank">Node</a> for some CLIs, and <a class="ulink" href="https://code.visualstudio.com" target="_blank">VS Code</a> as your editor.</p>
-      <pre class="cmd">brew install git uv node
+      <pre class="cmd"><span class="c"># macOS</span>
+brew install git uv node
 brew install --cask visual-studio-code
-uv --version     <span class="c"># uv manages Python, venvs, and packages</span></pre>
+
+<span class="c"># Linux (Debian/Ubuntu) — VS Code: install from code.visualstudio.com</span>
+sudo apt install -y git nodejs npm
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+<span class="c"># Windows (PowerShell)</span>
+winget install Git.Git OpenJS.NodeJS Microsoft.VisualStudioCode
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+<span class="c"># then, on any OS:</span>
+git --version &amp;&amp; uv --version</pre>
     </div>
 
     <div class="setup-step">
       <h3>3 · Ollama — run open models locally</h3>
-      <p><a class="ulink" href="https://ollama.com/download" target="_blank">Ollama</a> runs open-weight LLMs entirely on your machine — no API key, no per-token cost, and nothing leaves your computer. Download the app from the site, launch it once, then pull a model.</p>
-      <pre class="cmd">ollama --version
+      <p><a class="ulink" href="https://ollama.com/download" target="_blank">Ollama</a> runs open-weight LLMs entirely on your machine — no API key, no per-token cost, and nothing leaves your computer.</p>
+      <pre class="cmd"><span class="c"># macOS &amp; Windows — download the app from https://ollama.com/download</span>
+<span class="c"># Linux:</span>
+curl -fsSL https://ollama.com/install.sh | sh
+
+<span class="c"># then, on any OS:</span>
 ollama pull gemma3      <span class="c"># or any model from ollama.com/library</span>
 ollama run gemma3       <span class="c"># opens a chat; type /bye to exit</span>
 ollama list             <span class="c"># shows installed models</span></pre>
@@ -93,11 +115,18 @@ ollama list             <span class="c"># shows installed models</span></pre>
 
     <div class="setup-step">
       <h3>4 · Claude Code — an AI coding assistant in the terminal</h3>
-      <p>Reads a codebase and helps you write, run, and debug — invaluable when you're new to a large repo. Needs a paid Claude plan or API access. Install natively (no Node required), then verify.</p>
-      <pre class="cmd">curl -fsSL https://claude.ai/install.sh | bash   <span class="c"># or: npm install -g @anthropic-ai/claude-code</span>
-claude --version
-claude doctor          <span class="c"># checks install + auth</span>
-cd your-project &amp;&amp; claude   <span class="c"># first run opens a browser to sign in</span></pre>
+      <p>Reads a codebase and helps you write, run, and debug — invaluable when you're new to a large repo. Needs a paid Claude plan or API access.</p>
+      <pre class="cmd"><span class="c"># macOS / Linux</span>
+curl -fsSL https://claude.ai/install.sh | bash
+
+<span class="c"># Windows (PowerShell)</span>
+irm https://claude.ai/install.ps1 | iex
+
+<span class="c"># or, on any OS with Node 18+:</span>
+npm install -g @anthropic-ai/claude-code
+
+<span class="c"># then verify and launch inside a project folder:</span>
+claude --version &amp;&amp; claude doctor</pre>
       <p>Setup docs: <a class="ulink" href="https://code.claude.com/docs/en/setup" target="_blank">code.claude.com/docs/en/setup</a>. If <code>claude</code> isn't found after install, open a new terminal so your PATH refreshes.</p>
     </div>
 
@@ -107,6 +136,19 @@ cd your-project &amp;&amp; claude   <span class="c"># first run opens a browser 
     </div>
   </section>
 
+  <!-- Courses to anchor on -->
+  <section class="guide-sec">
+    <div class="sec-h">Courses to anchor on</div>
+    <p class="guide-note">If you'd rather follow one guided course than assemble your own path, any of these is a solid spine — they cover the fundamentals end to end. Pick one and stick with it.</p>
+    <ul class="interests">
+      <li><b>Andrew Ng — Machine Learning Specialization</b> — the classic first course; gentle and thorough. <a class="ulink" href="https://www.coursera.org/specializations/machine-learning-introduction" target="_blank">Coursera →</a></li>
+      <li><b>fast.ai — Practical Deep Learning for Coders</b> — top-down and code-first; you train real models in lesson one. <a class="ulink" href="https://course.fast.ai" target="_blank">course.fast.ai →</a></li>
+      <li><b>Google — Machine Learning Crash Course</b> — short, free, and hands-on. <a class="ulink" href="https://developers.google.com/machine-learning/crash-course" target="_blank">Crash Course →</a></li>
+      <li><b>Andrej Karpathy — Neural Networks: Zero to Hero</b> — build neural nets (and a small GPT) from scratch. <a class="ulink" href="https://karpathy.ai/zero-to-hero.html" target="_blank">Zero to Hero →</a></li>
+      <li><b>Kaggle Learn</b> — bite-sized, practical micro-courses (Python, pandas, intro ML). <a class="ulink" href="https://www.kaggle.com/learn" target="_blank">kaggle.com/learn →</a></li>
+    </ul>
+  </section>
+
   <!-- The learning path -->
   <section class="guide-sec">
     <div class="sec-h"><span class="num">↓</span> The learning path — roughly in order</div>
@@ -114,18 +156,56 @@ cd your-project &amp;&amp; claude   <span class="c"># first run opens a browser 
     <section class="project">
       <div class="idx">01</div>
       <div class="body">
-        <h3>Foundations — classical machine learning</h3>
-        <p>Start here even if you're aiming for deep learning. A few lines of scikit-learn each teach the vocabulary everything else builds on — linear/logistic regression, SVMs, random forests, and the ideas behind them: features, decision boundaries, overfitting, ensembles, and evaluation metrics (especially <b>AUC</b>, and why accuracy alone can mislead). A little math helps too — 3Blue1Brown's linear-algebra and calculus series make it visual.</p>
+        <h3>Learn to program in Python</h3>
+        <p>Python is the language of AI — start here before any model. Get comfortable with variables, lists and dictionaries, loops, functions, and classes, and with reading error messages. You don't need to be an expert, just fluent enough to express ideas in code.</p>
         <div class="linkrow">
-          <a class="ulink" href="https://scikit-learn.org/stable/getting_started.html" target="_blank">scikit-learn: getting started →</a>
-          <a class="ulink" href="https://scikit-learn.org/stable/user_guide.html" target="_blank">User guide →</a>
-          <a class="ulink" href="https://www.3blue1brown.com/topics/linear-algebra" target="_blank">3B1B: Essence of Linear Algebra →</a>
+          <a class="ulink" href="https://docs.python.org/3/tutorial/" target="_blank">The Python Tutorial →</a>
+          <a class="ulink" href="https://automatetheboringstuff.com/" target="_blank">Automate the Boring Stuff (free) →</a>
         </div>
       </div>
     </section>
 
     <section class="project">
       <div class="idx">02</div>
+      <div class="body">
+        <h3>The math you'll actually use</h3>
+        <p>You don't need a math degree, but an intuition for three areas pays off everywhere: <b>linear algebra</b> (vectors and matrices — how data and model weights are represented), <b>calculus</b> (derivatives and gradients — how models learn), and <b>probability &amp; statistics</b> (distributions, expectation, and how to evaluate results). Aim for intuition first; the notation follows.</p>
+        <div class="linkrow">
+          <a class="ulink" href="https://www.3blue1brown.com/topics/linear-algebra" target="_blank">3B1B: Essence of Linear Algebra →</a>
+          <a class="ulink" href="https://www.3blue1brown.com/topics/calculus" target="_blank">3B1B: Essence of Calculus →</a>
+          <a class="ulink" href="https://www.khanacademy.org/math/statistics-probability" target="_blank">Khan Academy: Statistics &amp; Probability →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project">
+      <div class="idx">03</div>
+      <div class="body">
+        <h3>Work with data — NumPy, pandas, notebooks</h3>
+        <p>Real ML is mostly data work. Learn to load, clean, and explore data before you model it: <b>NumPy</b> for numerical arrays, <b>pandas</b> for tables, <b>Matplotlib</b> for plots, and <b>Jupyter</b> notebooks for fast, interactive experiments.</p>
+        <div class="linkrow">
+          <a class="ulink" href="https://numpy.org/learn/" target="_blank">NumPy: learn →</a>
+          <a class="ulink" href="https://pandas.pydata.org/docs/getting_started/index.html" target="_blank">pandas: getting started →</a>
+          <a class="ulink" href="https://matplotlib.org/stable/tutorials/index.html" target="_blank">Matplotlib tutorials →</a>
+          <a class="ulink" href="https://jupyter.org/" target="_blank">Project Jupyter →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project">
+      <div class="idx">04</div>
+      <div class="body">
+        <h3>Classical machine learning</h3>
+        <p>Start modeling with scikit-learn — a few lines each for linear/logistic regression, SVMs, and random forests. These teach the vocabulary everything else builds on: features and labels, the train/validation/test split, overfitting vs. underfitting, ensembles, and evaluation metrics (especially <b>AUC</b>, and why accuracy alone can mislead on imbalanced data). Master these ideas here and deep learning is far less mysterious later.</p>
+        <div class="linkrow">
+          <a class="ulink" href="https://scikit-learn.org/stable/getting_started.html" target="_blank">scikit-learn: getting started →</a>
+          <a class="ulink" href="https://scikit-learn.org/stable/user_guide.html" target="_blank">User guide →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project">
+      <div class="idx">05</div>
       <div class="body">
         <h3>Deep learning &amp; neural networks</h3>
         <p>Write one raw PyTorch training loop by hand so the mechanics aren't a mystery, then move to <b>PyTorch Lightning</b>, which removes the boilerplate so you write the science. Learn what a convolution does and why CNNs suit images, then work up to attention and transformers — the architecture behind modern language and vision models. 3Blue1Brown's Neural Networks series is the best visual companion.</p>
@@ -139,7 +219,7 @@ cd your-project &amp;&amp; claude   <span class="c"># first run opens a browser 
     </section>
 
     <section class="project">
-      <div class="idx">03</div>
+      <div class="idx">06</div>
       <div class="body">
         <h3>Generative models</h3>
         <p>How modern AI creates images, audio, and video. Three families worth knowing: <b>VAEs</b> (encoder → compact latent space → decoder), <b>GANs</b> (a generator and a discriminator in a cat-and-mouse game), and <b>diffusion</b> (start from noise and denoise toward an image) — the approach behind today's best image and video generators.</p>
@@ -152,7 +232,7 @@ cd your-project &amp;&amp; claude   <span class="c"># first run opens a browser 
     </section>
 
     <section class="project">
-      <div class="idx">04</div>
+      <div class="idx">07</div>
       <div class="body">
         <h3>LLMs &amp; agents</h3>
         <p>Large language models and how to build on them. Learn to <b>prompt well</b> first — clear, specific instructions, and always verify what the model produces. Then understand the ladder: a <b>task</b> is one model call, a <b>workflow</b> is several calls on rails you define, and an <b>agent</b> directs its own steps and tools toward a goal. The building block is the augmented LLM — a model plus tools, retrieval, and memory.</p>
@@ -162,6 +242,22 @@ cd your-project &amp;&amp; claude   <span class="c"># first run opens a browser 
         </div>
       </div>
     </section>
+  </section>
+
+  <!-- Concepts worth knowing early -->
+  <section class="guide-sec">
+    <div class="sec-h">Concepts worth knowing early</div>
+    <p class="guide-note">A shared vocabulary makes everything above click faster. You'll meet these again and again — get a rough feel for each.</p>
+    <ul class="interests">
+      <li><b>Supervised vs. unsupervised vs. reinforcement learning</b> — learning from labeled examples, finding structure in unlabeled data, or learning from reward through trial and error.</li>
+      <li><b>Features &amp; labels</b> — the inputs a model sees and the answer it's trying to predict.</li>
+      <li><b>Train / validation / test split</b> — data you learn from, data you tune on, and data you touch only once to measure honest performance.</li>
+      <li><b>Overfitting vs. underfitting</b> — memorizing the training data vs. being too simple to capture the pattern; the balance is the bias–variance trade-off.</li>
+      <li><b>Loss &amp; gradient descent</b> — a number that measures how wrong the model is, and the algorithm that nudges its parameters to make that number smaller.</li>
+      <li><b>Hyperparameters</b> — the knobs you set before training (learning rate, model size, regularization), as opposed to the weights the model learns.</li>
+      <li><b>Generalization</b> — the whole point: performing well on data you've never seen, not just the training set.</li>
+      <li><b>Evaluation metrics</b> — accuracy, precision/recall, F1, and AUC; which one matters depends on the problem and how balanced the data is.</li>
+    </ul>
   </section>
 
   <!-- Good habits -->
