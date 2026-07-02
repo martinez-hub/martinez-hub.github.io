@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habits &amp; experiments — For Students — Josué Martínez</title>
+<meta name="description" content="Engineering habits that keep you productive in AI/ML, and the tooling (hydra-zen, xarray, mushin) that keeps experiments reproducible and organized.">
+<meta name="author" content="Josué Martínez">
+<meta property="og:title" content="Habits & experiments — For Students">
+<meta property="og:description" content="Good engineering habits and reproducible experiment tooling.">
+<meta property="og:image" content="https://martinez-hub.github.io/assets/profile.jpg">
+<meta property="og:url" content="https://martinez-hub.github.io/students-practice.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+
+<script>
+  (function(){
+    try{
+      var s=localStorage.getItem('theme');
+      var m=s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+      document.documentElement.setAttribute('data-theme',m);
+    }catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+  })();
+</script>
+
+<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CW59PVY98J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CW59PVY98J');
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Josué Martínez</a>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">About</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="students.html" class="active">Students</a></li>
+      <li><a href="./cv/Josue_Martinez_Martinez_CV.pdf" target="_blank">CV</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><button class="toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">◐</span> <span id="themeText">Dark</span></button></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap reveal d1">
+  <a class="crumb" href="students.html">← For Students</a>
+  <h1 class="page-title">Habits &amp; experiments</h1>
+  <p class="lead">The engineering habits that keep you productive, and the tooling that keeps your experiments reproducible once you're running more than a couple.</p>
+
+  <!-- Good habits -->
+  <section class="guide-sec">
+    <div class="sec-h">Good habits</div>
+    <p class="guide-note">The best way to pick up good engineering is to build it into your workflow from day one and let it run automatically.</p>
+    <ul class="interests">
+      <li><b>Reproducible environments</b> — keep dependencies in the project (with uv), so <code>uv sync</code> makes the same code run on your laptop, on Colab, or on a cloud GPU.</li>
+      <li><b>Repo hygiene</b> — small, descriptive commits; a real README; a <code>.gitignore</code> that never includes data or model weights; one experiment = one config.</li>
+      <li><b>Automate quality checks</b> — a linter/formatter like <a class="ulink" href="https://docs.astral.sh/ruff/" target="_blank">Ruff</a> plus a spell-checker, wired into a pre-commit hook so they run on every commit.</li>
+      <li><b>Keep a lab log</b> — every run gets a dated entry: what you ran, the settings, the numbers, what you concluded. It's how a final write-up gets written without a last-minute scramble.</li>
+      <li><b>Use AI tools as drafters, not oracles</b> — they're fast and useful, but always read and verify what they produce. And never paste anything sensitive or private into a cloud model.</li>
+      <li><b>Getting unstuck</b> — try it yourself, then search or ask your AI tools, then ask a mentor. A good question after a genuine attempt beats spinning for hours.</li>
+    </ul>
+  </section>
+
+  <!-- Running experiments -->
+  <section class="guide-sec">
+    <div class="sec-h">Running &amp; tracking experiments</div>
+    <p class="guide-note">Once you're running more than a couple of experiments, these tools keep your work reproducible and your results organized. Don't front-load them on day one — reach for them when scattered scripts and logs start to hurt.</p>
+    <div class="codeblock">
+      <div class="cb-bar"><span class="cb-label">shell</span><button class="cb-copy" type="button">Copy</button></div>
+      <pre class="cb-pre"><code>uv add hydra-zen mushin-py xarray</code></pre>
+    </div>
+    <ul class="interests">
+      <li><b>hydra-zen</b> — configure and launch experiments from Python instead of hand-written YAML. Each run saves its full configuration alongside its results, so experiments are reproducible, and parameter sweeps are one line. It has a dedicated PyTorch Lightning guide, so it layers onto your stack. <a class="ulink" href="https://mit-ll-responsible-ai.github.io/hydra-zen/" target="_blank">Docs →</a></li>
+      <li><b>xarray</b> — labeled, multi-dimensional arrays: think NumPy with named dimensions and coordinates. Ideal for holding results across seeds and settings as one tidy dataset instead of scattered logs. <a class="ulink" href="https://docs.xarray.dev/en/stable/" target="_blank">Docs →</a></li>
+      <li><b>mushin</b> — a workflow layer on top of Lightning + hydra-zen (a library I maintain). Define an experiment as a function, sweep over parameters, and get results back as a labeled xarray dataset. Its <code>benchmark.compare</code> and <code>Study</code> run a metric battery across seeds and report mean ± confidence intervals with statistical significance — "is this difference real, or just noise?" — and <code>llm.compare_llms</code> extends that same testing to LLM and agent systems. <a class="ulink" href="https://martinez-hub.github.io/mushin/" target="_blank">Docs →</a></li>
+    </ul>
+  </section>
+
+  <nav class="pager">
+    <a class="prev" href="students-learn.html">← The learning path</a>
+    <a class="next" href="students-skills.html">Next: Reading, writing &amp; talks →</a>
+  </nav>
+</main>
+
+<footer>
+  <div class="footer-inner"><span>© 2026 Josué Martínez</span><span>Hosted on GitHub Pages · Updated June 2026</span></div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>

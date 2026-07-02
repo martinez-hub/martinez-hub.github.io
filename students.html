@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Getting Started in AI — Josué Martínez</title>
-<meta name="description" content="A practical starting guide for students new to AI and machine learning — how to set up your environment, the concepts to learn in order (scikit-learn, PyTorch, generative models, LLMs & agents), and the skills beyond code: reading papers, giving talks, and writing.">
+<title>For Students — Josué Martínez</title>
+<meta name="description" content="A practical guide for students starting out in AI and machine learning — environment setup, a learn-in-order path, good habits and experiment tooling, and the skills beyond code: reading, writing, and giving talks.">
 <meta name="author" content="Josué Martínez">
-<meta property="og:title" content="Getting Started in AI — Josué Martínez">
-<meta property="og:description" content="A practical starting guide for students new to AI/ML: environment setup, a learn-in-order path, and the skills beyond code — reading papers, giving talks, and writing.">
+<meta property="og:title" content="For Students — Josué Martínez">
+<meta property="og:description" content="A practical guide for students starting out in AI/ML — setup, learning path, habits, and communication skills.">
 <meta property="og:image" content="https://martinez-hub.github.io/assets/profile.jpg">
 <meta property="og:url" content="https://martinez-hub.github.io/students.html">
 <meta property="og:type" content="website">
@@ -59,262 +59,36 @@
 </nav>
 
 <main class="wrap reveal d1">
-  <h1 class="page-title">Getting Started in AI</h1>
-  <p class="lead">If you're a student new to AI and machine learning, this is the path I'd point you to — how to <em>set up your tools</em>, the concepts to learn in roughly this order, and the skills that matter as much as the code: reading papers, giving talks, and writing.</p>
+  <h1 class="page-title">For Students</h1>
+  <p class="lead">A practical guide for students starting out in AI and machine learning — split into four parts so you can jump straight to what you need. New here? Start with <b>Set up your environment</b>, then follow the learning path.</p>
 
-  <!-- Set up your environment -->
-  <section class="guide-sec">
-    <div class="sec-h">Set up your environment</div>
-    <p class="guide-note">Work through these once and you're set for everything below. Each step lists commands for macOS, Linux, and Windows — run the block for your system. If a command fails, paste the exact error into a search or an AI assistant — don't spin on it.</p>
+  <div class="hub">
+    <a class="hub-card" href="students-setup.html">
+      <div class="hc-num">01</div>
+      <h3>Set up your environment</h3>
+      <p>Install the tools once — package manager, Git, Python (uv), a local model runner, an AI coding assistant, and cloud GPUs. Copy-paste commands for macOS, Linux, and Windows.</p>
+      <span class="hc-go">Open →</span>
+    </a>
+    <a class="hub-card" href="students-learn.html">
+      <div class="hc-num">02</div>
+      <h3>The learning path</h3>
+      <p>What to learn, in order — from Python and the essential math to classical ML, deep learning, generative models, and LLMs & agents. Plus courses to anchor on and the concepts to know early.</p>
+      <span class="hc-go">Open →</span>
+    </a>
+    <a class="hub-card" href="students-practice.html">
+      <div class="hc-num">03</div>
+      <h3>Habits &amp; experiments</h3>
+      <p>The engineering habits that keep you productive, and the tooling that keeps experiments reproducible and organized once you're running more than a couple.</p>
+      <span class="hc-go">Open →</span>
+    </a>
+    <a class="hub-card" href="students-skills.html">
+      <div class="hc-num">04</div>
+      <h3>Reading, writing &amp; talks</h3>
+      <p>The skills that matter as much as the code: reading papers actively, writing clearly as you go, and giving a research talk people remember.</p>
+      <span class="hc-go">Open →</span>
+    </a>
+  </div>
 
-    <div class="setup-step">
-      <h3>1 · A package manager</h3>
-      <p>A package manager installs everything else with one command. macOS uses <a class="ulink" href="https://brew.sh" target="_blank">Homebrew</a>; most Linux distros ship one already; Windows 10/11 include <a class="ulink" href="https://learn.microsoft.com/windows/package-manager/winget/" target="_blank">winget</a>.</p>
-      <pre class="cmd"><span class="c"># macOS — Homebrew (from https://brew.sh)</span>
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew --version
-
-<span class="c"># Linux — use your distro's manager, e.g. Debian/Ubuntu:</span>
-sudo apt update
-
-<span class="c"># Windows — winget is built in (run in PowerShell):</span>
-winget --version</pre>
-    </div>
-
-    <div class="setup-step">
-      <h3>2 · Core tools — Git, uv, Node, VS Code</h3>
-      <p><a class="ulink" href="https://git-scm.com" target="_blank">Git</a> for version control (make a <a class="ulink" href="https://github.com" target="_blank">GitHub</a> account too), <a class="ulink" href="https://docs.astral.sh/uv/" target="_blank">uv</a> for Python + dependencies, <a class="ulink" href="https://nodejs.org" target="_blank">Node</a> for some CLIs, and <a class="ulink" href="https://code.visualstudio.com" target="_blank">VS Code</a> as your editor.</p>
-      <pre class="cmd"><span class="c"># macOS</span>
-brew install git uv node
-brew install --cask visual-studio-code
-
-<span class="c"># Linux (Debian/Ubuntu) — VS Code: install from code.visualstudio.com</span>
-sudo apt install -y git nodejs npm
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-<span class="c"># Windows (PowerShell)</span>
-winget install Git.Git OpenJS.NodeJS Microsoft.VisualStudioCode
-powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-
-<span class="c"># then, on any OS:</span>
-git --version &amp;&amp; uv --version</pre>
-    </div>
-
-    <div class="setup-step">
-      <h3>3 · Ollama — run open models locally</h3>
-      <p><a class="ulink" href="https://ollama.com/download" target="_blank">Ollama</a> runs open-weight LLMs entirely on your machine — no API key, no per-token cost, and nothing leaves your computer.</p>
-      <pre class="cmd"><span class="c"># macOS — download the app from https://ollama.com/download</span>
-<span class="c"># Windows — download the app, or: winget install Ollama.Ollama</span>
-<span class="c"># Linux:</span>
-curl -fsSL https://ollama.com/install.sh | sh
-
-<span class="c"># then, on any OS:</span>
-ollama pull gemma4      <span class="c"># or any model from ollama.com/library</span>
-ollama run gemma4       <span class="c"># opens a chat; type /bye to exit</span>
-ollama list             <span class="c"># shows installed models</span></pre>
-    </div>
-
-    <div class="setup-step">
-      <h3>4 · Claude Code — an AI coding assistant in the terminal</h3>
-      <p>Reads a codebase and helps you write, run, and debug — invaluable when you're new to a large repo. Needs a paid Claude plan or API access.</p>
-      <pre class="cmd"><span class="c"># macOS / Linux</span>
-curl -fsSL https://claude.ai/install.sh | bash
-
-<span class="c"># Windows (PowerShell)</span>
-irm https://claude.ai/install.ps1 | iex
-
-<span class="c"># or, on any OS with Node 18+:</span>
-npm install -g @anthropic-ai/claude-code
-
-<span class="c"># then verify and launch inside a project folder:</span>
-claude --version &amp;&amp; claude doctor</pre>
-      <p>Setup docs: <a class="ulink" href="https://code.claude.com/docs/en/setup" target="_blank">code.claude.com/docs/en/setup</a>. If <code>claude</code> isn't found after install, open a new terminal so your PATH refreshes.</p>
-    </div>
-
-    <div class="setup-step">
-      <h3>5 · Cloud GPUs — when your laptop isn't enough</h3>
-      <p>No install needed. Start on <a class="ulink" href="https://colab.research.google.com" target="_blank">Google Colab</a> for zero-setup GPU notebooks, and graduate to a persistent environment like <a class="ulink" href="https://lightning.ai/studios" target="_blank">Lightning AI Studio</a> for sustained project work. Keep data and checkpoints out of git and save them before a session disconnects.</p>
-    </div>
-  </section>
-
-  <!-- Courses to anchor on -->
-  <section class="guide-sec">
-    <div class="sec-h">Courses to anchor on</div>
-    <p class="guide-note">If you'd rather follow one guided course than assemble your own path, any of these is a solid spine — they cover the fundamentals end to end. Pick one and stick with it.</p>
-    <ul class="interests">
-      <li><b>Andrew Ng — Machine Learning Specialization</b> — the classic first course; gentle and thorough. <a class="ulink" href="https://www.coursera.org/specializations/machine-learning-introduction" target="_blank">Coursera →</a></li>
-      <li><b>fast.ai — Practical Deep Learning for Coders</b> — top-down and code-first; you train real models in lesson one. <a class="ulink" href="https://course.fast.ai" target="_blank">course.fast.ai →</a></li>
-      <li><b>Google — Machine Learning Crash Course</b> — short, free, and hands-on. <a class="ulink" href="https://developers.google.com/machine-learning/crash-course" target="_blank">Crash Course →</a></li>
-      <li><b>Andrej Karpathy — Neural Networks: Zero to Hero</b> — build neural nets (and a small GPT) from scratch. <a class="ulink" href="https://karpathy.ai/zero-to-hero.html" target="_blank">Zero to Hero →</a></li>
-      <li><b>Kaggle Learn</b> — bite-sized, practical micro-courses (Python, pandas, intro ML). <a class="ulink" href="https://www.kaggle.com/learn" target="_blank">kaggle.com/learn →</a></li>
-    </ul>
-  </section>
-
-  <!-- The learning path -->
-  <section class="guide-sec">
-    <div class="sec-h"><span class="num">↓</span> The learning path — roughly in order</div>
-
-    <section class="project">
-      <div class="idx">01</div>
-      <div class="body">
-        <h3>Learn to program in Python</h3>
-        <p>Python is the language of AI — start here before any model. Get comfortable with variables, lists and dictionaries, loops, functions, and classes, and with reading error messages. You don't need to be an expert, just fluent enough to express ideas in code.</p>
-        <div class="linkrow">
-          <a class="ulink" href="https://docs.python.org/3/tutorial/" target="_blank">The Python Tutorial →</a>
-          <a class="ulink" href="https://automatetheboringstuff.com/" target="_blank">Automate the Boring Stuff (free) →</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="project">
-      <div class="idx">02</div>
-      <div class="body">
-        <h3>The math you'll actually use</h3>
-        <p>You don't need a math degree, but an intuition for three areas pays off everywhere: <b>linear algebra</b> (vectors and matrices — how data and model weights are represented), <b>calculus</b> (derivatives and gradients — how models learn), and <b>probability &amp; statistics</b> (distributions, expectation, and how to evaluate results). Aim for intuition first; the notation follows.</p>
-        <div class="linkrow">
-          <a class="ulink" href="https://www.3blue1brown.com/topics/linear-algebra" target="_blank">3B1B: Essence of Linear Algebra →</a>
-          <a class="ulink" href="https://www.3blue1brown.com/topics/calculus" target="_blank">3B1B: Essence of Calculus →</a>
-          <a class="ulink" href="https://www.khanacademy.org/math/statistics-probability" target="_blank">Khan Academy: Statistics &amp; Probability →</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="project">
-      <div class="idx">03</div>
-      <div class="body">
-        <h3>Work with data — NumPy, pandas, notebooks</h3>
-        <p>Real ML is mostly data work. Learn to load, clean, and explore data before you model it: <b>NumPy</b> for numerical arrays, <b>pandas</b> for tables, <b>Matplotlib</b> for plots, and <b>Jupyter</b> notebooks for fast, interactive experiments.</p>
-        <div class="linkrow">
-          <a class="ulink" href="https://numpy.org/learn/" target="_blank">NumPy: learn →</a>
-          <a class="ulink" href="https://pandas.pydata.org/docs/getting_started/index.html" target="_blank">pandas: getting started →</a>
-          <a class="ulink" href="https://matplotlib.org/stable/tutorials/index.html" target="_blank">Matplotlib tutorials →</a>
-          <a class="ulink" href="https://jupyter.org/" target="_blank">Project Jupyter →</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="project">
-      <div class="idx">04</div>
-      <div class="body">
-        <h3>Classical machine learning</h3>
-        <p>Start modeling with scikit-learn — a few lines each for linear/logistic regression, SVMs, and random forests. These teach the vocabulary everything else builds on: features and labels, the train/validation/test split, overfitting vs. underfitting, ensembles, and evaluation metrics (especially <b>AUC</b>, and why accuracy alone can mislead on imbalanced data). Master these ideas here and deep learning is far less mysterious later.</p>
-        <div class="linkrow">
-          <a class="ulink" href="https://scikit-learn.org/stable/getting_started.html" target="_blank">scikit-learn: getting started →</a>
-          <a class="ulink" href="https://scikit-learn.org/stable/user_guide.html" target="_blank">User guide →</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="project">
-      <div class="idx">05</div>
-      <div class="body">
-        <h3>Deep learning &amp; neural networks</h3>
-        <p>Write one raw PyTorch training loop by hand so the mechanics aren't a mystery, then move to <b>PyTorch Lightning</b>, which removes the boilerplate so you write the science. Learn what a convolution does and why CNNs suit images, then work up to attention and transformers — the architecture behind modern language and vision models. 3Blue1Brown's Neural Networks series is the best visual companion.</p>
-        <div class="linkrow">
-          <a class="ulink" href="https://pytorch.org/tutorials/" target="_blank">PyTorch 60-minute blitz →</a>
-          <a class="ulink" href="https://lightning.ai/docs/pytorch/stable/" target="_blank">PyTorch Lightning →</a>
-          <a class="ulink" href="https://jalammar.github.io/illustrated-transformer/" target="_blank">The Illustrated Transformer →</a>
-          <a class="ulink" href="https://www.3blue1brown.com/topics/neural-networks" target="_blank">3B1B: Neural Networks →</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="project">
-      <div class="idx">06</div>
-      <div class="body">
-        <h3>Generative models</h3>
-        <p>How modern AI creates images, audio, and video. Three families worth knowing: <b>VAEs</b> (encoder → compact latent space → decoder), <b>GANs</b> (a generator and a discriminator in a cat-and-mouse game), and <b>diffusion</b> (start from noise and denoise toward an image) — the approach behind today's best image and video generators.</p>
-        <div class="linkrow">
-          <a class="ulink" href="https://xnought.github.io/vae-explainer" target="_blank">VAE explainer →</a>
-          <a class="ulink" href="https://www.geeksforgeeks.org/deep-learning/generative-models-in-ai-a-comprehensive-comparison-of-gans-and-vaes/" target="_blank">GANs vs. VAEs →</a>
-          <a class="ulink" href="https://jalammar.github.io/illustrated-stable-diffusion/" target="_blank">Illustrated Stable Diffusion →</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="project">
-      <div class="idx">07</div>
-      <div class="body">
-        <h3>LLMs &amp; agents</h3>
-        <p>Large language models and how to build on them. Learn to <b>prompt well</b> first — clear, specific instructions, and always verify what the model produces. Then understand the ladder: a <b>task</b> is one model call, a <b>workflow</b> is several calls on rails you define, and an <b>agent</b> directs its own steps and tools toward a goal. The building block is the augmented LLM — a model plus tools, retrieval, and memory.</p>
-        <div class="linkrow">
-          <a class="ulink" href="https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank">Prompt engineering guide →</a>
-          <a class="ulink" href="https://www.anthropic.com/research/building-effective-agents" target="_blank">Building Effective Agents →</a>
-        </div>
-      </div>
-    </section>
-  </section>
-
-  <!-- Concepts worth knowing early -->
-  <section class="guide-sec">
-    <div class="sec-h">Concepts worth knowing early</div>
-    <p class="guide-note">A shared vocabulary makes everything above click faster. You'll meet these again and again — get a rough feel for each.</p>
-    <ul class="interests">
-      <li><b>Supervised vs. unsupervised vs. reinforcement learning</b> — learning from labeled examples, finding structure in unlabeled data, or learning from reward through trial and error.</li>
-      <li><b>Features &amp; labels</b> — the inputs a model sees and the answer it's trying to predict.</li>
-      <li><b>Train / validation / test split</b> — data you learn from, data you tune on, and data you touch only once to measure honest performance.</li>
-      <li><b>Overfitting vs. underfitting</b> — memorizing the training data vs. being too simple to capture the pattern; the balance is the bias–variance trade-off.</li>
-      <li><b>Loss &amp; gradient descent</b> — a number that measures how wrong the model is, and the algorithm that nudges its parameters to make that number smaller.</li>
-      <li><b>Hyperparameters</b> — the knobs you set before training (learning rate, model size, regularization), as opposed to the weights the model learns.</li>
-      <li><b>Generalization</b> — the whole point: performing well on data you've never seen, not just the training set.</li>
-      <li><b>Evaluation metrics</b> — accuracy, precision/recall, F1, and AUC; which one matters depends on the problem and how balanced the data is.</li>
-    </ul>
-  </section>
-
-  <!-- Good habits -->
-  <section class="guide-sec">
-    <div class="sec-h">Good habits</div>
-    <p class="guide-note">The best way to pick up good engineering is to build it into your workflow from day one and let it run automatically.</p>
-    <ul class="interests">
-      <li><b>Reproducible environments</b> — keep dependencies in the project (with uv), so <code>uv sync</code> makes the same code run on your laptop, on Colab, or on a cloud GPU.</li>
-      <li><b>Repo hygiene</b> — small, descriptive commits; a real README; a <code>.gitignore</code> that never includes data or model weights; one experiment = one config.</li>
-      <li><b>Automate quality checks</b> — a linter/formatter like <a class="ulink" href="https://docs.astral.sh/ruff/" target="_blank">Ruff</a> plus a spell-checker, wired into a pre-commit hook so they run on every commit.</li>
-      <li><b>Keep a lab log</b> — every run gets a dated entry: what you ran, the settings, the numbers, what you concluded. It's how a final write-up gets written without a last-minute scramble.</li>
-      <li><b>Use AI tools as drafters, not oracles</b> — they're fast and useful, but always read and verify what they produce. And never paste anything sensitive or private into a cloud model.</li>
-      <li><b>Getting unstuck</b> — try it yourself, then search or ask your AI tools, then ask a mentor. A good question after a genuine attempt beats spinning for hours.</li>
-    </ul>
-  </section>
-
-  <!-- Running experiments -->
-  <section class="guide-sec">
-    <div class="sec-h">Running &amp; tracking experiments</div>
-    <p class="guide-note">Once you're running more than a couple of experiments, these tools keep your work reproducible and your results organized. Don't front-load them on day one — reach for them when scattered scripts and logs start to hurt.</p>
-    <pre class="cmd">uv add hydra-zen mushin-py xarray</pre>
-    <ul class="interests">
-      <li><b>hydra-zen</b> — configure and launch experiments from Python instead of hand-written YAML. Each run saves its full configuration alongside its results, so experiments are reproducible, and parameter sweeps are one line. It has a dedicated PyTorch Lightning guide, so it layers onto your stack. <a class="ulink" href="https://mit-ll-responsible-ai.github.io/hydra-zen/" target="_blank">Docs →</a></li>
-      <li><b>xarray</b> — labeled, multi-dimensional arrays: think NumPy with named dimensions and coordinates. Ideal for holding results across seeds and settings as one tidy dataset instead of scattered logs. <a class="ulink" href="https://docs.xarray.dev/en/stable/" target="_blank">Docs →</a></li>
-      <li><b>mushin</b> — a workflow layer on top of Lightning + hydra-zen (a library I maintain). Define an experiment as a function, sweep over parameters, and get results back as a labeled xarray dataset. Its <code>benchmark.compare</code> and <code>Study</code> run a metric battery across seeds and report mean ± confidence intervals with statistical significance — "is this difference real, or just noise?" — and <code>llm.compare_llms</code> extends that same testing to LLM and agent systems. <a class="ulink" href="https://martinez-hub.github.io/mushin/" target="_blank">Docs →</a></li>
-    </ul>
-  </section>
-
-  <!-- Reading & writing -->
-  <section class="guide-sec">
-    <div class="sec-h">Reading &amp; writing</div>
-    <ul class="interests">
-      <li><b>Read papers actively</b> — for any paper, write three sentences: what problem, what idea, what result. That habit is worth more than reading twice as many. Skim the abstract and intro first; go deep only where it matters.</li>
-      <li><b>Write as you go</b> — a report or thesis grows as you work, so by the end you're revising, not scrambling. Keep it concise and grounded: claims tied to evidence, no filler.</li>
-      <li><b>Learn a bit of LaTeX</b> — <a class="ulink" href="https://www.overleaf.com" target="_blank">Overleaf</a> is browser-based LaTeX and the standard for research writing. Its <a class="ulink" href="https://www.overleaf.com/learn" target="_blank">"Learn LaTeX in 30 minutes"</a> is enough to get going.</li>
-    </ul>
-  </section>
-
-  <!-- Giving talks -->
-  <section class="guide-sec">
-    <div class="sec-h">Giving talks</div>
-    <p class="guide-note">Presenting your work well is a skill you can learn — and these are the standard references for it. All three are short (Winston's is an hour well spent once).</p>
-    <div class="linkrow guide-talks">
-      <a class="ulink" href="https://www.microsoft.com/en-us/research/academic-program/give-great-research-talk/" target="_blank">Simon Peyton Jones: How to Give a Great Research Talk →</a>
-      <a class="ulink" href="https://homes.cs.washington.edu/~mernst/advice/giving-talk.html" target="_blank">Michael Ernst: How to Give a Technical Presentation →</a>
-      <a class="ulink" href="https://www.youtube.com/watch?v=Unzc731iCUY" target="_blank">Patrick Winston: How to Speak (MIT) →</a>
-    </div>
-    <ul class="interests">
-      <li><b>Your talk is an advertisement</b> for the work, not the full paper — give intuition, omit the gory details.</li>
-      <li><b>Lead with the problem and why it matters</b>, ideally with a concrete example. Don't open on a title slide you dwell on.</li>
-      <li><b>One idea per slide</b> — descriptive slide titles, few words, real figures.</li>
-      <li><b>Practice out loud at least three times</b>, including once in front of a live person. Nerves are universal and fine.</li>
-    </ul>
-  </section>
-
-  <!-- CTA -->
   <div class="card guide-cta">
     <p><b>Questions?</b> If you're a student getting started and something here is unclear — or you just want a pointer on where to go next — feel free to <a class="ulink" href="contact.html">reach out</a>.</p>
   </div>

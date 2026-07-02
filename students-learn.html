@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The learning path — For Students — Josué Martínez</title>
+<meta name="description" content="What to learn in order to get into AI/ML — Python, the essential math, data tools, classical ML, deep learning, generative models, and LLMs & agents — plus courses to anchor on and the concepts to know early.">
+<meta name="author" content="Josué Martínez">
+<meta property="og:title" content="The learning path — For Students">
+<meta property="og:description" content="A learn-in-order path into AI/ML, courses to anchor on, and key concepts.">
+<meta property="og:image" content="https://martinez-hub.github.io/assets/profile.jpg">
+<meta property="og:url" content="https://martinez-hub.github.io/students-learn.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+
+<script>
+  (function(){
+    try{
+      var s=localStorage.getItem('theme');
+      var m=s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+      document.documentElement.setAttribute('data-theme',m);
+    }catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+  })();
+</script>
+
+<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CW59PVY98J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CW59PVY98J');
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Josué Martínez</a>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">About</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="students.html" class="active">Students</a></li>
+      <li><a href="./cv/Josue_Martinez_Martinez_CV.pdf" target="_blank">CV</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><button class="toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">◐</span> <span id="themeText">Dark</span></button></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap reveal d1">
+  <a class="crumb" href="students.html">← For Students</a>
+  <h1 class="page-title">The learning path</h1>
+  <p class="lead">What to learn, roughly in order. Prefer one guided course? Any of the anchors below covers the fundamentals end to end. Otherwise, follow the path topic by topic.</p>
+
+  <!-- Courses to anchor on -->
+  <section class="guide-sec">
+    <div class="sec-h">Courses to anchor on</div>
+    <p class="guide-note">If you'd rather follow one guided course than assemble your own path, any of these is a solid spine. Pick one and stick with it.</p>
+    <ul class="interests">
+      <li><b>Andrew Ng — Machine Learning Specialization</b> — the classic first course; gentle and thorough. <a class="ulink" href="https://www.coursera.org/specializations/machine-learning-introduction" target="_blank">Coursera →</a></li>
+      <li><b>fast.ai — Practical Deep Learning for Coders</b> — top-down and code-first; you train real models in lesson one. <a class="ulink" href="https://course.fast.ai" target="_blank">course.fast.ai →</a></li>
+      <li><b>Google — Machine Learning Crash Course</b> — short, free, and hands-on. <a class="ulink" href="https://developers.google.com/machine-learning/crash-course" target="_blank">Crash Course →</a></li>
+      <li><b>Andrej Karpathy — Neural Networks: Zero to Hero</b> — build neural nets (and a small GPT) from scratch. <a class="ulink" href="https://karpathy.ai/zero-to-hero.html" target="_blank">Zero to Hero →</a></li>
+      <li><b>Kaggle Learn</b> — bite-sized, practical micro-courses (Python, pandas, intro ML). <a class="ulink" href="https://www.kaggle.com/learn" target="_blank">kaggle.com/learn →</a></li>
+    </ul>
+  </section>
+
+  <!-- The learning path -->
+  <section class="guide-sec">
+    <div class="sec-h"><span class="num">↓</span> Topic by topic — roughly in order</div>
+
+    <section class="project">
+      <div class="idx">01</div>
+      <div class="body">
+        <h3>Learn to program in Python</h3>
+        <p>Python is the language of AI — start here before any model. Get comfortable with variables, lists and dictionaries, loops, functions, and classes, and with reading error messages. You don't need to be an expert, just fluent enough to express ideas in code.</p>
+        <div class="linkrow">
+          <a class="ulink" href="https://docs.python.org/3/tutorial/" target="_blank">The Python Tutorial →</a>
+          <a class="ulink" href="https://automatetheboringstuff.com/" target="_blank">Automate the Boring Stuff (free) →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project">
+      <div class="idx">02</div>
+      <div class="body">
+        <h3>The math you'll actually use</h3>
+        <p>You don't need a math degree, but an intuition for three areas pays off everywhere: <b>linear algebra</b> (vectors and matrices — how data and model weights are represented), <b>calculus</b> (derivatives and gradients — how models learn), and <b>probability &amp; statistics</b> (distributions, expectation, and how to evaluate results). Aim for intuition first; the notation follows.</p>
+        <div class="linkrow">
+          <a class="ulink" href="https://www.3blue1brown.com/topics/linear-algebra" target="_blank">3B1B: Essence of Linear Algebra →</a>
+          <a class="ulink" href="https://www.3blue1brown.com/topics/calculus" target="_blank">3B1B: Essence of Calculus →</a>
+          <a class="ulink" href="https://www.khanacademy.org/math/statistics-probability" target="_blank">Khan Academy: Statistics &amp; Probability →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project">
+      <div class="idx">03</div>
+      <div class="body">
+        <h3>Work with data — NumPy, pandas, notebooks</h3>
+        <p>Real ML is mostly data work. Learn to load, clean, and explore data before you model it: <b>NumPy</b> for numerical arrays, <b>pandas</b> for tables, <b>Matplotlib</b> for plots, and <b>Jupyter</b> notebooks for fast, interactive experiments.</p>
+        <div class="linkrow">
+          <a class="ulink" href="https://numpy.org/learn/" target="_blank">NumPy: learn →</a>
+          <a class="ulink" href="https://pandas.pydata.org/docs/getting_started/index.html" target="_blank">pandas: getting started →</a>
+          <a class="ulink" href="https://matplotlib.org/stable/tutorials/index.html" target="_blank">Matplotlib tutorials →</a>
+          <a class="ulink" href="https://jupyter.org/" target="_blank">Project Jupyter →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project">
+      <div class="idx">04</div>
+      <div class="body">
+        <h3>Classical machine learning</h3>
+        <p>Start modeling with scikit-learn — a few lines each for linear/logistic regression, SVMs, and random forests. These teach the vocabulary everything else builds on: features and labels, the train/validation/test split, overfitting vs. underfitting, ensembles, and evaluation metrics (especially <b>AUC</b>, and why accuracy alone can mislead on imbalanced data). Master these ideas here and deep learning is far less mysterious later.</p>
+        <div class="linkrow">
+          <a class="ulink" href="https://scikit-learn.org/stable/getting_started.html" target="_blank">scikit-learn: getting started →</a>
+          <a class="ulink" href="https://scikit-learn.org/stable/user_guide.html" target="_blank">User guide →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project">
+      <div class="idx">05</div>
+      <div class="body">
+        <h3>Deep learning &amp; neural networks</h3>
+        <p>Write one raw PyTorch training loop by hand so the mechanics aren't a mystery, then move to <b>PyTorch Lightning</b>, which removes the boilerplate so you write the science. Learn what a convolution does and why CNNs suit images, then work up to attention and transformers — the architecture behind modern language and vision models. 3Blue1Brown's Neural Networks series is the best visual companion.</p>
+        <div class="linkrow">
+          <a class="ulink" href="https://pytorch.org/tutorials/" target="_blank">PyTorch 60-minute blitz →</a>
+          <a class="ulink" href="https://lightning.ai/docs/pytorch/stable/" target="_blank">PyTorch Lightning →</a>
+          <a class="ulink" href="https://jalammar.github.io/illustrated-transformer/" target="_blank">The Illustrated Transformer →</a>
+          <a class="ulink" href="https://www.3blue1brown.com/topics/neural-networks" target="_blank">3B1B: Neural Networks →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project">
+      <div class="idx">06</div>
+      <div class="body">
+        <h3>Generative models</h3>
+        <p>How modern AI creates images, audio, and video. Three families worth knowing: <b>VAEs</b> (encoder → compact latent space → decoder), <b>GANs</b> (a generator and a discriminator in a cat-and-mouse game), and <b>diffusion</b> (start from noise and denoise toward an image) — the approach behind today's best image and video generators.</p>
+        <div class="linkrow">
+          <a class="ulink" href="https://xnought.github.io/vae-explainer" target="_blank">VAE explainer →</a>
+          <a class="ulink" href="https://www.geeksforgeeks.org/deep-learning/generative-models-in-ai-a-comprehensive-comparison-of-gans-and-vaes/" target="_blank">GANs vs. VAEs →</a>
+          <a class="ulink" href="https://jalammar.github.io/illustrated-stable-diffusion/" target="_blank">Illustrated Stable Diffusion →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project">
+      <div class="idx">07</div>
+      <div class="body">
+        <h3>LLMs &amp; agents</h3>
+        <p>Large language models and how to build on them. Learn to <b>prompt well</b> first — clear, specific instructions, and always verify what the model produces. Then understand the ladder: a <b>task</b> is one model call, a <b>workflow</b> is several calls on rails you define, and an <b>agent</b> directs its own steps and tools toward a goal. The building block is the augmented LLM — a model plus tools, retrieval, and memory.</p>
+        <div class="linkrow">
+          <a class="ulink" href="https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank">Prompt engineering guide →</a>
+          <a class="ulink" href="https://www.anthropic.com/research/building-effective-agents" target="_blank">Building Effective Agents →</a>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- Concepts worth knowing early -->
+  <section class="guide-sec">
+    <div class="sec-h">Concepts worth knowing early</div>
+    <p class="guide-note">A shared vocabulary makes everything above click faster. You'll meet these again and again — get a rough feel for each.</p>
+    <ul class="interests">
+      <li><b>Supervised vs. unsupervised vs. reinforcement learning</b> — learning from labeled examples, finding structure in unlabeled data, or learning from reward through trial and error.</li>
+      <li><b>Features &amp; labels</b> — the inputs a model sees and the answer it's trying to predict.</li>
+      <li><b>Train / validation / test split</b> — data you learn from, data you tune on, and data you touch only once to measure honest performance.</li>
+      <li><b>Overfitting vs. underfitting</b> — memorizing the training data vs. being too simple to capture the pattern; the balance is the bias–variance trade-off.</li>
+      <li><b>Loss &amp; gradient descent</b> — a number that measures how wrong the model is, and the algorithm that nudges its parameters to make that number smaller.</li>
+      <li><b>Hyperparameters</b> — the knobs you set before training (learning rate, model size, regularization), as opposed to the weights the model learns.</li>
+      <li><b>Generalization</b> — the whole point: performing well on data you've never seen, not just the training set.</li>
+      <li><b>Evaluation metrics</b> — accuracy, precision/recall, F1, and AUC; which one matters depends on the problem and how balanced the data is.</li>
+    </ul>
+  </section>
+
+  <nav class="pager">
+    <a class="prev" href="students-setup.html">← Set up your environment</a>
+    <a class="next" href="students-practice.html">Next: Habits &amp; experiments →</a>
+  </nav>
+</main>
+
+<footer>
+  <div class="footer-inner"><span>© 2026 Josué Martínez</span><span>Hosted on GitHub Pages · Updated June 2026</span></div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>
