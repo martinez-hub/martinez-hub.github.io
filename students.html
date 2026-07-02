@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Students &amp; Interns — Josué Martínez</title>
+<meta name="description" content="A mentoring guide for new PhD students and interns working with Josué Martínez on trustworthy AI and deepfake detection — the learning path, curated resources, tooling, and how we work.">
+<meta name="author" content="Josué Martínez">
+<meta property="og:title" content="For Students & Interns — Josué Martínez">
+<meta property="og:description" content="A learning path and resources for new students and interns in trustworthy AI and deepfake detection.">
+<meta property="og:image" content="https://martinez-hub.github.io/assets/profile.jpg">
+<meta property="og:url" content="https://martinez-hub.github.io/students.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+
+<script>
+  (function(){
+    try{
+      var s=localStorage.getItem('theme');
+      var m=s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+      document.documentElement.setAttribute('data-theme',m);
+    }catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+  })();
+</script>
+
+<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CW59PVY98J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CW59PVY98J');
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Josué Martínez</a>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">About</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="students.html" class="active">Students</a></li>
+      <li><a href="./cv/Josue_Martinez_Martinez_CV.pdf" target="_blank">CV</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><button class="toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">◐</span> <span id="themeText">Dark</span></button></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap reveal d1">
+  <h1 class="page-title">For Students &amp; Interns</h1>
+  <p class="lead">If you're starting research with me — usually on deepfake detection and the harder problem behind it, building models that <em>know what they don't know</em> — this is the path I point you to and the resources I'd hand you on day one.</p>
+
+  <!-- The problem -->
+  <section class="guide-sec">
+    <div class="sec-h">The problem</div>
+    <div class="about">
+      <p>Deepfakes are synthetic or manipulated media; <b>detection</b> is the task of telling real from fake. Getting high accuracy on one dataset isn't the hard part — <b>generalization</b> is. A detector trained on one kind of manipulation tends to fall apart on manipulations, cameras, and compression levels it hasn't seen. How <b>calibrated</b> and how <b>robust to adversarial stress</b> a detector is rounds out the picture.</p>
+      <p class="muted">Keep three words in mind the whole way through:</p>
+      <div class="tags guide-tags"><span>Generalization</span><span>Calibration</span><span>Robustness</span></div>
+    </div>
+    <div class="card guide-card">
+      <p><b>The north star.</b> The goal isn't just a classifier. It's an <b>agent</b> — a system that perceives media, reasons about it, and flags what it can't vouch for. You don't build that in week one, but everything on the path below points toward it.</p>
+    </div>
+  </section>
+
+  <!-- The learning path -->
+  <section class="guide-sec">
+    <div class="sec-h"><span class="num">↓</span> The learning path — read it as a sequence</div>
+
+    <section class="project">
+      <div class="idx">01</div>
+      <div class="body">
+        <h3>Foundations — classical machine learning</h3>
+        <p>The gentle on-ramp, each a few lines in scikit-learn: linear/logistic regression, SVMs, random forests. These teach the vocabulary everything else builds on — features, decision boundaries, overfitting, ensembles — and the evaluation metrics that matter, especially <b>AUC</b> and why accuracy alone misleads on imbalanced or shifted data.</p>
+        <div class="linkrow">
+          <a class="ulink" href="https://scikit-learn.org/stable/getting_started.html" target="_blank">scikit-learn: getting started →</a>
+          <a class="ulink" href="https://scikit-learn.org/stable/user_guide.html" target="_blank">User guide →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project">
+      <div class="idx">02</div>
+      <div class="body">
+        <h3>Deep learning &amp; the architecture ladder</h3>
+        <p>Write one raw PyTorch training loop by hand so the mechanics aren't a mystery, then switch to <b>PyTorch Lightning</b> — the actual stack — which removes the boilerplate. Learn what a convolution does and why CNNs suit pixels. Then climb the ladder as orientation: attention → transformers → world models → frontier video models. The goal is seeing how the pieces connect, not mastering transformers in a day.</p>
+        <div class="linkrow">
+          <a class="ulink" href="https://pytorch.org/tutorials/" target="_blank">PyTorch 60-minute blitz →</a>
+          <a class="ulink" href="https://lightning.ai/docs/pytorch/stable/" target="_blank">PyTorch Lightning →</a>
+          <a class="ulink" href="https://jalammar.github.io/illustrated-transformer/" target="_blank">The Illustrated Transformer →</a>
+          <a class="ulink" href="https://worldmodels.github.io/" target="_blank">World Models →</a>
+          <a class="ulink" href="https://www.3blue1brown.com/topics/neural-networks" target="_blank">3Blue1Brown: Neural Networks →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project">
+      <div class="idx">03</div>
+      <div class="body">
+        <h3>Generative models &amp; how fakes are made</h3>
+        <p>You can't understand detection without understanding generation. Three families: <b>VAEs</b> (the classic face-swap is an autoencoder trick), <b>GANs</b> (whose discriminator does exactly your job — real vs. fake), and <b>diffusion</b> (today's best image and video generators). Then how those become deepfakes — face-swap, reenactment, fully synthetic video — and why a detector good at one is often blind to another.</p>
+        <div class="linkrow">
+          <a class="ulink" href="https://xnought.github.io/vae-explainer" target="_blank">VAE explainer →</a>
+          <a class="ulink" href="https://jalammar.github.io/illustrated-stable-diffusion/" target="_blank">Illustrated Stable Diffusion →</a>
+          <a class="ulink" href="https://arxiv.org/abs/1901.08971" target="_blank">FaceForensics++ →</a>
+          <a class="ulink" href="https://github.com/SCLBD/DeepfakeBench" target="_blank">DeepfakeBench →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project">
+      <div class="idx">04</div>
+      <div class="body">
+        <h3>Uncertainty, calibration &amp; robustness — the core</h3>
+        <p>This is the heart of the work. <b>Calibration</b>: do the confidence numbers mean anything? A model that says 90% should be right about 90% of the time. <b>Uncertainty quantification</b>: does the model know when an input is unlike anything it trained on? "Confidently wrong on novel inputs" is the failure mode we most want to avoid. <b>SNGP</b> — the method EQUINE builds on — spectral-normalizes the hidden layers and swaps in a Gaussian-process head whose variance grows as inputs drift from the training data, which is what lets a model effectively say "I've never seen anything like this."</p>
+        <div class="linkrow">
+          <a class="ulink" href="https://arxiv.org/abs/1706.04599" target="_blank">On Calibration (Guo et al.) →</a>
+          <a class="ulink" href="https://www.emergentmind.com/topics/spectral-normalized-neural-gaussian-process-sngp" target="_blank">SNGP overview →</a>
+          <a class="ulink" href="https://github.com/mit-ll-responsible-ai/equine" target="_blank">EQUINE (runnable notebooks) →</a>
+          <a class="ulink" href="https://arxiv.org/abs/2211.10881" target="_blank">Reliability survey →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project">
+      <div class="idx">05</div>
+      <div class="body">
+        <h3>Agentic AI</h3>
+        <p>Where the path leads. A <b>task</b> is one model call; a <b>workflow</b> is several calls on rails you define; an <b>agent</b> directs its own steps and tools toward a goal. The building block is the augmented LLM — a model plus tools, retrieval, and memory. Tie it back to the north star: your eventual detector as an agent that looks at media, reasons, and flags what it can't vouch for.</p>
+        <div class="linkrow">
+          <a class="ulink" href="https://www.anthropic.com/research/building-effective-agents" target="_blank">Building Effective Agents →</a>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- Tools & habits -->
+  <section class="guide-sec">
+    <div class="sec-h">Tools &amp; good habits</div>
+    <p class="guide-note">The fastest way to pick up good engineering is to build it into the repo from day one and let it run automatically.</p>
+    <ul class="interests">
+      <li><b>Modern Python stack</b> — <a class="ulink" href="https://docs.astral.sh/uv/" target="_blank">uv</a> for environments and dependencies, PyTorch Lightning for training, and Ruff + Codespell wired into a pre-commit hook so quality checks run on every commit.</li>
+      <li><b>Run models locally</b> — <a class="ulink" href="https://ollama.com/download" target="_blank">Ollama</a> with Gemma for anything you don't want to send to a cloud service. Public research data and public code are fine for cloud tools; anything sensitive stays on your machine.</li>
+      <li><b>Use AI tools well</b> — Claude Code and friends are fast drafters, not oracles. Write clear, specific prompts and always verify what they produce. This habit matters more the more you rely on them.</li>
+      <li><b>Repo hygiene</b> — small, descriptive commits; a real README; a <code>.gitignore</code> that never includes data or model weights; one experiment = one config.</li>
+      <li><b>Keep a lab log</b> — every run gets a dated entry: what you ran, the settings, the numbers, what you concluded. It's how the final write-up gets written without a last-minute scramble.</li>
+    </ul>
+  </section>
+
+  <!-- How we work -->
+  <section class="guide-sec">
+    <div class="sec-h">How we work together</div>
+    <ul class="interests">
+      <li><b>Getting unstuck</b> — try it yourself, then ask your tools or search, then ask me. A good question after a genuine attempt is exactly right; spinning for hours is not.</li>
+      <li><b>Read actively</b> — for any paper, send me three sentences: what problem, what idea, what result. That habit is worth more than reading twice as many papers.</li>
+      <li><b>Write throughout</b> — the final report grows as you work, so by the end you're revising, not scrambling. Concise and grounded: claims tied to evidence, no filler.</li>
+      <li><b>Scope deliberately</b> — we choose your project once you have the foundations, so the decision is informed rather than guessed.</li>
+    </ul>
+  </section>
+
+  <!-- CTA -->
+  <div class="card guide-cta">
+    <p><b>Interested in working together?</b> I'm always glad to hear from students and prospective interns in trustworthy AI, deepfake detection, and agentic systems. Reach out through the <a class="ulink" href="contact.html">contact page</a>.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner"><span>© 2026 Josué Martínez</span><span>Hosted on GitHub Pages · Updated June 2026</span></div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>
