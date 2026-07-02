@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Set up your environment — For Students — Josué Martínez</title>
+<meta name="description" content="Install the tools for AI/ML work once: package manager, Git, Python (uv), Ollama, Claude Code, and cloud GPUs — with copy-paste commands for macOS, Linux, and Windows.">
+<meta name="author" content="Josué Martínez">
+<meta property="og:title" content="Set up your environment — For Students">
+<meta property="og:description" content="Copy-paste setup commands for macOS, Linux, and Windows.">
+<meta property="og:image" content="https://martinez-hub.github.io/assets/profile.jpg">
+<meta property="og:url" content="https://martinez-hub.github.io/students-setup.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+
+<script>
+  (function(){
+    try{
+      var s=localStorage.getItem('theme');
+      var m=s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+      document.documentElement.setAttribute('data-theme',m);
+    }catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+  })();
+</script>
+
+<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CW59PVY98J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CW59PVY98J');
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Josué Martínez</a>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">About</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="students.html" class="active">Students</a></li>
+      <li><a href="./cv/Josue_Martinez_Martinez_CV.pdf" target="_blank">CV</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><button class="toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">◐</span> <span id="themeText">Dark</span></button></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap reveal d1">
+  <a class="crumb" href="students.html">← For Students</a>
+  <h1 class="page-title">Set up your environment</h1>
+  <p class="lead">Work through these once and you're set for everything else. Pick your operating system in each block — the <b>Copy</b> button grabs just those commands. If a command fails, paste the exact error into a search or an AI assistant; don't spin on it.</p>
+
+  <section class="guide-sec">
+    <div class="sec-h"><span class="num">01</span> A package manager</div>
+    <p class="guide-note">A package manager installs everything else with one command. macOS uses <a class="ulink" href="https://brew.sh" target="_blank">Homebrew</a>; most Linux distros ship one already; Windows 10/11 include <a class="ulink" href="https://learn.microsoft.com/windows/package-manager/winget/" target="_blank">winget</a>.</p>
+    <div class="codeblock" data-tabs>
+      <div class="cb-bar">
+        <div class="cb-tabs">
+          <button class="cb-tab" data-os="macos">macOS</button>
+          <button class="cb-tab" data-os="linux">Linux</button>
+          <button class="cb-tab" data-os="windows">Windows</button>
+        </div>
+        <button class="cb-copy" type="button">Copy</button>
+      </div>
+      <pre class="cb-pre" data-os="macos"><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew --version</code></pre>
+      <pre class="cb-pre" data-os="linux" hidden><code><span class="c"># Debian/Ubuntu already has apt; just refresh it</span>
+sudo apt update</code></pre>
+      <pre class="cb-pre" data-os="windows" hidden><code><span class="c"># winget is built into Windows 10/11 — run in PowerShell</span>
+winget --version</code></pre>
+    </div>
+  </section>
+
+  <section class="guide-sec">
+    <div class="sec-h"><span class="num">02</span> Core tools — Git, uv, Node, VS Code</div>
+    <p class="guide-note"><a class="ulink" href="https://git-scm.com" target="_blank">Git</a> for version control (make a <a class="ulink" href="https://github.com" target="_blank">GitHub</a> account too), <a class="ulink" href="https://docs.astral.sh/uv/" target="_blank">uv</a> for Python + dependencies, <a class="ulink" href="https://nodejs.org" target="_blank">Node</a> for some CLIs, and <a class="ulink" href="https://code.visualstudio.com" target="_blank">VS Code</a> as your editor.</p>
+    <div class="codeblock" data-tabs>
+      <div class="cb-bar">
+        <div class="cb-tabs">
+          <button class="cb-tab" data-os="macos">macOS</button>
+          <button class="cb-tab" data-os="linux">Linux</button>
+          <button class="cb-tab" data-os="windows">Windows</button>
+        </div>
+        <button class="cb-copy" type="button">Copy</button>
+      </div>
+      <pre class="cb-pre" data-os="macos"><code>brew install git uv node
+brew install --cask visual-studio-code
+git --version &amp;&amp; uv --version</code></pre>
+      <pre class="cb-pre" data-os="linux" hidden><code>sudo apt install -y git nodejs npm
+curl -LsSf https://astral.sh/uv/install.sh | sh   <span class="c"># uv</span>
+<span class="c"># VS Code: install from code.visualstudio.com</span>
+git --version &amp;&amp; uv --version</code></pre>
+      <pre class="cb-pre" data-os="windows" hidden><code>winget install Git.Git OpenJS.NodeJS Microsoft.VisualStudioCode
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"   <span class="c"># uv</span>
+git --version; uv --version</code></pre>
+    </div>
+  </section>
+
+  <section class="guide-sec">
+    <div class="sec-h"><span class="num">03</span> Ollama — run open models locally</div>
+    <p class="guide-note"><a class="ulink" href="https://ollama.com/download" target="_blank">Ollama</a> runs open-weight LLMs entirely on your machine — no API key, no per-token cost, and nothing leaves your computer.</p>
+    <div class="codeblock" data-tabs>
+      <div class="cb-bar">
+        <div class="cb-tabs">
+          <button class="cb-tab" data-os="macos">macOS</button>
+          <button class="cb-tab" data-os="linux">Linux</button>
+          <button class="cb-tab" data-os="windows">Windows</button>
+        </div>
+        <button class="cb-copy" type="button">Copy</button>
+      </div>
+      <pre class="cb-pre" data-os="macos"><code><span class="c"># Download the app from https://ollama.com/download, then:</span>
+ollama pull gemma4      <span class="c"># or any model from ollama.com/library</span>
+ollama run gemma4       <span class="c"># opens a chat; type /bye to exit</span>
+ollama list</code></pre>
+      <pre class="cb-pre" data-os="linux" hidden><code>curl -fsSL https://ollama.com/install.sh | sh
+ollama pull gemma4      <span class="c"># or any model from ollama.com/library</span>
+ollama run gemma4       <span class="c"># opens a chat; type /bye to exit</span>
+ollama list</code></pre>
+      <pre class="cb-pre" data-os="windows" hidden><code><span class="c"># Download the app from https://ollama.com/download, or:</span>
+winget install Ollama.Ollama
+ollama pull gemma4      <span class="c"># or any model from ollama.com/library</span>
+ollama run gemma4       <span class="c"># /bye to exit</span>
+ollama list</code></pre>
+    </div>
+  </section>
+
+  <section class="guide-sec">
+    <div class="sec-h"><span class="num">04</span> Claude Code — an AI coding assistant</div>
+    <p class="guide-note">Reads a codebase and helps you write, run, and debug — invaluable when you're new to a large repo. Needs a paid Claude plan or API access.</p>
+    <div class="codeblock" data-tabs>
+      <div class="cb-bar">
+        <div class="cb-tabs">
+          <button class="cb-tab" data-os="macos">macOS</button>
+          <button class="cb-tab" data-os="linux">Linux</button>
+          <button class="cb-tab" data-os="windows">Windows</button>
+        </div>
+        <button class="cb-copy" type="button">Copy</button>
+      </div>
+      <pre class="cb-pre" data-os="macos"><code>curl -fsSL https://claude.ai/install.sh | bash
+claude --version &amp;&amp; claude doctor</code></pre>
+      <pre class="cb-pre" data-os="linux" hidden><code>curl -fsSL https://claude.ai/install.sh | bash
+claude --version &amp;&amp; claude doctor</code></pre>
+      <pre class="cb-pre" data-os="windows" hidden><code><span class="c"># run in PowerShell</span>
+irm https://claude.ai/install.ps1 | iex
+claude --version; claude doctor</code></pre>
+    </div>
+    <p class="guide-note">Any OS with Node 18+ can instead run <code>npm install -g @anthropic-ai/claude-code</code>. If <code>claude</code> isn't found after install, open a new terminal so your PATH refreshes. Setup docs: <a class="ulink" href="https://code.claude.com/docs/en/setup" target="_blank">code.claude.com/docs/en/setup</a>.</p>
+  </section>
+
+  <section class="guide-sec">
+    <div class="sec-h"><span class="num">05</span> Cloud GPUs — when your laptop isn't enough</div>
+    <p class="guide-note">No install needed. Start on <a class="ulink" href="https://colab.research.google.com" target="_blank">Google Colab</a> for zero-setup GPU notebooks, and graduate to a persistent environment like <a class="ulink" href="https://lightning.ai/studios" target="_blank">Lightning AI Studio</a> for sustained project work. Keep data and checkpoints out of git, and save them before a session disconnects.</p>
+  </section>
+
+  <nav class="pager">
+    <span class="spacer"></span>
+    <a class="next" href="students-learn.html">Next: The learning path →</a>
+  </nav>
+</main>
+
+<footer>
+  <div class="footer-inner"><span>© 2026 Josué Martínez</span><span>Hosted on GitHub Pages · Updated June 2026</span></div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>
