@@ -215,6 +215,22 @@ footer{ border-top:1px solid var(--line); background:var(--surface); padding:2.5
 .interests code{ font-family:'JetBrains Mono',monospace; font-size:.86em; background:var(--surface-2);
   border:1px solid var(--line); border-radius:4px; padding:.05em .4em; color:var(--accent); }
 .interests a.ulink{ color:var(--accent); }
+.setup-step p a{ color:var(--accent); }
+.setup-step code{ font-family:'JetBrains Mono',monospace; font-size:.86em; background:var(--surface-2);
+  border:1px solid var(--line); border-radius:4px; padding:.05em .4em; color:var(--accent); }
+
+/* setup steps + command blocks */
+.setup-step{ padding:1.5rem 0; border-bottom:1px solid var(--line); }
+.setup-step:last-child{ border-bottom:none; }
+.setup-step h3{ font-family:'Newsreader',serif; font-weight:600; font-size:1.2rem; letter-spacing:-.01em; }
+.setup-step p{ color:var(--muted); margin-top:.4rem; max-width:72ch; line-height:1.6; }
+.setup-step p + .cmd{ margin-top:.85rem; }
+.cmd{ font-family:'JetBrains Mono',monospace; font-size:.8rem; line-height:1.75; color:var(--text);
+  background:var(--surface); border:1px solid var(--line); border-radius:8px;
+  padding:1rem 1.15rem; margin:.85rem 0 1rem; overflow-x:auto; white-space:pre; -webkit-overflow-scrolling:touch; }
+.cmd .c{ color:var(--faint); }
+.cmd + p{ margin-top:0; }
+.guide-talks{ margin-bottom:1.75rem; }
 
 /* ===== Responsive ===== */
 @media(max-width:760px){
