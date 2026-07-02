@@ -275,6 +275,18 @@ claude --version &amp;&amp; claude doctor</pre>
     </ul>
   </section>
 
+  <!-- Running experiments -->
+  <section class="guide-sec">
+    <div class="sec-h">Running &amp; tracking experiments</div>
+    <p class="guide-note">Once you're running more than a couple of experiments, these tools keep your work reproducible and your results organized. Don't front-load them on day one — reach for them when scattered scripts and logs start to hurt.</p>
+    <pre class="cmd">uv add hydra-zen mushin-py xarray</pre>
+    <ul class="interests">
+      <li><b>hydra-zen</b> — configure and launch experiments from Python instead of hand-written YAML. Each run saves its full configuration alongside its results, so experiments are reproducible, and parameter sweeps are one line. It has a dedicated PyTorch Lightning guide, so it layers onto your stack. <a class="ulink" href="https://mit-ll-responsible-ai.github.io/hydra-zen/" target="_blank">Docs →</a></li>
+      <li><b>xarray</b> — labeled, multi-dimensional arrays: think NumPy with named dimensions and coordinates. Ideal for holding results across seeds and settings as one tidy dataset instead of scattered logs. <a class="ulink" href="https://docs.xarray.dev/en/stable/" target="_blank">Docs →</a></li>
+      <li><b>mushin</b> — a workflow layer on top of Lightning + hydra-zen (a library I maintain). Define an experiment as a function, sweep over parameters, and get results back as a labeled xarray dataset. Its <code>benchmark.compare</code> and <code>Study</code> run a metric battery across seeds and report mean ± confidence intervals with statistical significance — "is this difference real, or just noise?" — and <code>llm.compare_llms</code> extends that same testing to LLM and agent systems. <a class="ulink" href="https://martinez-hub.github.io/mushin/" target="_blank">Docs →</a></li>
+    </ul>
+  </section>
+
   <!-- Reading & writing -->
   <section class="guide-sec">
     <div class="sec-h">Reading &amp; writing</div>
