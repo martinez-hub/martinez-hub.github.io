@@ -75,6 +75,51 @@
       <li><b>Use AI tools as drafters, not oracles</b> — they're fast and useful, but always read and verify what they produce. And never paste anything sensitive or private into a cloud model.</li>
       <li><b>Getting unstuck</b> — try it yourself, then search or ask your AI tools, then ask a mentor. A good question after a genuine attempt beats spinning for hours.</li>
     </ul>
+
+    <p class="guide-note">Start a project so it's reproducible from day one:</p>
+    <div class="codeblock">
+      <div class="cb-bar"><span class="cb-label">shell</span><button class="cb-copy" type="button">Copy</button></div>
+      <pre class="cb-pre"><code>uv init my-project &amp;&amp; cd my-project
+uv add torch torchvision lightning scikit-learn
+uv run python train.py     <span class="c"># runs in the project env — no activate needed</span></code></pre>
+    </div>
+
+    <p class="guide-note">Wire up automatic quality checks that run on every commit:</p>
+    <div class="codeblock">
+      <div class="cb-bar"><span class="cb-label">shell</span><button class="cb-copy" type="button">Copy</button></div>
+      <pre class="cb-pre"><code>uv add --dev ruff codespell pre-commit
+uv run pre-commit install          <span class="c"># installs the git hook</span>
+uv run ruff check . &amp;&amp; uv run ruff format .</code></pre>
+    </div>
+
+    <p class="guide-note">…with a <code>.pre-commit-config.yaml</code> in your repo root:</p>
+    <div class="codeblock">
+      <div class="cb-bar"><span class="cb-label">.pre-commit-config.yaml</span><button class="cb-copy" type="button">Copy</button></div>
+      <pre class="cb-pre"><code><span class="c"># then run: uv run pre-commit autoupdate  (pins the latest versions)</span>
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+      - id: ruff-format
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.3.0
+    hooks:
+      - id: codespell</code></pre>
+    </div>
+
+    <p class="guide-note">A starter <code>.gitignore</code> — never commit data or model weights:</p>
+    <div class="codeblock">
+      <div class="cb-bar"><span class="cb-label">.gitignore</span><button class="cb-copy" type="button">Copy</button></div>
+      <pre class="cb-pre"><code>__pycache__/
+.venv/
+data/
+outputs/
+*.ckpt
+*.pth
+.env
+.DS_Store</code></pre>
+    </div>
   </section>
 
   <!-- Running experiments -->
@@ -90,6 +135,49 @@
       <li><b>xarray</b> — labeled, multi-dimensional arrays: think NumPy with named dimensions and coordinates. Ideal for holding results across seeds and settings as one tidy dataset instead of scattered logs. <a class="ulink" href="https://docs.xarray.dev/en/stable/" target="_blank">Docs →</a></li>
       <li><b>mushin</b> — a workflow layer on top of Lightning + hydra-zen (a library I maintain). Define an experiment as a function, sweep over parameters, and get results back as a labeled xarray dataset. Its <code>benchmark.compare</code> and <code>Study</code> run a metric battery across seeds and report mean ± confidence intervals with statistical significance — "is this difference real, or just noise?" — and <code>llm.compare_llms</code> extends that same testing to LLM and agent systems. <a class="ulink" href="https://martinez-hub.github.io/mushin/" target="_blank">Docs →</a></li>
     </ul>
+
+    <p class="guide-note"><b>hydra-zen</b> — capture a config you can override and reproduce later:</p>
+    <div class="codeblock">
+      <div class="cb-bar"><span class="cb-label">python</span><button class="cb-copy" type="button">Copy</button></div>
+      <pre class="cb-pre"><code>from hydra_zen import builds, instantiate
+
+OptimCfg = builds(dict, lr=1e-3, weight_decay=0.0)
+cfg = OptimCfg(lr=3e-4)     <span class="c"># override one field</span>
+instantiate(cfg)           <span class="c"># -&gt; {'lr': 0.0003, 'weight_decay': 0.0}</span></code></pre>
+    </div>
+
+    <p class="guide-note"><b>xarray</b> — hold results across seeds and settings in one labeled array:</p>
+    <div class="codeblock">
+      <div class="cb-bar"><span class="cb-label">python</span><button class="cb-copy" type="button">Copy</button></div>
+      <pre class="cb-pre"><code>import numpy as np, xarray as xr
+
+acc = xr.DataArray(
+    np.random.rand(3, 2),
+    dims=("seed", "lr"),
+    coords={"seed": [0, 1, 2], "lr": [1e-3, 1e-2]},
+    name="accuracy",
+)
+acc.mean("seed")     <span class="c"># average across seeds, per learning rate</span></code></pre>
+    </div>
+
+    <p class="guide-note"><b>mushin</b> — define a task, sweep it, and get a labeled dataset back:</p>
+    <div class="codeblock">
+      <div class="cb-bar"><span class="cb-label">python</span><button class="cb-copy" type="button">Copy</button></div>
+      <pre class="cb-pre"><code>from mushin import multirun
+from mushin.workflows import MultiRunMetricsWorkflow
+
+class LRSweep(MultiRunMetricsWorkflow):
+    @staticmethod
+    def task(lr: float, seed: int) -> dict:
+        <span class="c"># ... train + evaluate a model with these hyperparameters ...</span>
+        return dict(accuracy=acc)
+
+wf = LRSweep()
+wf.run(lr=multirun([0.01, 0.1, 1.0]), seed=multirun([0, 1, 2]))
+
+ds = wf.to_xarray()             <span class="c"># results as a labeled xarray dataset</span>
+ds["accuracy"].mean("seed")     <span class="c"># average over seeds, per learning rate</span></code></pre>
+    </div>
   </section>
 
   <nav class="pager">
