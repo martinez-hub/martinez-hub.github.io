@@ -103,13 +103,14 @@ git --version &amp;&amp; uv --version</pre>
     <div class="setup-step">
       <h3>3 · Ollama — run open models locally</h3>
       <p><a class="ulink" href="https://ollama.com/download" target="_blank">Ollama</a> runs open-weight LLMs entirely on your machine — no API key, no per-token cost, and nothing leaves your computer.</p>
-      <pre class="cmd"><span class="c"># macOS &amp; Windows — download the app from https://ollama.com/download</span>
+      <pre class="cmd"><span class="c"># macOS — download the app from https://ollama.com/download</span>
+<span class="c"># Windows — download the app, or: winget install Ollama.Ollama</span>
 <span class="c"># Linux:</span>
 curl -fsSL https://ollama.com/install.sh | sh
 
 <span class="c"># then, on any OS:</span>
-ollama pull gemma3      <span class="c"># or any model from ollama.com/library</span>
-ollama run gemma3       <span class="c"># opens a chat; type /bye to exit</span>
+ollama pull gemma4      <span class="c"># or any model from ollama.com/library</span>
+ollama run gemma4       <span class="c"># opens a chat; type /bye to exit</span>
 ollama list             <span class="c"># shows installed models</span></pre>
     </div>
 
