@@ -129,12 +129,12 @@ outputs/
     <p class="guide-note">Once you're running more than a couple of experiments, these tools keep your work reproducible and your results organized. Don't front-load them on day one — reach for them when scattered scripts and logs start to hurt.</p>
     <div class="codeblock">
       <div class="cb-bar"><span class="cb-label">shell</span><button class="cb-copy" type="button">Copy</button></div>
-      <pre class="cb-pre"><code>uv add hydra-zen mushin-py xarray</code></pre>
+      <pre class="cb-pre"><code>uv add hydra-zen "mushin-py[eval]" xarray   <span class="c"># [eval] adds compare, metric batteries &amp; LLM eval</span></code></pre>
     </div>
     <ul class="interests">
       <li><b>hydra-zen</b> — configure and launch experiments from Python instead of hand-written YAML. Each run saves its full configuration alongside its results, so experiments are reproducible, and parameter sweeps are one line. It has a dedicated PyTorch Lightning guide, so it layers onto your stack. <a class="ulink" href="https://mit-ll-responsible-ai.github.io/hydra-zen/" target="_blank">Docs →</a></li>
       <li><b>xarray</b> — labeled, multi-dimensional arrays: think NumPy with named dimensions and coordinates. Ideal for holding results across seeds and settings as one tidy dataset instead of scattered logs. <a class="ulink" href="https://docs.xarray.dev/en/stable/" target="_blank">Docs →</a></li>
-      <li><b>mushin</b> — a workflow layer on top of Lightning + hydra-zen (a library I maintain). Define an experiment as a function, sweep over parameters, and get results back as a labeled xarray dataset. Its <code>benchmark.compare</code> and <code>Study</code> run a metric battery across seeds and report mean ± confidence intervals with statistical significance — "is this difference real, or just noise?" — and <code>llm.compare_llms</code> extends that same testing to LLM and agent systems. <a class="ulink" href="https://martinez-hub.github.io/mushin/" target="_blank">Docs →</a></li>
+      <li><b>mushin</b> — a boilerplate-free sweep engine built on hydra-zen (a library I maintain). Decorate an experiment function with <code>@mushin.sweep</code>, sweep over parameters, and get the results back as a labeled xarray dataset — no subclassing. Your task just returns a <code>dict</code>, so it works with any model (scikit-learn, XGBoost, PyTorch), with first-class Lightning integration. With the <code>[eval]</code> extra, <code>benchmark.compare</code> and <code>Study</code> run a metric battery across seeds and report mean ± confidence intervals with statistical significance — "is this difference real, or just noise?" — and the same significance testing extends to LLM and agent evaluations. <a class="ulink" href="https://martinez-hub.github.io/mushin/" target="_blank">Docs →</a></li>
     </ul>
 
     <p class="guide-note"><b>hydra-zen</b> — capture a config you can override and reproduce later:</p>
@@ -161,28 +161,26 @@ acc = xr.DataArray(
 acc.mean("seed")     <span class="c"># average across seeds, per learning rate</span></code></pre>
     </div>
 
-    <p class="guide-note"><b>mushin end-to-end</b> — sweep a Lightning model across learning rates and seeds, collect the results as an xarray dataset, and plot straight from it:</p>
+    <p class="guide-note"><b>mushin end-to-end</b> — decorate a function that trains a Lightning model, sweep it across learning rates and seeds, get the results back as a labeled xarray dataset, and plot straight from it:</p>
     <div class="codeblock">
       <div class="cb-bar"><span class="cb-label">python</span><button class="cb-copy" type="button">Copy</button></div>
       <pre class="cb-pre"><code>import lightning as L
 import matplotlib.pyplot as plt
-from mushin import multirun
-from mushin.workflows import MultiRunMetricsWorkflow
+import mushin
 
-class LRSweep(MultiRunMetricsWorkflow):
-    @staticmethod
-    def task(lr: float, seed: int) -> dict:
-        L.seed_everything(seed)
-        model = MyLitModule(lr=lr)               <span class="c"># your LightningModule</span>
-        trainer = L.Trainer(max_epochs=5, accelerator="auto",
-                            logger=False, enable_checkpointing=False)
-        trainer.fit(model, datamodule=dm)        <span class="c"># dm: your LightningDataModule</span>
-        return {"accuracy": trainer.callback_metrics["val_acc"].item()}
+@mushin.sweep
+def lr_sweep(lr, seed):
+    L.seed_everything(seed)
+    model = MyLitModule(lr=lr)                   <span class="c"># your LightningModule</span>
+    trainer = L.Trainer(max_epochs=5, accelerator="auto",
+                        logger=False, enable_checkpointing=False)
+    trainer.fit(model, datamodule=dm)            <span class="c"># dm: your LightningDataModule</span>
+    return dict(accuracy=trainer.callback_metrics["val_acc"].item())
 
-wf = LRSweep()
-wf.run(lr=multirun([1e-3, 1e-2, 1e-1]), seed=multirun([0, 1, 2]))
-
-ds = wf.to_xarray()                              <span class="c"># labeled dataset, dims (lr, seed)</span>
+ds = lr_sweep.run(                               <span class="c"># 9 runs -&gt; labeled xarray.Dataset</span>
+    lr=mushin.multirun([1e-3, 1e-2, 1e-1]),
+    seed=mushin.multirun([0, 1, 2]),
+)                                               <span class="c"># dims (lr, seed)</span>
 mean = ds["accuracy"].mean("seed")              <span class="c"># average over seeds</span>
 std  = ds["accuracy"].std("seed")               <span class="c"># spread across seeds</span>
 
