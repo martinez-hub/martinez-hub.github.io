@@ -189,6 +189,7 @@ plt.errorbar(mean["lr"], mean, yerr=std, marker="o", capsize=4)
 plt.xscale("log"); plt.xlabel("learning rate"); plt.ylabel("val accuracy")
 plt.tight_layout(); plt.savefig("acc_vs_lr.png")</code></pre>
     </div>
+    <p class="guide-note">Need the full toolkit — failure handling, provenance, custom analysis? Drop to <code>lr_sweep.workflow</code>, or subclass <code>MultiRunMetricsWorkflow</code> directly.</p>
   </section>
 
   <nav class="pager">
