@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Habits &amp; experiments — For Students — Josué Martínez</title>
+<title>Habits &amp; experiments · For Students · Josué Martínez</title>
 <meta name="description" content="Engineering habits that keep you productive in AI/ML, and the tooling (hydra-zen, xarray, mushin) that keeps experiments reproducible and organized.">
 <meta name="author" content="Josué Martínez">
-<meta property="og:title" content="Habits & experiments — For Students">
+<meta property="og:title" content="Habits & experiments · For Students">
 <meta property="og:description" content="Good engineering habits and reproducible experiment tooling.">
 <meta property="og:image" content="https://martinez-hub.github.io/assets/profile.jpg">
 <meta property="og:url" content="https://martinez-hub.github.io/students-practice.html">
@@ -68,13 +68,13 @@
     <div class="sec-h">Good habits</div>
     <p class="guide-note">The best way to pick up good engineering is to build it into your workflow from day one and let it run automatically.</p>
     <ul class="interests">
-      <li><b>Reproducible environments</b> — keep dependencies in the project (with uv), so <code>uv sync</code> makes the same code run on your laptop, on Colab, or on a cloud GPU.</li>
-      <li><b>Repo hygiene</b> — small, descriptive commits; a real README; a <code>.gitignore</code> that never includes data or model weights; one experiment = one config.</li>
-      <li><b>Automate quality checks</b> — a linter/formatter like <a class="ulink" href="https://docs.astral.sh/ruff/" target="_blank">Ruff</a> plus a spell-checker, wired into a pre-commit hook so they run on every commit.</li>
-      <li><b>Keep a lab log</b> — every run gets a dated entry: what you ran, the settings, the numbers, what you concluded. It's how a final write-up gets written without a last-minute scramble.</li>
-      <li><b>Use AI tools as drafters, not oracles</b> — they're fast and useful, but always read and verify what they produce. And never paste anything sensitive or private into a cloud model.</li>
-      <li><b>Getting unstuck</b> — try it yourself, then search or ask your AI tools, then ask a mentor. A good question after a genuine attempt beats spinning for hours.</li>
-      <li><b>Learn how research actually works</b> — Bill Freeman's (MIT) chapter <i>How to Do Research</i>, in the free <a class="ulink" href="https://visionbook.mit.edu" target="_blank"><i>Foundations of Computer Vision</i></a>, is a short, practical read on picking problems, making steady progress, and working with an advisor.</li>
+      <li><b>Reproducible environments</b>: keep dependencies in the project (with uv), so <code>uv sync</code> makes the same code run on your laptop, on Colab, or on a cloud GPU.</li>
+      <li><b>Repo hygiene</b>: small, descriptive commits; a real README; a <code>.gitignore</code> that never includes data or model weights; one experiment = one config.</li>
+      <li><b>Automate quality checks</b>: a linter/formatter like <a class="ulink" href="https://docs.astral.sh/ruff/" target="_blank">Ruff</a> plus a spell-checker, wired into a pre-commit hook so they run on every commit.</li>
+      <li><b>Keep a lab log</b>: every run gets a dated entry: what you ran, the settings, the numbers, what you concluded. It's how a final write-up gets written without a last-minute scramble.</li>
+      <li><b>Use AI tools as drafters, not oracles</b>: they're fast and useful, but always read and verify what they produce. And never paste anything sensitive or private into a cloud model.</li>
+      <li><b>Getting unstuck</b>: try it yourself, then search or ask your AI tools, then ask a mentor. A good question after a genuine attempt beats spinning for hours.</li>
+      <li><b>Learn how research actually works</b>: Bill Freeman's (MIT) chapter <i>How to Do Research</i>, in the free <a class="ulink" href="https://visionbook.mit.edu" target="_blank"><i>Foundations of Computer Vision</i></a>, is a short, practical read on picking problems, making steady progress, and working with an advisor.</li>
     </ul>
 
     <p class="guide-note">Start a project so it's reproducible from day one:</p>
@@ -109,7 +109,7 @@ repos:
       - id: codespell</code></pre>
     </div>
 
-    <p class="guide-note">A starter <code>.gitignore</code> — never commit data or model weights:</p>
+    <p class="guide-note">A starter <code>.gitignore</code> (never commit data or model weights):</p>
     <div class="codeblock">
       <div class="cb-bar"><span class="cb-label">.gitignore</span><button class="cb-copy" type="button">Copy</button></div>
       <pre class="cb-pre"><code>__pycache__/
@@ -126,18 +126,18 @@ outputs/
   <!-- Running experiments -->
   <section class="guide-sec">
     <div class="sec-h">Running &amp; tracking experiments</div>
-    <p class="guide-note">Once you're running more than a couple of experiments, these tools keep your work reproducible and your results organized. Don't front-load them on day one — reach for them when scattered scripts and logs start to hurt.</p>
+    <p class="guide-note">Once you're running more than a couple of experiments, these tools keep your work reproducible and your results organized. Don't front-load them on day one. Reach for them when scattered scripts and logs start to hurt.</p>
     <div class="codeblock">
       <div class="cb-bar"><span class="cb-label">shell</span><button class="cb-copy" type="button">Copy</button></div>
       <pre class="cb-pre"><code>uv add hydra-zen "mushin-py[eval]" xarray   <span class="c"># [eval] adds compare, metric batteries &amp; LLM eval</span></code></pre>
     </div>
     <ul class="interests">
-      <li><b>hydra-zen</b> — configure and launch experiments from Python instead of hand-written YAML. Each run saves its full configuration alongside its results, so experiments are reproducible, and parameter sweeps are one line. It has a dedicated PyTorch Lightning guide, so it layers onto your stack. <a class="ulink" href="https://mit-ll-responsible-ai.github.io/hydra-zen/" target="_blank">Docs →</a></li>
-      <li><b>xarray</b> — labeled, multi-dimensional arrays: think NumPy with named dimensions and coordinates. Ideal for holding results across seeds and settings as one tidy dataset instead of scattered logs. <a class="ulink" href="https://docs.xarray.dev/en/stable/" target="_blank">Docs →</a></li>
-      <li><b>mushin</b> — a boilerplate-free sweep engine I maintain, built on hydra-zen. Decorate an experiment function with <code>@mushin.sweep</code>, sweep over parameters, and get the results back as a labeled xarray dataset — no subclassing. Your task just returns a <code>dict</code>, so it works with any model (scikit-learn, XGBoost, PyTorch), with first-class Lightning integration. With the <code>[eval]</code> extra, <code>benchmark.compare</code> and <code>Study</code> run a metric battery across seeds and report mean ± confidence intervals with statistical significance — "is this difference real, or just noise?" — and the same significance testing extends to LLM and agent evaluations. <a class="ulink" href="https://martinez-hub.github.io/mushin/" target="_blank">Docs →</a></li>
+      <li><b>hydra-zen</b>: configure and launch experiments from Python instead of hand-written YAML. Each run saves its full configuration alongside its results, so experiments are reproducible, and parameter sweeps are one line. It has a dedicated PyTorch Lightning guide, so it layers onto your stack. <a class="ulink" href="https://mit-ll-responsible-ai.github.io/hydra-zen/" target="_blank">Docs →</a></li>
+      <li><b>xarray</b>: labeled, multi-dimensional arrays: think NumPy with named dimensions and coordinates. Ideal for holding results across seeds and settings as one tidy dataset instead of scattered logs. <a class="ulink" href="https://docs.xarray.dev/en/stable/" target="_blank">Docs →</a></li>
+      <li><b>mushin</b>: a boilerplate-free sweep engine I maintain, built on hydra-zen. Decorate an experiment function with <code>@mushin.sweep</code>, sweep over parameters, and get the results back as a labeled xarray dataset, no subclassing. Your task just returns a <code>dict</code>, so it works with any model (scikit-learn, XGBoost, PyTorch), with first-class Lightning integration. With the <code>[eval]</code> extra, <code>benchmark.compare</code> and <code>Study</code> run a metric battery across seeds and report mean ± confidence intervals with statistical significance ("is this difference real, or just noise?"), and the same significance testing extends to LLM and agent evaluations. <a class="ulink" href="https://martinez-hub.github.io/mushin/" target="_blank">Docs →</a></li>
     </ul>
 
-    <p class="guide-note"><b>hydra-zen</b> — capture a config you can override and reproduce later:</p>
+    <p class="guide-note"><b>hydra-zen</b>: capture a config you can override and reproduce later:</p>
     <div class="codeblock">
       <div class="cb-bar"><span class="cb-label">python</span><button class="cb-copy" type="button">Copy</button></div>
       <pre class="cb-pre"><code>from hydra_zen import builds, instantiate
@@ -147,7 +147,7 @@ cfg = OptimCfg(lr=3e-4)     <span class="c"># override one field</span>
 instantiate(cfg)           <span class="c"># -&gt; {'lr': 0.0003, 'weight_decay': 0.0}</span></code></pre>
     </div>
 
-    <p class="guide-note"><b>xarray</b> — hold results across seeds and settings in one labeled array:</p>
+    <p class="guide-note"><b>xarray</b>: hold results across seeds and settings in one labeled array:</p>
     <div class="codeblock">
       <div class="cb-bar"><span class="cb-label">python</span><button class="cb-copy" type="button">Copy</button></div>
       <pre class="cb-pre"><code>import numpy as np, xarray as xr
@@ -161,7 +161,7 @@ acc = xr.DataArray(
 acc.mean("seed")     <span class="c"># average across seeds, per learning rate</span></code></pre>
     </div>
 
-    <p class="guide-note"><b>mushin end-to-end</b> — decorate a function that trains a Lightning model, sweep it across learning rates and seeds, get the results back as a labeled xarray dataset, and plot straight from it:</p>
+    <p class="guide-note"><b>mushin end-to-end</b>: decorate a function that trains a Lightning model, sweep it across learning rates and seeds, get the results back as a labeled xarray dataset, and plot straight from it:</p>
     <div class="codeblock">
       <div class="cb-bar"><span class="cb-label">python</span><button class="cb-copy" type="button">Copy</button></div>
       <pre class="cb-pre"><code>import lightning as L
@@ -189,7 +189,7 @@ plt.errorbar(mean["lr"], mean, yerr=std, marker="o", capsize=4)
 plt.xscale("log"); plt.xlabel("learning rate"); plt.ylabel("val accuracy")
 plt.tight_layout(); plt.savefig("acc_vs_lr.png")</code></pre>
     </div>
-    <p class="guide-note">Need the full toolkit — failure handling, provenance, custom analysis? Drop to <code>lr_sweep.workflow</code>, or subclass <code>MultiRunMetricsWorkflow</code> directly.</p>
+    <p class="guide-note">Need the full toolkit: failure handling, provenance, custom analysis? Drop to <code>lr_sweep.workflow</code>, or subclass <code>MultiRunMetricsWorkflow</code> directly.</p>
   </section>
 
   <nav class="pager">
