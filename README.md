@@ -19,10 +19,18 @@ build step, no dependencies.
 | `students-learn.html` | What to learn, in order |
 | `students-practice.html` | Engineering habits and running experiments |
 | `students-skills.html` | Reading, writing and talks |
+| `nba.html` | NBA predictions, rendered from the daily JSON the [nbaPredicts](https://github.com/martinez-hub/nbaPredicts) pipeline publishes |
 | `404.html` | Not-found page |
 
-Everything else: `style.css` holds all styles, `main.js` all behavior,
-`assets/` the favicon and profile image, and `cv/` the CV linked from the nav.
+Everything else: `style.css` holds all styles, `main.js` all shared behavior,
+`nba.js` the NBA page's rendering, `assets/` the favicon and profile image, and
+`cv/` the CV linked from the nav.
+
+The NBA page fetches `/nbaPredicts/data/latest.json` and `backtest.json`, which
+the nbaPredicts repository deploys to its own GitHub Pages site on this domain
+twice a day. To preview it locally, serve this folder with the pipeline's
+`site/` directory mounted at `/nbaPredicts/`, or pass `?data=/some/path/` to
+point the page at another same-origin folder.
 
 ## What main.js does
 

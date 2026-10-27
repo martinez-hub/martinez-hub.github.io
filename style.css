@@ -270,6 +270,96 @@ footer{ border-top:1px solid var(--line); background:var(--surface); padding:2.5
 .pager a:hover{ text-decoration:underline; }
 .pager .spacer{ flex:1; }
 
+/* ===== NBA predictions ===== */
+.nba-stamp{ font-family:'JetBrains Mono',monospace; font-size:.76rem; color:var(--faint); margin:-1rem 0 2.5rem; }
+.nba-note{ color:var(--muted); font-size:1rem; max-width:68ch; margin:-.6rem 0 1.4rem; }
+.nba-empty{ color:var(--muted); font-style:italic; padding:1.2rem 0 2rem; border-top:1px solid var(--line); }
+#nba section{ margin-bottom:3.5rem; }
+.sub-h{ font-family:'Newsreader',serif; font-weight:500; font-size:1.25rem; margin:2rem 0 .8rem; }
+
+/* slate: one row per ET date, date on the rail */
+.day{ display:grid; grid-template-columns:minmax(0,150px) 1fr; gap:2.5rem; padding-top:1.4rem; border-top:1px solid var(--line); margin-bottom:1.4rem; }
+.day-date{ font-family:'Newsreader',serif; font-weight:500; font-size:1.15rem; line-height:1.25; color:var(--accent);
+  position:sticky; top:5rem; align-self:start; }
+.day-games{ min-width:0; }
+.game{ padding:0 0 1.6rem; margin-bottom:1.6rem; border-bottom:1px solid var(--line); }
+.day-games .game:last-child{ border-bottom:none; margin-bottom:0; }
+.g-head{ display:flex; justify-content:space-between; align-items:baseline; gap:1rem; flex-wrap:wrap; margin-bottom:.8rem; }
+.g-teams{ font-family:'Newsreader',serif; font-weight:500; font-size:1.45rem; letter-spacing:-.01em; line-height:1.2; }
+.g-at{ font-style:italic; color:var(--muted); font-weight:400; }
+.g-head time{ font-family:'JetBrains Mono',monospace; font-size:.76rem; color:var(--faint); }
+
+/* the win-probability strip: away share on the left, home on the right */
+.strip{ position:relative; display:flex; gap:2px; height:14px; }
+.strip > span{ display:block; height:100%; border-radius:4px; }
+.s-away{ flex:0 0 50%; transition:flex-basis 1s cubic-bezier(.2,.7,.2,1); }
+.s-home{ flex:1 1 0; }
+.fav-home .s-home, .fav-away .s-away{ background:var(--accent); }
+.fav-home .s-away, .fav-away .s-home{ background:color-mix(in srgb,var(--muted) 22%,var(--bg)); }
+.s-mid{ position:absolute; left:50%; top:-4px; bottom:-4px; width:1px; background:var(--text); opacity:.45; }
+.strip-labels{ display:flex; justify-content:space-between; margin-top:.4rem;
+  font-family:'JetBrains Mono',monospace; font-size:.8rem; color:var(--muted); font-variant-numeric:tabular-nums; }
+.strip-labels .fav{ color:var(--accent); font-weight:500; }
+@media (prefers-reduced-motion:reduce){ .s-away{ transition:none; } }
+
+.g-proj{ margin-top:.8rem; font-size:1.05rem; }
+.g-proj b{ font-weight:600; font-variant-numeric:lining-nums tabular-nums; }
+.g-range{ color:var(--muted); font-size:.95rem; }
+.g-flag{ margin-top:.45rem; font-family:'JetBrains Mono',monospace; font-size:.74rem; color:var(--muted); }
+.g-flag::before{ content:""; display:inline-block; width:.5rem; height:.5rem; margin-right:.5rem; border:1.5px solid var(--accent); border-radius:50%; vertical-align:.05rem; }
+.g-more{ margin-top:.7rem; }
+.g-more summary{ cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:.78rem; color:var(--accent); width:max-content; max-width:100%; }
+.g-more summary:focus-visible, .pt:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; border-radius:3px; }
+.g-more[open] summary{ margin-bottom:.8rem; }
+.ptables{ display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+.injuries{ list-style:none; columns:2; column-gap:2rem; font-size:.98rem; }
+.injuries li{ break-inside:avoid; padding:.15rem 0; }
+.i-team{ font-family:'JetBrains Mono',monospace; font-size:.74rem; color:var(--faint); }
+.i-status{ color:var(--muted); font-style:italic; }
+
+/* tables */
+.table-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.ptable, .rtable, .btable{ border-collapse:collapse; width:100%; font-variant-numeric:tabular-nums; }
+.ptable th, .ptable td, .rtable th, .rtable td, .btable th, .btable td{ padding:.45rem .6rem; border-bottom:1px solid var(--line); text-align:right; vertical-align:top; }
+.ptable th:first-child, .rtable th:first-child, .rtable td:first-child, .btable th:first-child{ text-align:left; padding-left:0; }
+.ptable thead th, .rtable thead th, .btable thead th{ font-family:'JetBrains Mono',monospace; font-size:.72rem; font-weight:500; color:var(--faint); }
+.ptable thead th:first-child{ font-family:'Newsreader',serif; font-size:1rem; color:var(--text); }
+.ptable tbody th{ font-weight:500; font-size:.98rem; }
+.p-status{ font-style:italic; color:var(--muted); font-weight:400; }
+.ptable td .v, .btable td .v{ display:block; font-family:'JetBrains Mono',monospace; font-size:.84rem; }
+.ptable td .r, .btable td .r{ display:block; font-family:'JetBrains Mono',monospace; font-size:.68rem; color:var(--faint); }
+.rtable td{ font-size:.98rem; }
+.rtable .res{ font-family:'JetBrains Mono',monospace; font-size:.76rem; }
+.rtable .hit .res{ color:var(--accent); }
+.rtable .miss .res{ color:var(--faint); }
+.btable tr.ours th, .btable tr.ours td .v{ color:var(--accent); font-weight:600; }
+.btable td{ font-family:'JetBrains Mono',monospace; font-size:.84rem; }
+
+/* season facts */
+.facts{ display:grid; grid-template-columns:minmax(0,170px) 1fr; gap:.55rem 2rem; max-width:720px; }
+.facts dt{ font-family:'JetBrains Mono',monospace; font-size:.76rem; color:var(--faint); padding-top:.25rem; }
+.facts dd{ font-size:1.08rem; }
+
+/* calibration chart */
+.calib-fig{ display:grid; grid-template-columns:minmax(0,320px) 1fr; gap:2rem; align-items:center; margin:2rem 0 1rem; }
+.calib{ width:100%; height:auto; overflow:visible; }
+.calib .grid{ stroke:var(--line); stroke-width:1; }
+.calib .ref{ stroke:var(--muted); stroke-width:1; stroke-dasharray:4 4; }
+.calib .tick{ font-family:'JetBrains Mono',monospace; font-size:10px; fill:var(--faint); }
+.calib .axis{ font-family:'JetBrains Mono',monospace; font-size:11px; fill:var(--muted); }
+.calib .dot{ fill:var(--accent); stroke:var(--bg); stroke-width:2; }
+.calib .hit-area{ fill:transparent; }
+.calib .pt{ cursor:default; outline:none; }
+.calib .pt:hover .dot, .calib .pt:focus-visible .dot{ r:7; }
+.calib-fig figcaption{ color:var(--muted); font-size:1rem; max-width:52ch; line-height:1.6; }
+.nba-tip{ position:absolute; z-index:60; max-width:260px; pointer-events:none; background:var(--text); color:var(--bg);
+  font-family:'JetBrains Mono',monospace; font-size:.72rem; line-height:1.4; padding:.45rem .6rem; border-radius:5px; }
+.nba-tip[hidden]{ display:none; }
+
+.method p{ font-size:1.08rem; line-height:1.7; max-width:72ch; margin-bottom:1rem; }
+.method b{ color:var(--accent); font-weight:600; }
+.method a{ color:var(--accent); }
+
 /* ===== Responsive ===== */
 @media(max-width:760px){
   .nav-burger{ display:flex; }
@@ -289,6 +379,14 @@ footer{ border-top:1px solid var(--line); background:var(--surface); padding:2.5
   .pubsec{ grid-template-columns:1fr; gap:.6rem; }
   .pubsec-h{ position:static; }
   .nf-item{ grid-template-columns:1fr; gap:.4rem; }
+  .day{ grid-template-columns:1fr; gap:.6rem; }
+  .day-date{ position:static; }
+  .ptables{ grid-template-columns:1fr; }
+  .injuries{ columns:1; }
+  .facts{ grid-template-columns:1fr; gap:.1rem; }
+  .facts dd{ margin-bottom:.6rem; }
+  .calib-fig{ grid-template-columns:1fr; }
+  .g-teams{ font-size:1.25rem; }
   .hub{ grid-template-columns:1fr; }
   .about .first::first-letter{ float:none; font-size:inherit; padding:0; color:inherit; }
   .wrap,.nav-inner,.footer-inner{ padding-left:1.5rem; padding-right:1.5rem; }
