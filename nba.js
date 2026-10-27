@@ -106,7 +106,10 @@
       var mp = g.market.p_market >= 0.5 ? g.market.p_market : 1 - g.market.p_market;
       var spread = g.market.spread == null ? '' : ', ' + home.abbr + ' ' + (g.market.spread > 0 ? '+' : '') + g.market.spread;
       mkt = el('p', { class: 'strip-mkt' }, el('i', { class: 'mkt-key', 'aria-hidden': 'true' }),
-        'Betting line' + (g.market.books > 1 ? ' (' + g.market.books + ' books)' : '') + ': ' + mfav.abbr + ' ' + pct(mp) + spread);
+        'Betting line' + (g.market.books > 1 ? ' (' + g.market.books + ' books)' : '') + ': ' + mfav.abbr + ' ' + pct(mp) + spread +
+        (g.p_model != null ? '. EQUINE without the line: ' + home.abbr + ' ' + pct(g.p_model) : ''));
+    } else if (g.uses_line === false) {
+      mkt = el('p', { class: 'strip-mkt' }, 'No betting line posted yet; this is EQUINE from team form alone.');
     }
     return el('div', { class: 'strip-wrap' }, bar, labels, mkt);
   }
@@ -269,7 +272,7 @@
   }
 
   // ---------------------------------------------------------------- backtest
-  var MODEL_NAMES = { equine_gp: 'EQUINE GP', logistic: 'Logistic regression', elo: 'Elo rating', home_team: 'Always the home team' };
+  var MODEL_NAMES = { equine_market: 'EQUINE with the line', market: 'Betting line (close)', equine_gp: 'EQUINE without the line', logistic: 'Logistic regression', elo: 'Elo rating', home_team: 'Always the home team' };
 
   function seasonLabel(s) { return (s - 1) + '–' + String(s).slice(2); }
 
@@ -308,13 +311,14 @@
     var box = document.getElementById('backtest');
     box.textContent = '';
     var w = bt.winner;
-    var models = ['equine_gp', 'logistic', 'elo', 'home_team'];
+    var models = ['equine_market', 'market', 'equine_gp', 'logistic', 'elo', 'home_team'].filter(function (m) { return w.seasons[0] && w.seasons[0][m]; });
 
     var head = el('tr', null, el('th', { scope: 'col' }, 'Model'));
     w.seasons.forEach(function (s) { head.appendChild(el('th', { scope: 'col' }, seasonLabel(s.season))); });
     var body = el('tbody');
     models.forEach(function (m) {
-      var tr = el('tr', { class: m === 'equine_gp' ? 'ours' : '' }, el('th', { scope: 'row' }, MODEL_NAMES[m]));
+      var ours = m === (models[0] === 'equine_market' ? 'equine_market' : 'equine_gp');
+      var tr = el('tr', { class: ours ? 'ours' : '' }, el('th', { scope: 'row' }, MODEL_NAMES[m]));
       w.seasons.forEach(function (s) {
         tr.appendChild(el('td', null,
           el('span', { class: 'v' }, pct(s[m].accuracy, 1)),
@@ -333,10 +337,10 @@
         pct(nov[2].accuracy) + ' of the least familiar third.'
       : '';
     var calib = el('figure', { class: 'calib-fig' },
-      calibrationChart(w.reliability),
+      calibrationChart(w.reliability_market_model || w.reliability),
       el('figcaption', null,
-        'Calibration over every backtest game. When EQUINE says the home team has a 70% chance, the home team should win about 70% of those games; dots on the dashed line mean the probabilities can be taken at face value. ',
-        novText));
+        'Calibration of ' + (w.reliability_market_model ? 'EQUINE with the line' : 'EQUINE') + ' over every backtest game. When it says the home team has a 70% chance, the home team should win about 70% of those games; dots on the dashed line mean the probabilities can be taken at face value. ',
+        novText ? novText.replace('EQUINE\u2019s uncertainty', 'the uncertainty of EQUINE without the line') : ''));
     box.appendChild(calib);
 
     var f = bt.forecast, z = bt.forecast_zero_shot;
@@ -396,7 +400,8 @@
       el('p', null, el('b', null, 'Winner. '),
         'Each game is described by ' + w.features.length + ' numbers computed only from earlier games: Elo ratings, recent offensive and defensive efficiency, the four factors, rest and back-to-backs, and how much of each roster is available. An ' +
         w.embedding + ' network embeds those numbers and EQUINE’s Gaussian-process head turns the embedding into a win probability, shrinking it toward 50% when a matchup looks unlike its training data. It is retrained every morning on ' +
-        w.trained_on.toLocaleString() + ' games.'),
+        w.trained_on.toLocaleString() + ' games.' +
+        (w.stacked ? ' When a betting line is posted, a second EQUINE head takes two inputs, the line\u2019s win probability (several sportsbooks\u2019 median, bookmaker margin removed) and the team-form model\u2019s, and its output is the published pick. Over three seasons that model matched the closing line to within 0.001 Brier; everything team form knows is already in the line, so the remaining edge has to come from information the line does not have yet, such as late injury news.' : '')),
       el('p', null, el('b', null, 'EQUINE version. '),
         'Built from the newest open work on EQUINE rather than the last release: commit ',
         el('a', { class: 'ulink mono', href: EQUINE_REPO + '/commit/' + w.commit, target: '_blank' }, w.commit.slice(0, 7)),
