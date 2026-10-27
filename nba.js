@@ -106,7 +106,7 @@
       var mp = g.market.p_market >= 0.5 ? g.market.p_market : 1 - g.market.p_market;
       var spread = g.market.spread == null ? '' : ', ' + home.abbr + ' ' + (g.market.spread > 0 ? '+' : '') + g.market.spread;
       mkt = el('p', { class: 'strip-mkt' }, el('i', { class: 'mkt-key', 'aria-hidden': 'true' }),
-        (g.market.provider || 'Market') + ' line: ' + mfav.abbr + ' ' + pct(mp) + spread);
+        'Betting line' + (g.market.books > 1 ? ' (' + g.market.books + ' books)' : '') + ': ' + mfav.abbr + ' ' + pct(mp) + spread);
     }
     return el('div', { class: 'strip-wrap' }, bar, labels, mkt);
   }
@@ -231,7 +231,7 @@
       ];
       if (rec.vs_market && rec.vs_market.n) {
         var v = rec.vs_market;
-        items.push(['Against DraftKings', 'EQUINE picked ' + v.equine_correct + ' of ' + v.n + ', the betting line ' +
+        items.push(['Against the line', 'EQUINE picked ' + v.equine_correct + ' of ' + v.n + ', the betting line ' +
           v.market_correct + ' of ' + v.n + ' (Brier ' + num(v.equine_brier, 3) + ' vs ' + num(v.market_brier, 3) + ')']);
       }
       if (rec.player_mae) {
