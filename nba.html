@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NBA Predictions · Josué Martínez</title>
+<meta name="description" content="Daily NBA game predictions: win probabilities from an EQUINE Gaussian-process model and score and stat-line forecasts from Google's TimesFM, retrained every morning.">
+<meta name="author" content="Josué Martínez">
+<meta property="og:title" content="NBA Predictions · Josué Martínez">
+<meta property="og:description" content="Win probabilities from EQUINE and score and stat-line forecasts from TimesFM, updated every day.">
+<meta property="og:url" content="https://martinez-hub.github.io/nba.html">
+<meta property="og:type" content="website">
+
+<script>
+  (function(){
+    try{
+      var s=localStorage.getItem('theme');
+      var m=s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+      document.documentElement.setAttribute('data-theme',m);
+    }catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+  })();
+</script>
+
+<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CW59PVY98J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CW59PVY98J');
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Josué Martínez</a>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html">About</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="students.html">Students</a></li>
+      <li><a href="nba.html" class="active">NBA</a></li>
+      <li><a href="./cv/Josue_Martinez_Martinez_CV.pdf" target="_blank">CV</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><button class="toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">◐</span> <span id="themeText">Dark</span></button></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap reveal d1" id="nba">
+  <h1 class="page-title">NBA predictions</h1>
+  <p class="lead">Who wins tonight, by how much, and what each rotation player puts up. Win probabilities come from <a href="https://github.com/mit-ll-responsible-ai/equine" target="_blank">EQUINE</a>, a library for neural networks that know when they are unsure; scores and stat lines come from Google's <a href="https://github.com/google-research/timesfm" target="_blank">TimesFM</a> forecasting model. Both retrain on every box score since 2012 each morning.</p>
+  <p class="nba-stamp" id="stamp" aria-live="polite">Loading the latest predictions.</p>
+
+  <section aria-labelledby="slate-h">
+    <h2 class="section-title" id="slate-h">Upcoming games</h2>
+    <div id="slate" class="slate"></div>
+  </section>
+
+  <section aria-labelledby="record-h">
+    <h2 class="section-title" id="record-h">This season so far</h2>
+    <p class="nba-note">Each game is scored against the last prediction published before tip-off.</p>
+    <div id="record"></div>
+    <div id="results" class="results"></div>
+  </section>
+
+  <section aria-labelledby="backtest-h">
+    <h2 class="section-title" id="backtest-h">How well it works</h2>
+    <p class="nba-note">Walk-forward backtest: each season is predicted by a model trained only on the seasons before it.</p>
+    <div id="backtest"></div>
+  </section>
+
+  <section aria-labelledby="method-h" class="method">
+    <h2 class="section-title" id="method-h">How it works</h2>
+    <div id="method"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner"><span>© 2026 Josué Martínez</span><span>Predictions are for fun, not betting advice</span></div>
+</footer>
+<script src="main.js"></script>
+<script src="nba.js"></script>
+</body>
+</html>
