@@ -363,7 +363,7 @@
       el('p', null, el('b', null, 'Data. '),
         'Every regular-season, play-in and playoff game since ' + d.first_season + ', ' +
         d.games.toLocaleString() + ' games and ' + d.player_games.toLocaleString() +
-        ' player appearances, pulled from ESPN’s public scoreboard data. A scheduled job adds the night’s games at 6:15 AM Eastern and refreshes the injury report at 5:30 PM.'),
+        ' player appearances, pulled from ESPN’s public scoreboard data. A scheduled job adds the night’s games early each morning and refreshes the injury report late each afternoon, Eastern time.'),
       el('p', null, el('b', null, 'Winner. '),
         'Each game is described by ' + w.features.length + ' numbers computed only from earlier games: Elo ratings, recent offensive and defensive efficiency, the four factors, rest and back-to-backs, and how much of each roster is available. An ' +
         w.embedding + ' network embeds those numbers and EQUINE’s Gaussian-process head turns the embedding into a win probability, shrinking it toward 50% when a matchup looks unlike its training data. It is retrained every morning on ' +
