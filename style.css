@@ -300,6 +300,9 @@ footer{ border-top:1px solid var(--line); background:var(--surface); padding:2.5
 .strip-labels{ display:flex; justify-content:space-between; margin-top:.4rem;
   font-family:'JetBrains Mono',monospace; font-size:.8rem; color:var(--muted); font-variant-numeric:tabular-nums; }
 .strip-labels .fav{ color:var(--accent); font-weight:500; }
+.s-mkt{ position:absolute; top:-5px; bottom:-5px; width:3px; margin-left:-1.5px; border-radius:2px; background:var(--text); box-shadow:0 0 0 2px var(--bg); }
+.strip-mkt{ margin-top:.25rem; font-family:'JetBrains Mono',monospace; font-size:.72rem; color:var(--faint); display:flex; align-items:center; gap:.45rem; }
+.mkt-key{ display:inline-block; width:3px; height:.8rem; border-radius:2px; background:var(--text); }
 @media (prefers-reduced-motion:reduce){ .s-away{ transition:none; } }
 
 .g-proj{ margin-top:.8rem; font-size:1.05rem; }

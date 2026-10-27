@@ -91,13 +91,24 @@
     },
       el('span', { class: 's-away', 'data-w': (pa * 100).toFixed(2) }),
       el('span', { class: 's-home' }),
-      el('i', { class: 's-mid', 'aria-hidden': 'true' })
+      el('i', { class: 's-mid', 'aria-hidden': 'true' }),
+      g.market && g.market.p_market != null
+        ? el('i', { class: 's-mkt', style: 'left:' + ((1 - g.market.p_market) * 100).toFixed(2) + '%', 'aria-hidden': 'true' })
+        : null
     );
     var labels = el('div', { class: 'strip-labels', 'aria-hidden': 'true' },
       el('span', { class: fav === 'away' ? 'fav' : '' }, away.abbr + ' ' + pct(pa)),
       el('span', { class: fav === 'home' ? 'fav' : '' }, pct(g.p_home) + ' ' + home.abbr)
     );
-    return el('div', { class: 'strip-wrap' }, bar, labels);
+    var mkt = null;
+    if (g.market && g.market.p_market != null) {
+      var mfav = g.market.p_market >= 0.5 ? home : away;
+      var mp = g.market.p_market >= 0.5 ? g.market.p_market : 1 - g.market.p_market;
+      var spread = g.market.spread == null ? '' : ', ' + home.abbr + ' ' + (g.market.spread > 0 ? '+' : '') + g.market.spread;
+      mkt = el('p', { class: 'strip-mkt' }, el('i', { class: 'mkt-key', 'aria-hidden': 'true' }),
+        (g.market.provider || 'Market') + ' line: ' + mfav.abbr + ' ' + pct(mp) + spread);
+    }
+    return el('div', { class: 'strip-wrap' }, bar, labels, mkt);
   }
 
   function playerTable(data, rows, tid) {
@@ -218,6 +229,11 @@
         ['Brier score', num(rec.brier, 3) + ' (0.25 is a coin flip; lower is better)'],
         ['Team points', 'off by ' + num(rec.team_pts_mae) + ' a game on average']
       ];
+      if (rec.vs_market && rec.vs_market.n) {
+        var v = rec.vs_market;
+        items.push(['Against DraftKings', 'EQUINE picked ' + v.equine_correct + ' of ' + v.n + ', the betting line ' +
+          v.market_correct + ' of ' + v.n + ' (Brier ' + num(v.equine_brier, 3) + ' vs ' + num(v.market_brier, 3) + ')']);
+      }
       if (rec.player_mae) {
         items.push(['Player lines', 'off by ' + num(rec.player_mae.pts) + ' points, ' + num(rec.player_mae.reb) +
           ' rebounds and ' + num(rec.player_mae.ast) + ' assists on average']);
@@ -323,33 +339,46 @@
         novText));
     box.appendChild(calib);
 
-    var f = bt.forecast;
+    var f = bt.forecast, z = bt.forecast_zero_shot;
     if (f) {
-      var rows = [['Team points', f.team_points]];
-      [['pts', 'Player points'], ['reb', 'Player rebounds'], ['ast', 'Player assists'], ['fg3m', 'Player threes']].forEach(function (s) {
-        if (f.players[s[0]]) rows.push([s[1], f.players[s[0]]]);
-      });
+      var stats = [['pts', 'Player points'], ['reb', 'Player rebounds'], ['ast', 'Player assists'], ['fg3m', 'Player threes']];
+      var pick = function (src, key) { return key === 'team' ? src.team_points : src.players[key]; };
+      var rows = [['team', 'Team points']].concat(stats.filter(function (s) { return f.players[s[0]]; }));
       var fb = el('tbody');
       rows.forEach(function (r) {
-        fb.appendChild(el('tr', null,
-          el('th', { scope: 'row' }, r[0]),
-          el('td', null, num(r[1].mae, 2)),
-          el('td', null, num(r[1].baseline_mae, 2)),
-          el('td', null, pct(r[1].coverage_80))));
+        var cur = pick(f, r[0]);
+        var cells = [el('th', { scope: 'row' }, r[1]), el('td', null, num(cur.mae, 2))];
+        if (z) cells.push(el('td', null, num(pick(z, r[0]).mae, 2)));
+        cells.push(el('td', null, num(cur.baseline_mae, 2)), el('td', null, pct(cur.coverage_80)));
+        fb.appendChild(el('tr', null, cells));
       });
+      var head = [el('th', { scope: 'col' }, 'Forecast'), el('th', { scope: 'col' }, z ? 'Fine-tuned miss' : 'TimesFM miss')];
+      if (z) head.push(el('th', { scope: 'col' }, 'Zero-shot miss'));
+      head.push(el('th', { scope: 'col' }, 'Baseline miss'), el('th', { scope: 'col' }, 'Inside 80% range'));
       box.appendChild(el('h3', { class: 'sub-h' }, 'TimesFM forecasts, ' + seasonLabel(f.season)));
       box.appendChild(el('p', { class: 'nba-note' },
-        'Average miss on the next game, against a recent-form baseline (an exponentially weighted average of the same stat). The last column is how often the result landed inside the 80% range. Picking the side with more projected points gets the winner right ' +
+        'Average miss on the next game. ' +
+        (z ? 'Fine-tuned means TimesFM\u2019s output head retrained on NBA data from before the season; zero-shot is the released model. ' : '') +
+        'The baseline is an exponentially weighted average of the same stat, and the last column is how often the result landed inside the 80% range. Picking the side with more projected points gets the winner right ' +
         pct(f.winner_from_points_accuracy, 1) + ' of the time.'));
       box.appendChild(el('div', { class: 'table-scroll' }, el('table', { class: 'btable' },
-        el('thead', null, el('tr', null,
-          el('th', { scope: 'col' }, 'Forecast'), el('th', { scope: 'col' }, 'TimesFM miss'),
-          el('th', { scope: 'col' }, 'Baseline miss'), el('th', { scope: 'col' }, 'Inside 80% range'))),
-        fb)));
+        el('thead', null, el('tr', null, head)), fb)));
     }
   }
 
   // ---------------------------------------------------------------- method
+  function fineTuneParagraph(ft) {
+    if (!ft || ft.reason) return null;
+    var today = ft.used
+      ? 'Today\u2019s update kept the fine-tuned head: on the ' + ft.holdout_games +
+        ' most recent games it missed by ' + pct(1 - ft.mae_ratio, 1) + ' less than the released model.'
+      : 'Today\u2019s update kept the released model, because the fine-tuned head did not forecast the ' +
+        ft.holdout_games + ' most recent games any better.';
+    return el('p', null, el('b', null, 'Daily fine-tuning. '),
+      'Each morning TimesFM\u2019s output head is retrained on NBA team and player series, ' +
+      'holding out the ' + ft.holdout_games + ' most recent games, and kept only if it beats the released model on them. ' + today);
+  }
+
   function renderMethod(data) {
     var m = data.models, w = m.winner, f = m.forecast, d = data.data;
     var box = document.getElementById('method');
@@ -375,11 +404,12 @@
       el('p', null, el('b', null, 'Scores and stat lines. '),
         'TimesFM 2.5 reads each team’s points, and each rotation player’s points, rebounds, assists and threes, as a time series of up to ' +
         f.context + ' games and forecasts the next one without any training on basketball. Its XReg mode first fits a ridge regression on home or away, the opponent’s defensive rating and rest days, and TimesFM forecasts what that regression leaves over. The 2.5 checkpoint is used because its weights are Apache-2.0 licensed; TimesFM 3.0’s weights are licensed only for non-production use.'),
+      fineTuneParagraph(f.fine_tune),
       el('p', null, el('b', null, 'Code. '),
         'The pipeline, the data and every published prediction are in ',
         el('a', { class: 'ulink', href: REPO, target: '_blank' }, 'martinez-hub/nbaPredicts'), '.')
     ];
-    paras.forEach(function (p) { box.appendChild(p); });
+    paras.forEach(function (p) { if (p) box.appendChild(p); });
   }
 
   // ---------------------------------------------------------------- load
