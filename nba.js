@@ -398,10 +398,10 @@
         d.games.toLocaleString() + ' games and ' + d.player_games.toLocaleString() +
         ' player appearances, pulled from ESPN’s public scoreboard data. A scheduled job adds the night’s games early each morning and refreshes the injury report late each afternoon, Eastern time.'),
       el('p', null, el('b', null, 'Winner. '),
-        'Each game is described by ' + w.features.length + ' numbers computed only from earlier games: Elo ratings, recent offensive and defensive efficiency, the four factors, rest and back-to-backs, and how much of each roster is available. An ' +
+        'Each game is described by ' + w.features.length + ' numbers computed only from what was known before tip-off: Elo ratings, recent offensive and defensive efficiency, the four factors, rest and back-to-backs, and each roster\u2019s expected strength, from player plus-minus ratings weighted by projected minutes and each player\u2019s chance of playing in the NBA\u2019s official injury report. An ' +
         w.embedding + ' network embeds those numbers and EQUINE’s Gaussian-process head turns the embedding into a win probability, shrinking it toward 50% when a matchup looks unlike its training data. It is retrained every morning on ' +
         w.trained_on.toLocaleString() + ' games.' +
-        (w.stacked ? ' When a betting line is posted, a second EQUINE head takes two inputs, the line\u2019s win probability (several sportsbooks\u2019 median, bookmaker margin removed) and the team-form model\u2019s, and its output is the published pick. Over three seasons that model matched the closing line to within 0.001 Brier; everything team form knows is already in the line, so the remaining edge has to come from information the line does not have yet, such as late injury news.' : '')),
+        (w.stacked ? ' When a betting line is posted, a second EQUINE head takes two inputs, the line\u2019s win probability (several sportsbooks\u2019 median, bookmaker margin removed) and the team-form model\u2019s, and its output is the published pick. Over three seasons that model matched the closing line within noise and did not beat it, nor the opening line: what the features know, the betting market has largely priced in already.' : '')),
       el('p', null, el('b', null, 'EQUINE version. '),
         'Built from the newest open work on EQUINE rather than the last release: commit ',
         el('a', { class: 'ulink mono', href: EQUINE_REPO + '/commit/' + w.commit, target: '_blank' }, w.commit.slice(0, 7)),
