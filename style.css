@@ -335,6 +335,7 @@ footer{ border-top:1px solid var(--line); background:var(--surface); padding:2.5
 .rtable .res{ font-family:'JetBrains Mono',monospace; font-size:.76rem; }
 .rtable .hit .res{ color:var(--accent); }
 .rtable .miss .res{ color:var(--faint); }
+.rtable .bf-tag{ font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--faint); }
 .btable tr.ours th, .btable tr.ours td .v{ color:var(--accent); font-weight:600; }
 .btable td{ font-family:'JetBrains Mono',monospace; font-size:.84rem; }
 
