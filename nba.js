@@ -159,7 +159,7 @@
     );
     if (ph.mid != null && pa.mid != null) {
       card.appendChild(el('p', { class: 'g-proj' },
-        'TimesFM projects ',
+        'Projected score ',
         el('b', null, away.abbr + ' ' + round(pa.mid)), ', ',
         el('b', null, home.abbr + ' ' + round(ph.mid)),
         el('span', { class: 'g-range' }, ' (80% ranges ' + range(pa.lo, pa.hi) + ' and ' + range(ph.lo, ph.hi) + ')')
@@ -230,7 +230,9 @@
       var items = [
         ['Winners picked', rec.correct + ' of ' + rec.n + ' (' + pct(rec.accuracy, 1) + ')'],
         ['Brier score', num(rec.brier, 3) + ' (0.25 is a coin flip; lower is better)'],
-        ['Team points', 'off by ' + num(rec.team_pts_mae) + ' a game on average']
+        ['Team points', 'off by ' + num(rec.team_pts_mae) + ' a game on average' +
+          (rec.team_pts_n_split ? ' (over the ' + rec.team_pts_n_split + ' games logged with both, ' + num(rec.team_pts_mae_split) +
+            ' for the published score and ' + num(rec.team_pts_mae_tfm) + ' for TimesFM\u2019s own split)' : '')]
       ];
       if (rec.vs_market && rec.vs_market.n) {
         var v = rec.vs_market;
@@ -266,7 +268,7 @@
     res.appendChild(el('div', { class: 'table-scroll' }, el('table', { class: 'rtable' },
       el('thead', null, el('tr', null,
         el('th', { scope: 'col' }, 'Date'), el('th', { scope: 'col' }, 'Final'),
-        el('th', { scope: 'col' }, 'EQUINE pick'), el('th', { scope: 'col' }, 'TimesFM score'),
+        el('th', { scope: 'col' }, 'EQUINE pick'), el('th', { scope: 'col' }, 'Projected score'),
         el('th', { scope: 'col' }, 'Pick'))),
       body)));
   }
@@ -364,8 +366,8 @@
       box.appendChild(el('p', { class: 'nba-note' },
         'Average miss on the next game. ' +
         (z ? 'Fine-tuned means TimesFM\u2019s output head retrained on NBA data from before the season; zero-shot is the released model. ' : '') +
-        'The baseline is an exponentially weighted average of the same stat, and the last column is how often the result landed inside the 80% range. Picking the side with more projected points gets the winner right ' +
-        pct(f.winner_from_points_accuracy, 1) + ' of the time.'));
+        'The baseline is an exponentially weighted average of the same stat, and the last column is how often the result landed inside the 80% range. On its own, picking the side TimesFM gives more points gets the winner right only ' +
+        pct(f.winner_from_points_accuracy, 1) + ' of the time, so the scores on this page keep TimesFM\u2019s total and split it by EQUINE\u2019s pick.'));
       box.appendChild(el('div', { class: 'table-scroll' }, el('table', { class: 'btable' },
         el('thead', null, el('tr', null, head)), fb)));
     }
@@ -409,7 +411,7 @@
         ', the top of the stack of open pull requests ', prs, '.'),
       el('p', null, el('b', null, 'Scores and stat lines. '),
         'TimesFM 2.5 reads each team’s points, and each rotation player’s points, rebounds, assists and threes, as a time series of up to ' +
-        f.context + ' games and forecasts the next one without any training on basketball. Its XReg mode first fits a ridge regression on home or away, the opponent’s defensive rating and rest days, and TimesFM forecasts what that regression leaves over. The 2.5 checkpoint is used because its weights are Apache-2.0 licensed; TimesFM 3.0’s weights are licensed only for non-production use.'),
+        f.context + ' games and forecasts the next one without any training on basketball. Its XReg mode first fits a ridge regression on home or away, the opponent’s defensive rating and rest days, and TimesFM forecasts what that regression leaves over. A game\u2019s projected score is TimesFM\u2019s total for the two teams, split so the margin matches EQUINE\u2019s win probability, converted to points the way betting lines convert a spread into odds. Each team\u2019s series alone picks winners poorly: from 2021\u201322 to 2025\u201326, in the games where TimesFM\u2019s split and EQUINE picked different winners, EQUINE was right 63% of the time, and the split score missed by 0.2 to 0.35 fewer points per team every season. The 2.5 checkpoint is used because its weights are Apache-2.0 licensed; TimesFM 3.0’s weights are licensed only for non-production use.'),
       fineTuneParagraph(f.fine_tune),
       el('p', null, el('b', null, 'Code. '),
         'The pipeline, the data and every published prediction are in ',
