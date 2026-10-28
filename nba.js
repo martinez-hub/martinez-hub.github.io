@@ -234,6 +234,11 @@
           (rec.team_pts_n_split ? ' (over the ' + rec.team_pts_n_split + ' games logged with both, ' + num(rec.team_pts_mae_split) +
             ' for the published score and ' + num(rec.team_pts_mae_tfm) + ' for TimesFM\u2019s own split)' : '')]
       ];
+      if (rec.backfilled) {
+        var pre = rec.before_tipoff;
+        items.push(['Before tip-off', pre.n ? pre.correct + ' of ' + pre.n + ' picks published before the game were right' : 'none yet']);
+        items.push(['After the fact', rec.backfilled + ' games from before this page went live, predicted afterwards with models trained only on earlier days, the injury report published before tip-off and the closing line; marked \u201cafter\u201d below']);
+      }
       if (rec.vs_market && rec.vs_market.n) {
         var v = rec.vs_market;
         items.push(['Against the line', 'EQUINE picked ' + v.equine_correct + ' of ' + v.n + ', the betting line ' +
@@ -259,7 +264,7 @@
       body.appendChild(el('tr', { class: r.correct ? 'hit' : 'miss' },
         el('td', { class: 'mono' }, fmtDate(r.date, { month: 'short', day: 'numeric' })),
         el('td', null, away.abbr + ' ' + round(r.away_pts) + ', ' + home.abbr + ' ' + round(r.home_pts)),
-        el('td', null, pick.abbr + ' ' + pct(conf)),
+        el('td', null, pick.abbr + ' ' + pct(conf), r.backfilled ? el('span', { class: 'bf-tag', title: 'Predicted after the game, using only what was known before tip-off' }, ' after') : null),
         el('td', null, r.pred_away_pts == null ? '–' : round(r.pred_away_pts) + '–' + round(r.pred_home_pts)),
         el('td', { class: 'res' }, r.correct ? 'Right' : 'Wrong')
       ));
