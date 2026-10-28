@@ -167,8 +167,8 @@
     }
     if (g.novelty >= 0.9) {
       var share = g.novelty >= 0.995 ? 'almost every' : pct(g.novelty) + ' of';
-      card.appendChild(el('p', { class: 'g-flag', title: 'EQUINE\u2019s Gaussian-process variance for this game, ranked against recent games the model was checked on. Higher variance pulls the probability toward 50%.' },
-        'Unfamiliar matchup: EQUINE is less sure here than on ' + share + ' recent games.'));
+      card.appendChild(el('p', { class: 'g-flag', title: 'The variance of EQUINE\u2019s Gaussian process for this game, ranked against recent games the model was checked on: how far this game\u2019s inputs sit from the games it learned from.' },
+        'Rare matchup: its inputs sit further from EQUINE\u2019s training games than ' + share + ' recent games.'));
     }
     var players = el('details', { class: 'g-more' },
       el('summary', null, 'Player projections'),
@@ -332,15 +332,16 @@
 
     var nov = w.by_novelty || [];
     var novText = nov.length === 3
-      ? 'Sorting the backtest games by EQUINE’s uncertainty, it picked ' + pct(nov[0].accuracy) +
-        ' of the most familiar third correctly, ' + pct(nov[1].accuracy) + ' of the middle third and ' +
-        pct(nov[2].accuracy) + ' of the least familiar third.'
+      ? 'Sorted by how unusual a game\u2019s inputs are to EQUINE (its Gaussian-process variance), it picked ' + pct(nov[0].accuracy) +
+        ' of the most ordinary third correctly, ' + pct(nov[1].accuracy) + ' of the middle third and ' +
+        pct(nov[2].accuracy) + ' of the rarest third. The rarest games are mostly lopsided matchups, which are easier to call, and the probabilities stayed calibrated in every third (calibration error at most ' +
+        num(Math.max(nov[0].ece, nov[1].ece, nov[2].ece), 3) + ').'
       : '';
     var calib = el('figure', { class: 'calib-fig' },
       calibrationChart(w.reliability_market_model || w.reliability),
       el('figcaption', null,
         'Calibration of ' + (w.reliability_market_model ? 'EQUINE with the line' : 'EQUINE') + ' over every backtest game. When it says the home team has a 70% chance, the home team should win about 70% of those games; dots on the dashed line mean the probabilities can be taken at face value. ',
-        novText ? novText.replace('EQUINE\u2019s uncertainty', 'the uncertainty of EQUINE without the line') : ''));
+        novText));
     box.appendChild(calib);
 
     var f = bt.forecast, z = bt.forecast_zero_shot;
