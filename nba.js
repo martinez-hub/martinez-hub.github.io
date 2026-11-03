@@ -11,7 +11,6 @@
     if (q && q.charAt(0) === '/' && q.charAt(1) !== '/') DATA = q.replace(/\/?$/, '/');
   } catch (e) {}
   var REPO = 'https://github.com/martinez-hub/nbaPredicts';
-  var EQUINE_REPO = 'https://github.com/mit-ll-responsible-ai/equine';
 
   // ---------------------------------------------------------------- helpers
   function el(tag, attrs) {
@@ -107,9 +106,9 @@
       var spread = g.market.spread == null ? '' : ', ' + home.abbr + ' ' + (g.market.spread > 0 ? '+' : '') + g.market.spread;
       mkt = el('p', { class: 'strip-mkt' }, el('i', { class: 'mkt-key', 'aria-hidden': 'true' }),
         'Betting line' + (g.market.books > 1 ? ' (' + g.market.books + ' books)' : '') + ': ' + mfav.abbr + ' ' + pct(mp) + spread +
-        (g.p_model != null ? '. EQUINE without the line: ' + home.abbr + ' ' + pct(g.p_model) : ''));
+        (g.p_model != null ? '. The model without the line: ' + home.abbr + ' ' + pct(g.p_model) : ''));
     } else if (g.uses_line === false) {
-      mkt = el('p', { class: 'strip-mkt' }, 'No betting line posted yet; this is EQUINE from team form alone.');
+      mkt = el('p', { class: 'strip-mkt' }, 'No betting line posted yet; this is the model from team form alone.');
     }
     return el('div', { class: 'strip-wrap' }, bar, labels, mkt);
   }
@@ -167,8 +166,8 @@
     }
     if (g.novelty >= 0.9) {
       var share = g.novelty >= 0.995 ? 'almost every' : pct(g.novelty) + ' of';
-      card.appendChild(el('p', { class: 'g-flag', title: 'The variance of EQUINE\u2019s Gaussian process for this game, ranked against recent games the model was checked on: how far this game\u2019s inputs sit from the games it learned from.' },
-        'Rare matchup: its inputs sit further from EQUINE\u2019s training games than ' + share + ' recent games.'));
+      card.appendChild(el('p', { class: 'g-flag', title: 'The variance of the model\u2019s Gaussian process for this game, ranked against recent games the model was checked on: how far this game\u2019s inputs sit from the games it learned from.' },
+        'Rare matchup: its inputs sit further from the model\u2019s training games than ' + share + ' recent games.'));
     }
     var players = el('details', { class: 'g-more' },
       el('summary', null, 'Player projections'),
@@ -241,7 +240,7 @@
       }
       if (rec.vs_market && rec.vs_market.n) {
         var v = rec.vs_market;
-        items.push(['Against the line', 'EQUINE picked ' + v.equine_correct + ' of ' + v.n + ', the betting line ' +
+        items.push(['Against the line', 'The model picked ' + v.equine_correct + ' of ' + v.n + ', the betting line ' +
           v.market_correct + ' of ' + v.n + ' (Brier ' + num(v.equine_brier, 3) + ' vs ' + num(v.market_brier, 3) + ')']);
       }
       if (rec.player_mae) {
@@ -273,13 +272,13 @@
     res.appendChild(el('div', { class: 'table-scroll' }, el('table', { class: 'rtable' },
       el('thead', null, el('tr', null,
         el('th', { scope: 'col' }, 'Date'), el('th', { scope: 'col' }, 'Final'),
-        el('th', { scope: 'col' }, 'EQUINE pick'), el('th', { scope: 'col' }, 'Projected score'),
+        el('th', { scope: 'col' }, 'Model pick'), el('th', { scope: 'col' }, 'Projected score'),
         el('th', { scope: 'col' }, 'Pick'))),
       body)));
   }
 
   // ---------------------------------------------------------------- backtest
-  var MODEL_NAMES = { equine_market: 'EQUINE with the line', market: 'Betting line (close)', equine_gp: 'EQUINE without the line', logistic: 'Logistic regression', elo: 'Elo rating', home_team: 'Always the home team' };
+  var MODEL_NAMES = { equine_market: 'Gaussian process with the line', market: 'Betting line (close)', equine_gp: 'Gaussian process without the line', logistic: 'Logistic regression', elo: 'Elo rating', home_team: 'Always the home team' };
 
   function seasonLabel(s) { return (s - 1) + '–' + String(s).slice(2); }
 
@@ -339,7 +338,7 @@
 
     var nov = w.by_novelty || [];
     var novText = nov.length === 3
-      ? 'Sorted by how unusual a game\u2019s inputs are to EQUINE (its Gaussian-process variance), it picked ' + pct(nov[0].accuracy) +
+      ? 'Sorted by how unusual a game\u2019s inputs are to the model (its Gaussian-process variance), it picked ' + pct(nov[0].accuracy) +
         ' of the most ordinary third correctly, ' + pct(nov[1].accuracy) + ' of the middle third and ' +
         pct(nov[2].accuracy) + ' of the rarest third. The rarest games are mostly lopsided matchups, which are easier to call, and the probabilities stayed calibrated in every third (calibration error at most ' +
         num(Math.max(nov[0].ece, nov[1].ece, nov[2].ece), 3) + ').'
@@ -347,7 +346,7 @@
     var calib = el('figure', { class: 'calib-fig' },
       calibrationChart(w.reliability_market_model || w.reliability),
       el('figcaption', null,
-        'Calibration of ' + (w.reliability_market_model ? 'EQUINE with the line' : 'EQUINE') + ' over every backtest game. When it says the home team has a 70% chance, the home team should win about 70% of those games; dots on the dashed line mean the probabilities can be taken at face value. ',
+        'Calibration of ' + (w.reliability_market_model ? 'the Gaussian-process model with the line' : 'the Gaussian-process model') + ' over every backtest game. When it says the home team has a 70% chance, the home team should win about 70% of those games; dots on the dashed line mean the probabilities can be taken at face value. ',
         novText));
     box.appendChild(calib);
 
@@ -372,7 +371,7 @@
         'Average miss on the next game. ' +
         (z ? 'Fine-tuned means TimesFM\u2019s output head retrained on NBA data from before the season; zero-shot is the released model. ' : '') +
         'The baseline is an exponentially weighted average of the same stat, and the last column is how often the result landed inside the 80% range. On its own, picking the side TimesFM gives more points gets the winner right only ' +
-        pct(f.winner_from_points_accuracy, 1) + ' of the time, so the scores on this page keep TimesFM\u2019s total and split it by EQUINE\u2019s pick.'));
+        pct(f.winner_from_points_accuracy, 1) + ' of the time, so the scores on this page keep TimesFM\u2019s total and split it by the win model\u2019s pick.'));
       box.appendChild(el('div', { class: 'table-scroll' }, el('table', { class: 'btable' },
         el('thead', null, el('tr', null, head)), fb)));
     }
@@ -395,28 +394,21 @@
     var m = data.models, w = m.winner, f = m.forecast, d = data.data;
     var box = document.getElementById('method');
     box.textContent = '';
-    var prs = el('span');
-    w.prs.forEach(function (n, i) {
-      if (i) prs.appendChild(document.createTextNode(i === w.prs.length - 1 ? ' and ' : ', '));
-      prs.appendChild(el('a', { class: 'ulink', href: EQUINE_REPO + '/pull/' + n, target: '_blank' }, '#' + n));
-    });
     var paras = [
       el('p', null, el('b', null, 'Data. '),
         'Every regular-season, play-in and playoff game since ' + d.first_season + ', ' +
         d.games.toLocaleString() + ' games and ' + d.player_games.toLocaleString() +
         ' player appearances, pulled from ESPN’s public scoreboard data. A scheduled job adds the night’s games early each morning and refreshes the injury report late each afternoon, Eastern time.'),
       el('p', null, el('b', null, 'Winner. '),
-        'Each game is described by ' + w.features.length + ' numbers computed only from what was known before tip-off: Elo ratings, recent offensive and defensive efficiency, the four factors, rest and back-to-backs, and each roster\u2019s expected strength, from player plus-minus ratings weighted by projected minutes and each player\u2019s chance of playing in the NBA\u2019s official injury report. An ' +
-        w.embedding + ' network embeds those numbers and EQUINE’s Gaussian-process head turns the embedding into a win probability, shrinking it toward 50% when a matchup looks unlike its training data. It is retrained every morning on ' +
+        'Each game is described by ' + w.features.length + ' numbers computed only from what was known before tip-off: Elo ratings, recent offensive and defensive efficiency, the four factors, rest and back-to-backs, and each roster\u2019s expected strength, from player plus-minus ratings weighted by projected minutes and each player\u2019s chance of playing in the NBA\u2019s official injury report. A neural network (' +
+        w.embedding + ') embeds those numbers and a Gaussian-process head turns the embedding into a win probability, shrinking it toward 50% when a matchup looks unlike its training data.' +
+        (w.mirrored ? ' Each training game is used twice, once from each team\u2019s side, and each prediction averages the two views, so the model treats home and away teams consistently.' : '') +
+        ' It is retrained every morning on ' +
         w.trained_on.toLocaleString() + ' games.' +
-        (w.stacked ? ' When a betting line is posted, a second EQUINE head takes two inputs, the line\u2019s win probability (several sportsbooks\u2019 median, bookmaker margin removed) and the team-form model\u2019s, and its output is the published pick. Over three seasons that model matched the closing line within noise and did not beat it, nor the opening line: what the features know, the betting market has largely priced in already.' : '')),
-      el('p', null, el('b', null, 'EQUINE version. '),
-        'Built from the newest open work on EQUINE rather than the last release: commit ',
-        el('a', { class: 'ulink mono', href: EQUINE_REPO + '/commit/' + w.commit, target: '_blank' }, w.commit.slice(0, 7)),
-        ', the top of the stack of open pull requests ', prs, '.'),
+        (w.stacked ? ' When a betting line is posted, a second Gaussian-process head takes two inputs, the line\u2019s win probability (several sportsbooks\u2019 median, bookmaker margin removed) and the team-form model\u2019s, and its output is the published pick. Over three seasons that model matched the closing line within noise and did not beat it, nor the opening line: what the features know, the betting market has largely priced in already.' : '')),
       el('p', null, el('b', null, 'Scores and stat lines. '),
         'TimesFM 2.5 reads each team’s points, and each rotation player’s points, rebounds, assists and threes, as a time series of up to ' +
-        f.context + ' games and forecasts the next one without any training on basketball. Its XReg mode first fits a ridge regression on home or away, the opponent’s defensive rating and rest days, and TimesFM forecasts what that regression leaves over. A game\u2019s projected score is TimesFM\u2019s total for the two teams, split so the margin matches EQUINE\u2019s win probability, converted to points the way betting lines convert a spread into odds. Each team\u2019s series alone picks winners poorly: from 2021\u201322 to 2025\u201326, in the games where TimesFM\u2019s split and EQUINE picked different winners, EQUINE was right 63% of the time, and the split score missed by 0.2 to 0.35 fewer points per team every season. The 2.5 checkpoint is used because its weights are Apache-2.0 licensed; TimesFM 3.0’s weights are licensed only for non-production use.'),
+        f.context + ' games and forecasts the next one without any training on basketball. Its XReg mode first fits a ridge regression on home or away, the opponent’s defensive rating and rest days, and TimesFM forecasts what that regression leaves over. A game\u2019s projected score is TimesFM\u2019s total for the two teams, split so the margin matches the win probability, converted to points the way betting lines convert a spread into odds. Each team\u2019s series alone picks winners poorly: from 2021\u201322 to 2025\u201326, in the games where TimesFM\u2019s split and the win model picked different winners, the win model was right 63% of the time, and the split score missed by 0.2 to 0.35 fewer points per team every season. The 2.5 checkpoint is used because its weights are Apache-2.0 licensed; TimesFM 3.0’s weights are licensed only for non-production use.'),
       fineTuneParagraph(f.fine_tune),
       el('p', null, el('b', null, 'Code. '),
         'The pipeline, the data and every published prediction are in ',

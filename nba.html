@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NBA Predictions · Josué Martínez</title>
-<meta name="description" content="Daily NBA game predictions: win probabilities from an EQUINE Gaussian-process model and score and stat-line forecasts from Google's TimesFM, retrained every morning.">
+<meta name="description" content="Daily NBA game predictions: win probabilities from a Gaussian-process model and score and stat-line forecasts from Google's TimesFM, retrained every morning.">
 <meta name="author" content="Josué Martínez">
 <meta property="og:title" content="NBA Predictions · Josué Martínez">
-<meta property="og:description" content="Win probabilities from EQUINE and score and stat-line forecasts from TimesFM, updated every day.">
+<meta property="og:description" content="Win probabilities from a Gaussian-process model and score and stat-line forecasts from TimesFM, updated every day.">
 <meta property="og:url" content="https://martinez-hub.github.io/nba.html">
 <meta property="og:type" content="website">
 
@@ -59,7 +59,7 @@
 
 <main class="wrap reveal d1" id="nba">
   <h1 class="page-title">NBA predictions</h1>
-  <p class="lead">Who wins tonight, by how much, and what each rotation player puts up. Win probabilities come from <a href="https://github.com/mit-ll-responsible-ai/equine" target="_blank">EQUINE</a>, a library for neural networks that know when they are unsure; scores and stat lines come from Google's <a href="https://github.com/google-research/timesfm" target="_blank">TimesFM</a> forecasting model. Both retrain on every box score since 2012 each morning.</p>
+  <p class="lead">Who wins tonight, by how much, and what each rotation player puts up. Win probabilities come from a neural network with a Gaussian-process head, which also says when a matchup is unlike the games it learned from; scores and stat lines come from Google's <a href="https://github.com/google-research/timesfm" target="_blank">TimesFM</a> forecasting model. Both retrain on every box score since 2012 each morning.</p>
   <p class="nba-stamp" id="stamp" aria-live="polite">Loading the latest predictions.</p>
 
   <section aria-labelledby="slate-h">
