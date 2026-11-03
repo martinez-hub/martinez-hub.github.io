@@ -21,3 +21,6 @@ Desktop.ini
 
 # Superpowers brainstorm artifacts
 .superpowers/
+
+# Planning documents stay private: kept locally, out of the public repo.
+docs/superpowers/
